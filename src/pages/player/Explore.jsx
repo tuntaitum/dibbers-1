@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
-import { MapPin, Search, SlidersHorizontal, Star, Clock } from "lucide-react";
+import { MapPin, Search, SlidersHorizontal, RefreshCw } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 
 const SPORTS = ["All", "Padel", "Squash", "Pickleball"];
@@ -19,12 +19,42 @@ export default function Explore() {
   const [sport, setSport] = useState("All");
   const [priceIdx, setPriceIdx] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
+  const [userCoords, setUserCoords] = useState(null);
+  const [locating, setLocating] = useState(false);
 
   useEffect(() => {
     base44.entities.Venue.filter({ status: "approved" })
       .then(setVenues)
       .finally(() => setLoading(false));
   }, []);
+
+  const getLocation = useCallback(() => {
+    if (!navigator.geolocation) return;
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setLocating(false);
+      },
+      () => setLocating(false)
+    );
+  }, []);
+
+  useEffect(() => { getLocation(); }, []);
+
+  const haversineKm = (lat1, lng1, lat2, lng2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  };
+
+  const distanceLabel = (venue) => {
+    if (!userCoords || !venue.latitude || !venue.longitude) return null;
+    const km = haversineKm(userCoords.lat, userCoords.lng, venue.latitude, venue.longitude);
+    return km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`;
+  };
 
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());
@@ -110,7 +140,17 @@ export default function Explore() {
           </div>
         ) : (
           <div className="space-y-3">
-            <p className="text-xs text-muted-foreground font-body mb-2">{filtered.length} venues found</p>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs text-muted-foreground font-body">{filtered.length} venues found</p>
+              <button
+                onClick={getLocation}
+                disabled={locating}
+                className="flex items-center gap-1 text-xs text-brand-orange font-semibold"
+              >
+                <RefreshCw size={11} className={locating ? "animate-spin" : ""} />
+                {userCoords ? "Refresh location" : "Get my location"}
+              </button>
+            </div>
             {filtered.map(venue => (
               <Link key={venue.id} to={`/venue/${venue.id}`} className="block">
                 <div className="bg-white rounded-2xl border border-border p-4 hover:border-brand-orange/50 transition-all hover:shadow-md active:scale-[0.99]">
@@ -127,6 +167,11 @@ export default function Explore() {
                       <div className="flex items-center gap-1 text-muted-foreground text-xs mt-0.5">
                         <MapPin size={11} />
                         <span className="truncate">{venue.address || venue.city || "Bangkok"}</span>
+                        {distanceLabel(venue) && (
+                          <span className="flex-shrink-0 bg-brand-sky text-brand-brown px-1.5 py-0.5 rounded-full font-semibold ml-1">
+                            {distanceLabel(venue)}
+                          </span>
+                        )}
                       </div>
                     </div>
                     {venue.price_per_hour && (
