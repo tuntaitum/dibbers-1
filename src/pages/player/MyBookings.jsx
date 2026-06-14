@@ -44,7 +44,7 @@ export default function MyBookings() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-brand-brown px-4 pt-12 pb-5">
+      <div className="bg-brand-brown px-4 pt-5 pb-5">
         <h1 className="font-heading text-4xl font-bold text-white">MY BOOKINGS</h1>
         <p className="text-white/60 text-sm mt-0.5">Manage your court time</p>
       </div>

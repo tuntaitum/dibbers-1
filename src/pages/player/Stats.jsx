@@ -110,7 +110,7 @@ export default function Stats() {
   return (
     <div className="min-h-screen bg-background pb-8">
       {/* Header */}
-      <div className="bg-brand-brown px-4 pt-12 pb-6">
+      <div className="bg-brand-brown px-4 pt-5 pb-6">
         <h1 className="font-heading text-4xl font-bold text-white">MY STATS</h1>
         <p className="text-white/60 text-sm">Your playing journey</p>
       </div>

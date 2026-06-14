@@ -58,7 +58,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-background pb-8">
-      <div className="bg-brand-brown px-4 pt-12 pb-8">
+      <div className="bg-brand-brown px-4 pt-5 pb-8">
         <div className="flex items-center justify-between mb-4">
           <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
           <button onClick={() => setEditing(!editing)} className="bg-white/10 text-white p-2 rounded-xl hover:bg-white/20 transition-colors">

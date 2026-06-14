@@ -37,7 +37,7 @@ export default function Explore() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-brand-brown px-4 pt-12 pb-6">
+      <div className="bg-brand-brown px-4 pt-5 pb-6">
         <h1 className="font-heading text-4xl font-bold text-white mb-1">EXPLORE</h1>
         <p className="text-white/60 text-sm font-body">Find courts near you</p>
         <div className="mt-4 relative">

@@ -72,64 +72,76 @@ export default function BookingConfirm() {
     setConfirming(false);
   };
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
-    </div>
-  );
-
-  if (booking) return (
-    <div className="min-h-screen bg-brand-green flex flex-col items-center justify-center p-6 text-center">
-      <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-xl animate-fade-in">
-        <div className="w-16 h-16 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle2 size={36} className="text-brand-green" />
-        </div>
-        <h1 className="font-heading text-3xl font-bold text-brand-brown mb-1">BOOKING CONFIRMED!</h1>
-        <p className="text-muted-foreground text-sm mb-6">Your slot is reserved. See you on court!</p>
-        <div className="bg-brand-cream rounded-2xl p-4 mb-5 text-left space-y-2">
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Venue</span>
-            <span className="font-semibold text-brand-brown">{venue.name}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Court</span>
-            <span className="font-semibold text-brand-brown">{court.name}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Date</span>
-            <span className="font-semibold text-brand-brown">{slot.date}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Time</span>
-            <span className="font-semibold text-brand-brown">{slot.start_time} – {slot.end_time}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Price</span>
-            <span className="font-stat text-lg text-brand-orange">฿{slot.price}</span>
-          </div>
-          <div className="border-t border-border pt-2 flex justify-between text-sm">
-            <span className="text-muted-foreground">Reference</span>
-            <span className="font-mono font-bold text-brand-brown tracking-wider">{booking.reference_code}</span>
-          </div>
-        </div>
-        {paymentMode === "pay_at_venue" && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 text-xs text-amber-700">
-            Please present this reference code at the venue to confirm your payment.
-          </div>
-        )}
-        <button
-          onClick={() => navigate("/bookings")}
-          className="w-full bg-brand-orange text-white py-3 rounded-xl font-semibold"
-        >
-          View my bookings
-        </button>
+  const Shell = ({ children, bg }) => (
+    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
+      <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || "bg-background"}`}>
+        {children}
       </div>
     </div>
   );
 
+  if (loading) return (
+    <Shell>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
+      </div>
+    </Shell>
+  );
+
+  if (booking) return (
+    <Shell bg="bg-brand-green">
+      <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+        <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-xl animate-fade-in">
+          <div className="w-16 h-16 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle2 size={36} className="text-brand-green" />
+          </div>
+          <h1 className="font-heading text-3xl font-bold text-brand-brown mb-1">BOOKING CONFIRMED!</h1>
+          <p className="text-muted-foreground text-sm mb-6">Your slot is reserved. See you on court!</p>
+          <div className="bg-brand-cream rounded-2xl p-4 mb-5 text-left space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Venue</span>
+              <span className="font-semibold text-brand-brown">{venue.name}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Court</span>
+              <span className="font-semibold text-brand-brown">{court.name}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Date</span>
+              <span className="font-semibold text-brand-brown">{slot.date}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Time</span>
+              <span className="font-semibold text-brand-brown">{slot.start_time} – {slot.end_time}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Price</span>
+              <span className="font-stat text-lg text-brand-orange">฿{slot.price}</span>
+            </div>
+            <div className="border-t border-border pt-2 flex justify-between text-sm">
+              <span className="text-muted-foreground">Reference</span>
+              <span className="font-mono font-bold text-brand-brown tracking-wider">{booking.reference_code}</span>
+            </div>
+          </div>
+          {paymentMode === "pay_at_venue" && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 text-xs text-amber-700">
+              Please present this reference code at the venue to confirm your payment.
+            </div>
+          )}
+          <button
+            onClick={() => navigate("/bookings")}
+            className="w-full bg-brand-orange text-white py-3 rounded-xl font-semibold"
+          >
+            View my bookings
+          </button>
+        </div>
+      </div>
+    </Shell>
+  );
+
   return (
-    <div className="min-h-screen bg-background pb-8">
-      <div className="bg-brand-brown px-4 pt-12 pb-5 flex items-center gap-3">
+    <Shell>
+      <div className="bg-brand-brown px-4 pt-5 pb-5 flex items-center gap-3">
         <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
           <ArrowLeft size={22} />
         </button>
@@ -184,6 +196,6 @@ export default function BookingConfirm() {
           {confirming ? "Confirming..." : "CONFIRM BOOKING"}
         </button>
       </div>
-    </div>
+    </Shell>
   );
 }
