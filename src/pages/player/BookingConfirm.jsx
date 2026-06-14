@@ -3,12 +3,14 @@ import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { ArrowLeft, CheckCircle2, CreditCard, Building2 } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
 
 function genRef() {
   return "DBB" + Math.random().toString(36).toUpperCase().substring(2, 8);
 }
 
 export default function BookingConfirm() {
+  const isMobile = useIsMobileApp();
   const { slotId } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -72,11 +74,15 @@ export default function BookingConfirm() {
     setConfirming(false);
   };
 
-  const Shell = ({ children, bg }) => (
+  const Shell = ({ children, bg }) => isMobile ? (
     <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
       <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || "bg-background"}`}>
         {children}
       </div>
+    </div>
+  ) : (
+    <div className={`min-h-screen ${bg || "bg-background"}`}>
+      {children}
     </div>
   );
 
@@ -141,14 +147,14 @@ export default function BookingConfirm() {
 
   return (
     <Shell>
-      <div className="bg-brand-brown px-4 pt-5 pb-5 flex items-center gap-3">
+      <div className={`bg-brand-brown flex items-center gap-3 ${isMobile ? "px-4 pt-5 pb-5" : "px-8 py-5"}`}>
         <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
           <ArrowLeft size={22} />
         </button>
         <h1 className="font-heading text-3xl font-bold text-white">CONFIRM BOOKING</h1>
       </div>
 
-      <div className="px-4 py-5 space-y-4">
+      <div className={`${isMobile ? "px-4 py-5" : "max-w-lg mx-auto px-8 py-8"} space-y-4`}>
         {/* Summary */}
         <div className="bg-white rounded-2xl border border-border p-4">
           <h2 className="font-heading text-lg font-bold text-brand-brown mb-3">BOOKING SUMMARY</h2>

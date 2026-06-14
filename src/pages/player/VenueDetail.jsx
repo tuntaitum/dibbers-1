@@ -4,8 +4,11 @@ import { base44 } from "@/api/base44Client";
 import { ArrowLeft, MapPin, Clock, ChevronRight } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import { format, addDays } from "date-fns";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
+import VenueDetailWeb from "@/pages/player/web/VenueDetailWeb";
 
 export default function VenueDetail() {
+  const isMobile = useIsMobileApp();
   const { id } = useParams();
   const navigate = useNavigate();
   const [venue, setVenue] = useState(null);
@@ -41,15 +44,21 @@ export default function VenueDetail() {
     }).then(s => setSlots(s.filter(sl => sl.status === "available")));
   }, [selectedCourt, selectedDate]);
 
-  if (loading) return (
+  const loadingShell = isMobile ? (
     <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
       <div className="w-full max-w-[430px] min-h-screen bg-background flex items-center justify-center shadow-2xl">
         <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
       </div>
     </div>
+  ) : (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
+    </div>
   );
 
-  if (!venue) return (
+  if (loading) return loadingShell;
+
+  if (!venue) return isMobile ? (
     <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
       <div className="w-full max-w-[430px] min-h-screen bg-background flex flex-col items-center justify-center gap-3 shadow-2xl">
         <p className="text-2xl">🏟️</p>
@@ -57,7 +66,28 @@ export default function VenueDetail() {
         <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
       </div>
     </div>
+  ) : (
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-3">
+      <p className="text-2xl">🏟️</p>
+      <p className="font-heading text-xl text-brand-brown">Venue not found</p>
+      <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
+    </div>
   );
+
+  if (!isMobile) {
+    return (
+      <VenueDetailWeb
+        venue={venue}
+        courts={courts}
+        slots={slots}
+        selectedCourt={selectedCourt}
+        setSelectedCourt={setSelectedCourt}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        dates={dates}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-200 flex items-start justify-center">

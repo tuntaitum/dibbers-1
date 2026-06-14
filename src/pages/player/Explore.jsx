@@ -3,6 +3,8 @@ import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
 import { MapPin, Search, SlidersHorizontal, RefreshCw } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
+import ExploreWeb from "@/pages/player/web/ExploreWeb";
 
 const SPORTS = ["All", "Padel", "Squash", "Pickleball"];
 const PRICE_RANGES = [
@@ -13,6 +15,7 @@ const PRICE_RANGES = [
 ];
 
 export default function Explore() {
+  const isMobile = useIsMobileApp();
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -55,6 +58,19 @@ export default function Explore() {
     const km = haversineKm(userCoords.lat, userCoords.lng, venue.latitude, venue.longitude);
     return km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`;
   };
+
+  if (!isMobile) {
+    return (
+      <ExploreWeb
+        venues={venues}
+        loading={loading}
+        userCoords={userCoords}
+        locating={locating}
+        getLocation={getLocation}
+        distanceLabel={distanceLabel}
+      />
+    );
+  }
 
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());

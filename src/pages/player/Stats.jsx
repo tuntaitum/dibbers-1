@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Flame, Clock, CalendarCheck, TrendingUp, Zap } from "lucide-react";
 import { getWeek, getYear, parseISO, isThisWeek, isThisMonth } from "date-fns";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
 
 export default function Stats() {
+  const isMobile = useIsMobileApp();
   const [profile, setProfile] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [user, setUser] = useState(null);
@@ -107,15 +109,18 @@ export default function Stats() {
     </div>
   );
 
+  const pad = isMobile ? "px-4" : "max-w-3xl mx-auto px-8";
+
   return (
     <div className="min-h-screen bg-background pb-8">
-      {/* Header */}
-      <div className="bg-brand-brown px-4 pt-5 pb-6">
-        <h1 className="font-heading text-4xl font-bold text-white">MY STATS</h1>
-        <p className="text-white/60 text-sm">Your playing journey</p>
+      <div className={`bg-brand-brown ${isMobile ? "px-4 pt-5 pb-6" : "px-8 py-8"}`}>
+        <div className={isMobile ? "" : "max-w-3xl mx-auto"}>
+          <h1 className="font-heading text-4xl font-bold text-white">MY STATS</h1>
+          <p className="text-white/60 text-sm">Your playing journey</p>
+        </div>
       </div>
 
-      <div className="px-4 py-5 space-y-4">
+      <div className={`${pad} py-5 space-y-4`}>
         {/* Streak banner */}
         <div className="bg-brand-orange rounded-2xl p-5 flex items-center justify-between">
           <div>

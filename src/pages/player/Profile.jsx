@@ -3,10 +3,12 @@ import { base44 } from "@/api/base44Client";
 import { User, Edit2, LogOut, Building2, ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import SportBadge from "@/components/SportBadge";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
 
 const SPORTS = ["Padel", "Squash", "Pickleball"];
 
 export default function Profile() {
+  const isMobile = useIsMobileApp();
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [editing, setEditing] = useState(false);

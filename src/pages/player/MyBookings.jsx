@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { CalendarDays, MapPin, Clock, CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { CalendarDays, Clock, Loader2 } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
 
 const statusConfig = {
   confirmed: { label: "Confirmed", color: "bg-brand-green/10 text-brand-green" },
@@ -10,6 +11,7 @@ const statusConfig = {
 };
 
 export default function MyBookings() {
+  const isMobile = useIsMobileApp();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState("upcoming");
@@ -42,14 +44,18 @@ export default function MyBookings() {
 
   const displayed = tab === "upcoming" ? upcoming : past;
 
+  const pad = isMobile ? "px-4" : "max-w-3xl mx-auto px-8";
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-brand-brown px-4 pt-5 pb-5">
-        <h1 className="font-heading text-4xl font-bold text-white">MY BOOKINGS</h1>
-        <p className="text-white/60 text-sm mt-0.5">Manage your court time</p>
+      <div className={`bg-brand-brown ${isMobile ? "px-4 pt-5 pb-5" : "px-8 py-8"}`}>
+        <div className={isMobile ? "" : "max-w-3xl mx-auto"}>
+          <h1 className="font-heading text-4xl font-bold text-white">MY BOOKINGS</h1>
+          <p className="text-white/60 text-sm mt-0.5">Manage your court time</p>
+        </div>
       </div>
 
-      <div className="px-4 py-3 flex gap-2 border-b border-border bg-brand-cream sticky top-0 z-10">
+      <div className={`${pad} py-3 flex gap-2 border-b border-border bg-brand-cream sticky top-0 z-10`}>
         {[
           { key: "upcoming", label: `Upcoming (${upcoming.length})` },
           { key: "past", label: `Past (${past.length})` },
@@ -66,7 +72,7 @@ export default function MyBookings() {
         ))}
       </div>
 
-      <div className="px-4 py-4">
+      <div className={`${pad} py-4`}>
         {loading ? (
           <div className="flex justify-center py-20"><Loader2 className="animate-spin text-brand-orange" size={28} /></div>
         ) : displayed.length === 0 ? (
