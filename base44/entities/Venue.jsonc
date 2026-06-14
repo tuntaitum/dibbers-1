@@ -1,0 +1,92 @@
+{
+  "name": "Venue",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "sports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Padel",
+          "Squash",
+          "Pickleball"
+        ]
+      }
+    },
+    "amenities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payment_mode": {
+      "type": "string",
+      "enum": [
+        "in_app",
+        "pay_at_venue",
+        "both"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "suspended"
+      ],
+      "default": "pending"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "owner_id": {
+      "type": "string"
+    },
+    "owner_name": {
+      "type": "string"
+    },
+    "owner_email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "price_per_hour": {
+      "type": "number"
+    },
+    "court_count": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "address",
+    "sports",
+    "owner_id"
+  ]
+}

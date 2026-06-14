@@ -1,0 +1,68 @@
+{
+  "name": "PlayerProfile",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "preferred_sports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Padel",
+          "Squash",
+          "Pickleball"
+        ]
+      }
+    },
+    "total_hours_played": {
+      "type": "number",
+      "default": 0
+    },
+    "total_sessions": {
+      "type": "number",
+      "default": 0
+    },
+    "current_streak_weeks": {
+      "type": "number",
+      "default": 0
+    },
+    "longest_streak_weeks": {
+      "type": "number",
+      "default": 0
+    },
+    "last_session_week": {
+      "type": "string"
+    },
+    "sessions_this_week": {
+      "type": "number",
+      "default": 0
+    },
+    "sessions_this_month": {
+      "type": "number",
+      "default": 0
+    },
+    "padel_hours": {
+      "type": "number",
+      "default": 0
+    },
+    "squash_hours": {
+      "type": "number",
+      "default": 0
+    },
+    "pickleball_hours": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "user_id"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "Booking",
+  "type": "object",
+  "properties": {
+    "player_id": {
+      "type": "string"
+    },
+    "player_name": {
+      "type": "string"
+    },
+    "player_email": {
+      "type": "string"
+    },
+    "venue_id": {
+      "type": "string"
+    },
+    "venue_name": {
+      "type": "string"
+    },
+    "court_id": {
+      "type": "string"
+    },
+    "court_name": {
+      "type": "string"
+    },
+    "sport": {
+      "type": "string",
+      "enum": [
+        "Padel",
+        "Squash",
+        "Pickleball"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "start_time": {
+      "type": "string"
+    },
+    "end_time": {
+      "type": "string"
+    },
+    "duration_hours": {
+      "type": "number"
+    },
+    "price": {
+      "type": "number"
+    },
+    "payment_mode": {
+      "type": "string",
+      "enum": [
+        "in_app",
+        "pay_at_venue"
+      ]
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "refunded"
+      ],
+      "default": "pending"
+    },
+    "booking_status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "cancelled",
+        "completed"
+      ],
+      "default": "confirmed"
+    },
+    "reference_code": {
+      "type": "string"
+    },
+    "slot_id": {
+      "type": "string"
+    },
+    "session_logged": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "player_id",
+    "venue_id",
+    "court_id",
+    "sport",
+    "date",
+    "start_time",
+    "end_time",
+    "price",
+    "payment_mode"
+  ]
+}

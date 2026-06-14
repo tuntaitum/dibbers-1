@@ -1,53 +1,99 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import ScrollToTop from './components/ScrollToTop';
-// Add page imports here
+
+// Layouts
+import PlayerLayout from '@/components/PlayerLayout';
+import VenueLayout from '@/components/VenueLayout';
+import AdminLayout from '@/components/AdminLayout';
+
+// Public
+import Landing from '@/pages/Landing';
+
+// Player
+import Explore from '@/pages/player/Explore';
+import VenueDetail from '@/pages/player/VenueDetail';
+import BookingConfirm from '@/pages/player/BookingConfirm';
+import MyBookings from '@/pages/player/MyBookings';
+import Stats from '@/pages/player/Stats';
+import Profile from '@/pages/player/Profile';
+
+// Venue
+import VenueDashboard from '@/pages/venue/VenueDashboard';
+import VenueOnboarding from '@/pages/venue/VenueOnboarding';
+import MyCourts from '@/pages/venue/MyCourts';
+import VenueBookings from '@/pages/venue/VenueBookings';
+import VenueSettings from '@/pages/venue/VenueSettings';
+
+// Admin
+import AdminDashboard from '@/pages/admin/AdminDashboard';
+import AdminVenues from '@/pages/admin/AdminVenues';
+import AdminUsers from '@/pages/admin/AdminUsers';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
-  // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+      <div className="fixed inset-0 flex items-center justify-center bg-brand-cream">
+        <div className="flex flex-col items-center gap-3">
+          <span className="font-heading text-3xl font-bold text-brand-brown">Dibbers</span>
+          <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin"></div>
+        </div>
       </div>
     );
   }
 
-  // Handle authentication errors
   if (authError) {
-    if (authError.type === 'user_not_registered') {
-      return <UserNotRegisteredError />;
-    } else if (authError.type === 'auth_required') {
-      // Redirect to login automatically
-      navigateToLogin();
-      return null;
-    }
+    if (authError.type === 'user_not_registered') return <UserNotRegisteredError />;
+    else if (authError.type === 'auth_required') { navigateToLogin(); return null; }
   }
 
-  // Render the main app
   return (
     <Routes>
-      {/* Add your page Route elements here */}
+      {/* Public */}
+      <Route path="/" element={<Landing />} />
+
+      {/* Player app */}
+      <Route element={<PlayerLayout />}>
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/bookings" element={<MyBookings />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+      <Route path="/venue/:id" element={<VenueDetail />} />
+      <Route path="/book/:slotId" element={<BookingConfirm />} />
+
+      {/* Venue portal */}
+      <Route element={<VenueLayout />}>
+        <Route path="/venue/dashboard" element={<VenueDashboard />} />
+        <Route path="/venue/courts" element={<MyCourts />} />
+        <Route path="/venue/bookings" element={<VenueBookings />} />
+        <Route path="/venue/settings" element={<VenueSettings />} />
+      </Route>
+      <Route path="/venue/new" element={<VenueOnboarding />} />
+
+      {/* Admin panel */}
+      <Route element={<AdminLayout />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/venues" element={<AdminVenues />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+      </Route>
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
 
-
 function App() {
-
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router>
-          <ScrollToTop />
           <AuthenticatedApp />
         </Router>
         <Toaster />

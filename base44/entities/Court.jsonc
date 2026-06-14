@@ -1,0 +1,40 @@
+{
+  "name": "Court",
+  "type": "object",
+  "properties": {
+    "venue_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "sport": {
+      "type": "string",
+      "enum": [
+        "Padel",
+        "Squash",
+        "Pickleball"
+      ]
+    },
+    "price_per_hour": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "venue_id",
+    "name",
+    "sport",
+    "price_per_hour"
+  ]
+}
