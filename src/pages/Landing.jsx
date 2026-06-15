@@ -55,9 +55,16 @@ export default function Landing() {
           <div className="bg-brand-green rounded-3xl p-8 relative overflow-hidden">
             <div className="absolute inset-0 opacity-10" style={{backgroundImage: "repeating-linear-gradient(45deg, #EA672D 0, #EA672D 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px"}} />
             <div className="relative z-10 text-white">
-              <p className="font-heading text-5xl font-bold mb-1">2,847</p>
-              <p className="text-white/60 text-sm mb-6">sessions booked this week</p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1 rounded-full text-xs font-bold mb-5 tracking-wide">
+                <Flame size={12} /> COMING SOON TO THAILAND
+              </div>
+              <h3 className="font-heading text-4xl font-bold text-white leading-tight mb-3">
+                YOUR COURT.<br />YOUR STREAK.<br />YOUR GAME.
+              </h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
+              </p>
+              <div className="grid grid-cols-3 gap-3 mb-6">
                 {sports.map(s => (
                   <div key={s.name} className="bg-white/10 rounded-2xl p-3 text-center">
                     <div className="text-2xl mb-1">{s.emoji}</div>
@@ -65,13 +72,9 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 bg-brand-orange/20 rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <Flame size={16} className="text-brand-orange" />
-                  <span className="font-heading text-xl font-bold text-brand-orange">8 WEEKS</span>
-                </div>
-                <p className="text-white/60 text-xs">Your current playing streak</p>
-              </div>
+              <Link to="/register" className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-xl font-bold text-sm hover:bg-brand-orange/90 transition-colors">
+                Join the waitlist <ArrowRight size={15} />
+              </Link>
             </div>
           </div>
         </div>
