@@ -58,31 +58,35 @@ export default function Profile() {
     </div>
   );
 
+  const pad = isMobile ? "px-4" : "max-w-2xl mx-auto px-8";
+
   return (
     <div className="min-h-screen bg-background pb-8">
-      <div className="bg-brand-brown px-4 pt-5 pb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
-          <button onClick={() => setEditing(!editing)} className="bg-white/10 text-white p-2 rounded-xl hover:bg-white/20 transition-colors">
-            <Edit2 size={16} />
-          </button>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center">
-            {profile?.avatar_url ? (
-              <img src={profile.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover" />
-            ) : (
-              <User size={28} className="text-brand-orange" />
-            )}
+      <div className={`bg-brand-brown ${isMobile ? "px-4 pt-5 pb-8" : "px-8 py-8"}`}>
+        <div className={isMobile ? "" : "max-w-2xl mx-auto"}>
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
+            <button onClick={() => setEditing(!editing)} className="bg-white/10 text-white p-2 rounded-xl hover:bg-white/20 transition-colors">
+              <Edit2 size={16} />
+            </button>
           </div>
-          <div>
-            <p className="font-heading text-2xl font-bold text-white">{profile?.display_name || user.full_name || "Player"}</p>
-            <p className="text-white/60 text-sm">{user.email}</p>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center">
+              {profile?.avatar_url ? (
+                <img src={profile.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover" />
+              ) : (
+                <User size={28} className="text-brand-orange" />
+              )}
+            </div>
+            <div>
+              <p className="font-heading text-2xl font-bold text-white">{profile?.display_name || user.full_name || "Player"}</p>
+              <p className="text-white/60 text-sm">{user.email}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="px-4 py-5 space-y-4">
+      <div className={`${pad} py-5 space-y-4`}>
         {editing ? (
           <div className="bg-white rounded-2xl border border-border p-4 space-y-4 animate-fade-in">
             <h2 className="font-heading text-lg font-bold text-brand-brown">EDIT PROFILE</h2>
