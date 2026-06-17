@@ -18,6 +18,8 @@ import Landing from '@/pages/Landing';
 import Explore from '@/pages/player/Explore';
 import VenueDetail from '@/pages/player/VenueDetail';
 import BookingConfirm from '@/pages/player/BookingConfirm';
+import BookingPayment from '@/pages/player/BookingPayment';
+import BookingConfirmed from '@/pages/player/BookingConfirmed';
 import MyBookings from '@/pages/player/MyBookings';
 import Stats from '@/pages/player/Stats';
 import Profile from '@/pages/player/Profile';
@@ -67,6 +69,8 @@ const AuthenticatedApp = () => {
       </Route>
       <Route path="/venue/:id" element={<VenueDetail />} />
       <Route path="/book/:slotId" element={<BookingConfirm />} />
+      <Route path="/pay/:slotId" element={<BookingPayment />} />
+      <Route path="/booking-confirmed/:bookingId" element={<BookingConfirmed />} />
 
       {/* Venue portal */}
       <Route element={<VenueLayout />}>
