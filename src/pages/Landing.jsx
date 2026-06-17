@@ -123,6 +123,34 @@ export default function Landing() {
         </Link>
       </section>
 
+      {/* Court Owners CTA */}
+      <section className="py-20 max-w-6xl mx-auto px-6">
+        <div className="bg-brand-green rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 tracking-wide">
+              🏟️ FOR VENUE OWNERS
+            </div>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+              OWN A COURT?<br />LET'S TALK.
+            </h2>
+            <p className="text-white/70 text-base leading-relaxed">
+              We're partnering with Padel, Squash, and Pickleball venues across Thailand. Get your courts in front of thousands of active players — manage bookings, set availability, and grow your community on Dibbers.
+            </p>
+          </div>
+          <div className="bg-white/10 rounded-2xl p-8 text-center">
+            <p className="text-white/80 text-sm mb-2">Ready to list your venue?</p>
+            <p className="font-heading text-2xl font-bold text-white mb-1">Get in touch with us</p>
+            <p className="text-white/60 text-sm mb-6">Our team will walk you through everything — no commitment required.</p>
+            <a
+              href="mailto:admin@dibbers.app"
+              className="inline-flex items-center gap-2 bg-brand-orange text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-brand-orange/90 transition-colors"
+            >
+              ✉️ admin@dibbers.app
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-brand-brown text-white/40 text-center py-6 text-sm font-body">
         © 2026 Dibbers · Thailand's Court Sports Platform
