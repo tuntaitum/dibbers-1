@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { ArrowLeft, CreditCard, Building2, Lock, ShieldCheck } from "lucide-react";
+import { ArrowLeft, CreditCard, Building2, Lock, ShieldCheck, Phone, User, Mail, Sparkles } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 
@@ -18,10 +18,15 @@ export default function BookingPayment() {
   const [slot, setSlot] = useState(null);
   const [court, setCourt] = useState(null);
   const [venue, setVenue] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // null = guest
   const [paymentMode, setPaymentMode] = useState("pay_at_venue");
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
+
+  // Guest contact info
+  const [guestName, setGuestName] = useState("");
+  const [guestEmail, setGuestEmail] = useState("");
+  const [guestPhone, setGuestPhone] = useState("");
 
   // Card form state (UI only — Stripe to be wired in)
   const [cardNumber, setCardNumber] = useState("");
@@ -32,11 +37,20 @@ export default function BookingPayment() {
   useEffect(() => {
     const venueId = searchParams.get("venue");
     const courtId = searchParams.get("court");
+    // Try to get current user — guests will get null
+    const getUser = async () => {
+      try {
+        const u = await base44.auth.me();
+        return u;
+      } catch {
+        return null;
+      }
+    };
     Promise.all([
       base44.entities.TimeSlot.filter({ id: slotId }),
       base44.entities.Court.filter({ id: courtId }),
       base44.entities.Venue.filter({ id: venueId }),
-      base44.auth.me(),
+      getUser(),
     ]).then(([slots, courts, venues, u]) => {
       setSlot(slots[0]);
       setCourt(courts[0]);
@@ -61,13 +75,21 @@ export default function BookingPayment() {
     return digits;
   };
 
+  const isGuest = !user;
+  const canSubmit = isGuest
+    ? guestName.trim() && guestEmail.trim() && guestPhone.trim()
+    : true;
+
   const handleConfirm = async () => {
+    if (!canSubmit) return;
     setProcessing(true);
     const ref = genRef();
+    const playerName = isGuest ? guestName : (user.full_name || user.email);
+    const playerEmail = isGuest ? guestEmail : user.email;
     const booking = await base44.entities.Booking.create({
-      player_id: user.id,
-      player_name: user.full_name || user.email,
-      player_email: user.email,
+      player_id: isGuest ? `guest_${ref}` : user.id,
+      player_name: playerName,
+      player_email: playerEmail,
       venue_id: venue.id,
       venue_name: venue.name,
       court_id: court.id,
@@ -87,7 +109,7 @@ export default function BookingPayment() {
     });
     await base44.entities.TimeSlot.update(slot.id, { status: "booked" });
     setProcessing(false);
-    navigate(`/booking-confirmed/${booking.id}?paymentMode=${paymentMode}`);
+    navigate(`/booking-confirmed/${booking.id}?paymentMode=${paymentMode}&guest=${isGuest}`);
   };
 
   const Shell = ({ children }) => isMobile ? (
@@ -131,6 +153,19 @@ export default function BookingPayment() {
 
       <div className={`${isMobile ? "px-4 py-5" : "max-w-lg mx-auto px-8 py-8"} space-y-4`}>
 
+        {/* Sign-up nudge for guests */}
+        {isGuest && (
+          <div className="bg-brand-orange/10 border border-brand-orange/25 rounded-2xl p-4 flex gap-3 items-start">
+            <Sparkles size={18} className="text-brand-orange flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-bold text-brand-brown">Get member perks!</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                <Link to="/register" className="text-brand-orange font-semibold underline underline-offset-2">Create a free account</Link> to save your bookings, track your stats, and unlock exclusive deals.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Order summary */}
         <div className="bg-white rounded-2xl border border-border p-4">
           <h2 className="font-heading text-base font-bold text-brand-brown mb-3">ORDER SUMMARY</h2>
@@ -146,6 +181,52 @@ export default function BookingPayment() {
             </div>
           </div>
         </div>
+
+        {/* Guest contact form */}
+        {isGuest && (
+          <div className="bg-white rounded-2xl border border-border p-4 space-y-3">
+            <h2 className="font-heading text-base font-bold text-brand-brown">YOUR DETAILS</h2>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Full name</label>
+              <div className="relative">
+                <input
+                  value={guestName}
+                  onChange={e => setGuestName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full border border-border rounded-xl px-4 py-3 pl-10 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown placeholder-muted-foreground"
+                />
+                <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Email address</label>
+              <div className="relative">
+                <input
+                  value={guestEmail}
+                  onChange={e => setGuestEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  type="email"
+                  className="w-full border border-border rounded-xl px-4 py-3 pl-10 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown placeholder-muted-foreground"
+                />
+                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Phone number <span className="text-brand-orange">*</span></label>
+              <div className="relative">
+                <input
+                  value={guestPhone}
+                  onChange={e => setGuestPhone(e.target.value)}
+                  placeholder="+66 8X XXX XXXX"
+                  type="tel"
+                  className="w-full border border-border rounded-xl px-4 py-3 pl-10 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown placeholder-muted-foreground"
+                />
+                <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">Used to confirm your booking at the venue</p>
+            </div>
+          </div>
+        )}
 
         {/* Payment method selector */}
         {(canPayOnline && canPayAtVenue) && (
@@ -188,7 +269,6 @@ export default function BookingPayment() {
                 </div>
               </div>
             </div>
-
             <div>
               <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Cardholder name</label>
               <input
@@ -198,7 +278,6 @@ export default function BookingPayment() {
                 className="w-full border border-border rounded-xl px-4 py-3 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown placeholder-muted-foreground"
               />
             </div>
-
             <div>
               <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Card number</label>
               <div className="relative">
@@ -212,7 +291,6 @@ export default function BookingPayment() {
                 <CreditCard size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
               </div>
             </div>
-
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-xs font-semibold text-muted-foreground block mb-1.5">Expiry date</label>
@@ -235,7 +313,6 @@ export default function BookingPayment() {
                 />
               </div>
             </div>
-
             <div className="flex items-center gap-2 bg-brand-sky/60 rounded-xl p-3">
               <ShieldCheck size={14} className="text-brand-brown flex-shrink-0" />
               <p className="text-xs text-brand-brown/70">Your payment details are encrypted and processed securely via Stripe.</p>
@@ -257,7 +334,7 @@ export default function BookingPayment() {
         {/* CTA */}
         <button
           onClick={handleConfirm}
-          disabled={processing}
+          disabled={processing || !canSubmit}
           className="w-full bg-brand-orange text-white py-4 rounded-2xl font-bold text-lg font-heading tracking-wide disabled:opacity-60 hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
         >
           {processing ? (

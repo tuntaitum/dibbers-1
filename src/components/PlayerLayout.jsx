@@ -1,7 +1,8 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Compass, CalendarDays, BarChart2, User } from "lucide-react";
+import { Compass, CalendarDays, BarChart2, User, LogIn } from "lucide-react";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import { useAuth } from "@/lib/AuthContext";
 
 const tabs = [
   { path: "/explore", label: "Explore", icon: Compass },
@@ -13,6 +14,7 @@ const tabs = [
 export default function PlayerLayout() {
   const location = useLocation();
   const isMobile = useIsMobileApp();
+  const { isAuthenticated } = useAuth();
 
   if (isMobile) {
     return (
@@ -79,6 +81,15 @@ export default function PlayerLayout() {
                 </Link>
               );
             })}
+            {!isAuthenticated && (
+              <Link
+                to="/login"
+                className="ml-2 flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-brand-orange text-white hover:bg-brand-orange/90 transition-all"
+              >
+                <LogIn size={16} />
+                Sign in
+              </Link>
+            )}
           </div>
         </div>
       </nav>

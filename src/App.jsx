@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
@@ -52,7 +53,7 @@ const AuthenticatedApp = () => {
 
   if (authError) {
     if (authError.type === 'user_not_registered') return <UserNotRegisteredError />;
-    else if (authError.type === 'auth_required') { navigateToLogin(); return null; }
+    // auth_required is handled per-route — player pages are public, don't global-redirect
   }
 
   return (
@@ -60,32 +61,38 @@ const AuthenticatedApp = () => {
       {/* Public */}
       <Route path="/" element={<Landing />} />
 
-      {/* Player app */}
+      {/* Player app — Explore is fully public; Stats/Profile/Bookings require login */}
       <Route element={<PlayerLayout />}>
         <Route path="/explore" element={<Explore />} />
-        <Route path="/bookings" element={<MyBookings />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+          <Route path="/bookings" element={<MyBookings />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Route>
       <Route path="/venue/:id" element={<VenueDetail />} />
       <Route path="/book/:slotId" element={<BookingConfirm />} />
       <Route path="/pay/:slotId" element={<BookingPayment />} />
       <Route path="/booking-confirmed/:bookingId" element={<BookingConfirmed />} />
 
-      {/* Venue portal */}
-      <Route element={<VenueLayout />}>
-        <Route path="/venue/dashboard" element={<VenueDashboard />} />
-        <Route path="/venue/courts" element={<MyCourts />} />
-        <Route path="/venue/bookings" element={<VenueBookings />} />
-        <Route path="/venue/settings" element={<VenueSettings />} />
+      {/* Venue portal — requires login */}
+      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+        <Route element={<VenueLayout />}>
+          <Route path="/venue/dashboard" element={<VenueDashboard />} />
+          <Route path="/venue/courts" element={<MyCourts />} />
+          <Route path="/venue/bookings" element={<VenueBookings />} />
+          <Route path="/venue/settings" element={<VenueSettings />} />
+        </Route>
+        <Route path="/venue/new" element={<VenueOnboarding />} />
       </Route>
-      <Route path="/venue/new" element={<VenueOnboarding />} />
 
-      {/* Admin panel */}
-      <Route element={<AdminLayout />}>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/venues" element={<AdminVenues />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
+      {/* Admin panel — requires login */}
+      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/venues" element={<AdminVenues />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

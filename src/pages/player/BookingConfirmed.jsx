@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { CheckCircle2, CalendarDays, MapPin, Clock, Share2, Home } from "lucide-react";
+import { CheckCircle2, CalendarDays, MapPin, Clock, Home, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 
 export default function BookingConfirmed() {
@@ -13,6 +14,7 @@ export default function BookingConfirmed() {
   const [loading, setLoading] = useState(true);
 
   const paymentMode = searchParams.get("paymentMode");
+  const isGuest = searchParams.get("guest") === "true";
 
   useEffect(() => {
     base44.entities.Booking.filter({ id: bookingId }).then(res => {
@@ -106,14 +108,38 @@ export default function BookingConfirmed() {
             </div>
           </div>
 
+          {/* Guest sign-up nudge */}
+          {isGuest && (
+            <div className="px-6 pb-2">
+              <div className="bg-brand-orange/10 border border-brand-orange/25 rounded-2xl p-4 flex gap-3 items-start">
+                <Sparkles size={16} className="text-brand-orange flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-bold text-brand-brown">Save your bookings & earn perks</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    <Link to="/register" className="text-brand-orange font-semibold underline underline-offset-2">Create a free account</Link> to track all your sessions, build a streak, and get exclusive member deals.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Actions */}
           <div className="px-6 pb-6 space-y-3">
-            <button
-              onClick={() => navigate("/bookings")}
-              className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
-            >
-              <Home size={16} /> VIEW MY BOOKINGS
-            </button>
+            {isGuest ? (
+              <Link
+                to="/explore"
+                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
+              >
+                <Home size={16} /> BACK TO EXPLORE
+              </Link>
+            ) : (
+              <button
+                onClick={() => navigate("/bookings")}
+                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
+              >
+                <Home size={16} /> VIEW MY BOOKINGS
+              </button>
+            )}
             <button
               onClick={() => navigate("/explore")}
               className="w-full border-2 border-brand-brown/15 text-brand-brown py-3 rounded-xl font-semibold text-sm hover:border-brand-brown/30 transition-colors"
