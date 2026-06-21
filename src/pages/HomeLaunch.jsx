@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { MapPin, CalendarCheck, BarChart2, Flame, Mail } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, MapPin, CalendarCheck, BarChart2, Flame } from "lucide-react";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -13,22 +14,17 @@ const features = [
   { icon: BarChart2, title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
 ];
 
-export default function Landing() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleNotify = (e) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
-
+export default function HomeLaunch() {
   return (
     <div className="min-h-screen bg-brand-cream font-body">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/9d835b838_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
-        <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">
-          <Flame size={13} /> LAUNCHING SOON
+        <div className="flex items-center gap-3">
+          <Link to="/login" className="text-brand-brown font-medium text-sm hover:text-brand-orange transition-colors">Sign in</Link>
+          <Link to="/register" className="bg-brand-orange text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-brand-orange/90 transition-colors">
+            Get started
+          </Link>
         </div>
       </nav>
 
@@ -44,33 +40,16 @@ export default function Landing() {
             BELONG.
           </h1>
           <p className="text-brand-brown/70 text-lg mb-8 leading-relaxed max-w-md">
-            Dibbers is coming to Thailand. Discover and book Padel, Squash, and Pickleball courts — log sessions, build streaks, and make every hour on court count.
+            Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
           </p>
-
-          {/* Email capture */}
-          {submitted ? (
-            <div className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green px-5 py-3 rounded-full font-semibold text-sm">
-              ✅ You're on the list — we'll be in touch!
-            </div>
-          ) : (
-            <form onSubmit={handleNotify} className="flex items-center gap-2 max-w-sm">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="flex-1 px-4 py-3 rounded-full border-2 border-brand-brown/20 bg-white text-brand-brown text-sm focus:outline-none focus:border-brand-orange transition-colors"
-              />
-              <button
-                type="submit"
-                className="bg-brand-orange text-white px-5 py-3 rounded-full font-semibold text-sm hover:bg-brand-orange/90 transition-colors whitespace-nowrap"
-              >
-                Notify me
-              </button>
-            </form>
-          )}
-          <p className="text-brand-brown/40 text-xs mt-3">Be the first to know when we launch.</p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <Link to="/register" className="bg-brand-orange text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-brand-orange/90 transition-all hover:gap-3">
+              Start playing <ArrowRight size={16} />
+            </Link>
+            <Link to="/explore" className="border-2 border-brand-brown/20 text-brand-brown px-6 py-3 rounded-full font-semibold hover:border-brand-brown/40 transition-colors">
+              Browse courts
+            </Link>
+          </div>
         </div>
         <div className="relative hidden md:block">
           <div className="bg-brand-green rounded-3xl p-8 relative overflow-hidden">
@@ -85,7 +64,7 @@ export default function Landing() {
               <p className="text-white/60 text-sm leading-relaxed mb-6">
                 We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
               </p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 mb-6">
                 {sports.map(s => (
                   <div key={s.name} className="bg-white/10 rounded-2xl p-3 text-center">
                     <div className="text-2xl mb-1">{s.emoji}</div>
@@ -93,6 +72,9 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
+              <Link to="/register" className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-xl font-bold text-sm hover:bg-brand-orange/90 transition-colors">
+                Join the waitlist <ArrowRight size={15} />
+              </Link>
             </div>
           </div>
         </div>
@@ -105,7 +87,7 @@ export default function Landing() {
           <p className="text-white/60 mb-10">Every court, every sport, one platform.</p>
           <div className="grid md:grid-cols-3 gap-4">
             {sports.map(s => (
-              <div key={s.name} className="bg-white/10 rounded-2xl p-6">
+              <div key={s.name} className="bg-white/10 rounded-2xl p-6 hover:bg-white/15 transition-colors">
                 <div className="text-4xl mb-3">{s.emoji}</div>
                 <h3 className="font-heading text-2xl font-bold text-white mb-1">{s.name.toUpperCase()}</h3>
                 <p className="text-white/60 text-sm">{s.desc}</p>
@@ -132,32 +114,13 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Coming soon CTA */}
+      {/* CTA */}
       <section className="bg-brand-orange py-16 text-center">
-        <h2 className="font-heading text-5xl font-bold text-white mb-3">COMING SOON.</h2>
-        <p className="text-white/80 mb-8 text-lg max-w-md mx-auto">We're putting the finishing touches on something great. Drop your email and we'll let you know the moment we go live.</p>
-        {submitted ? (
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-full font-semibold">
-            ✅ You're on the list!
-          </div>
-        ) : (
-          <form onSubmit={handleNotify} className="flex items-center gap-2 max-w-sm mx-auto">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="Your email address"
-              className="flex-1 px-4 py-3 rounded-full border-2 border-white/30 bg-white/10 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-white transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-white text-brand-orange px-5 py-3 rounded-full font-bold text-sm hover:bg-brand-cream transition-colors whitespace-nowrap"
-            >
-              Notify me
-            </button>
-          </form>
-        )}
+        <h2 className="font-heading text-5xl font-bold text-white mb-3">READY TO PLAY?</h2>
+        <p className="text-white/80 mb-8 text-lg">Join thousands of players across Thailand.</p>
+        <Link to="/register" className="bg-white text-brand-orange px-8 py-3 rounded-full font-bold text-lg hover:bg-brand-cream transition-colors inline-flex items-center gap-2">
+          Create your account <ArrowRight size={18} />
+        </Link>
       </section>
 
       {/* Court Owners CTA */}
