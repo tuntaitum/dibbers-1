@@ -26,7 +26,7 @@ export default function Landing() {
     <div className="min-h-screen bg-brand-cream font-body">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/9d835b838_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
+        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
         <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">
           <Flame size={13} /> LAUNCHING SOON
         </div>

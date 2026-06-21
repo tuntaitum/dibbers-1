@@ -64,7 +64,7 @@ export default function PlayerLayout() {
       {/* Top nav bar */}
       <nav className="bg-brand-brown border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-8 flex items-center justify-between h-14">
-          <Link to="/explore" className="font-heading text-2xl font-bold text-white tracking-wide">Dibbers</Link>
+          <Link to="/explore"><img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-10 w-auto" /></Link>
           <div className="flex items-center gap-1">
             {tabs.map(({ path, label, icon: Icon }) => {
               const active = location.pathname === path;
