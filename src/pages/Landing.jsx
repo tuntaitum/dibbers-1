@@ -31,7 +31,7 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0EDE5] font-body text-[#1a1a1a]">
+    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a]">
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -128,7 +128,7 @@ export default function Landing() {
 
         <div className="grid md:grid-cols-3 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden">
           {features.map(({ num, title, desc }) => (
-            <div key={title} className="bg-[#F0EDE5] p-10 hover:bg-white transition-colors duration-500 group">
+            <div key={title}               className="bg-[#F7F5F0] p-10 hover:bg-white transition-colors duration-500 group">
               <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/30 mb-6 block">{num}</span>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-[#1a1a1a] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
               <p className="text-sm font-light text-[#1a1a1a]/50 leading-relaxed">{desc}</p>
@@ -185,7 +185,7 @@ export default function Landing() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white/80 text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
+                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
                 />
                 <button
                   type="submit"

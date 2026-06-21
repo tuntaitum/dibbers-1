@@ -107,12 +107,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: overlay;
-    opacity: 0.35;
+    opacity: 0.55;
   }
   .noise > * {
     position: relative;
@@ -121,10 +121,9 @@
 
   /* Gradient hero background */
   .gradient-hero {
-    background: radial-gradient(ellipse at 0% 100%, #EA672D 0%, transparent 55%),
-                radial-gradient(ellipse at 100% 0%, #00452A 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 50%, #c5dfc5 0%, transparent 60%),
-                #EBE8DC;
+    background: radial-gradient(ellipse at 0% 110%, #EA672D55 0%, transparent 45%),
+                radial-gradient(ellipse at 100% -10%, #00452A44 0%, transparent 45%),
+                #F7F5F0;
   }
 
   .gradient-green-block {
