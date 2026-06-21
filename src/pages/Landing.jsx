@@ -19,7 +19,7 @@ export default function Landing() {
     <div className="min-h-screen bg-brand-cream font-body">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/9d835b838_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-10 w-auto" />
+        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/9d835b838_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
         <div className="flex items-center gap-3">
           <Link to="/login" className="text-brand-brown font-medium text-sm hover:text-brand-orange transition-colors">Sign in</Link>
           <Link to="/register" className="bg-brand-orange text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-brand-orange/90 transition-colors">
