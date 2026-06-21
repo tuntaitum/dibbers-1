@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, CalendarCheck, BarChart2, Flame, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const sports = [
@@ -10,9 +10,9 @@ const sports = [
 ];
 
 const features = [
-  { icon: MapPin, title: "Discover", desc: "Browse courts near you, filter by sport, price, and availability in seconds." },
-  { icon: CalendarCheck, title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
-  { icon: BarChart2, title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
+  { num: "01", title: "Discover", desc: "Browse courts near you. Filter by sport, price, and availability in seconds." },
+  { num: "02", title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
+  { num: "03", title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
 ];
 
 export default function Landing() {
@@ -31,178 +31,209 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-cream font-body">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
-        <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">
-          <Flame size={13} /> LAUNCHING SOON
+    <div className="min-h-screen bg-[#F0EDE5] font-body text-[#1a1a1a]">
+
+      {/* ── Nav ── */}
+      <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
+        <img
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
+          alt="Dibbers"
+          className="h-12 w-auto brightness-0"
+        />
+        <div className="flex items-center gap-6">
+          <span className="text-xs font-light tracking-[0.15em] uppercase text-[#1a1a1a]/40">
+            Thailand · Launching 2026
+          </span>
+          <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-20 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-3 py-1.5 rounded-full text-xs font-semibold mb-5">
-            <Flame size={13} /> Thailand's sports lifestyle platform
+      {/* ── Hero ── */}
+      <section className="gradient-hero noise min-h-[92vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-12">
+          {/* Left: headline */}
+          <div className="flex-1">
+            <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/50 mb-8">
+              Padel · Squash · Pickleball
+            </p>
+            <h1 className="font-heading font-bold text-[clamp(4rem,9vw,9rem)] leading-[0.9] tracking-[-0.04em] text-[#1a1a1a] mb-0">
+              PLAY<br />
+              <span className="text-brand-orange">MORE.</span><br />
+              TRACK<br />
+              IT.
+            </h1>
           </div>
-          <h1 className="font-heading text-6xl md:text-7xl font-bold text-brand-brown leading-none mb-5">
-            PLAY MORE.<br />
-            <span className="text-brand-orange">TRACK IT.</span><br />
-            BELONG.
-          </h1>
-          <p className="text-brand-brown/70 text-lg mb-8 leading-relaxed max-w-md">
-            Dibbers is coming to Thailand. Discover and book Padel, Squash, and Pickleball courts — log sessions, build streaks, and make every hour on court count.
+
+          {/* Right: sub-copy + form */}
+          <div className="md:max-w-xs">
+            <p className="text-base font-light text-[#1a1a1a]/60 leading-relaxed mb-8">
+              Dibbers is coming to Thailand. Discover and book courts — log sessions, build streaks, and make every hour on court count.
+            </p>
+
+            {submitted ? (
+              <div className="flex items-center gap-3 text-brand-green">
+                <div className="w-5 h-5 rounded-full border-2 border-brand-green flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-brand-green" />
+                </div>
+                <span className="text-sm font-medium tracking-wide">You're on the list.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleNotify} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="Your email address"
+                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white/60 backdrop-blur-sm text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-[#1a1a1a] text-white py-3.5 rounded-xl text-sm font-medium tracking-wide hover:bg-brand-orange transition-colors duration-300 flex items-center justify-center gap-2 group"
+                >
+                  Notify me when we launch
+                  <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </button>
+              </form>
+            )}
+
+            <p className="text-xs font-light text-[#1a1a1a]/30 mt-3 tracking-wide">
+              Be the first to know. No spam.
+            </p>
+          </div>
+        </div>
+
+        {/* Sports tags at the bottom */}
+        <div className="flex items-center gap-4 mt-16 flex-wrap">
+          {sports.map(s => (
+            <div key={s.name} className="flex items-center gap-2 border border-[#1a1a1a]/15 bg-white/40 backdrop-blur-sm rounded-full px-4 py-2">
+              <span className="text-base">{s.emoji}</span>
+              <span className="text-xs font-medium tracking-[0.1em] uppercase text-[#1a1a1a]/70">{s.name}</span>
+            </div>
+          ))}
+          <span className="text-xs font-light text-[#1a1a1a]/30 tracking-wide ml-2">Available at launch</span>
+        </div>
+      </section>
+
+      {/* ── How it works ── */}
+      <section className="max-w-[1400px] mx-auto px-8 py-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
+          <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em] text-[#1a1a1a]">
+            HOW IT<br />WORKS.
+          </h2>
+          <p className="text-sm font-light text-[#1a1a1a]/40 tracking-wide max-w-xs">
+            From discovery to daily habit — three steps to your next session.
           </p>
-
-          {/* Email capture */}
-          {submitted ? (
-            <div className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green px-5 py-3 rounded-full font-semibold text-sm">
-              ✅ You're on the list — we'll be in touch!
-            </div>
-          ) : (
-            <form onSubmit={handleNotify} className="flex items-center gap-2 max-w-sm">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="flex-1 px-4 py-3 rounded-full border-2 border-brand-brown/20 bg-white text-brand-brown text-sm focus:outline-none focus:border-brand-orange transition-colors"
-              />
-              <button
-                type="submit"
-                className="bg-brand-orange text-white px-5 py-3 rounded-full font-semibold text-sm hover:bg-brand-orange/90 transition-colors whitespace-nowrap"
-              >
-                Notify me
-              </button>
-            </form>
-          )}
-          <p className="text-brand-brown/40 text-xs mt-3">Be the first to know when we launch.</p>
         </div>
-        <div className="relative hidden md:block">
-          <div className="bg-brand-green rounded-3xl p-8 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" style={{backgroundImage: "repeating-linear-gradient(45deg, #EA672D 0, #EA672D 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px"}} />
-            <div className="relative z-10 text-white">
-              <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1 rounded-full text-xs font-bold mb-5 tracking-wide">
-                <Flame size={12} /> COMING SOON TO THAILAND
-              </div>
-              <h3 className="font-heading text-4xl font-bold text-white leading-tight mb-3">
-                YOUR COURT.<br />YOUR STREAK.<br />YOUR GAME.
-              </h3>
-              <p className="text-white/60 text-sm leading-relaxed mb-6">
-                We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
-              </p>
-              <div className="grid grid-cols-3 gap-3">
-                {sports.map(s => (
-                  <div key={s.name} className="bg-white/10 rounded-2xl p-3 text-center">
-                    <div className="text-2xl mb-1">{s.emoji}</div>
-                    <div className="font-semibold text-xs">{s.name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Sports */}
-      <section className="bg-brand-brown py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="font-heading text-4xl font-bold text-white mb-2">SPORTS WE COVER</h2>
-          <p className="text-white/60 mb-10">Every court, every sport, one platform.</p>
-          <div className="grid md:grid-cols-3 gap-4">
-            {sports.map(s => (
-              <div key={s.name} className="bg-white/10 rounded-2xl p-6">
-                <div className="text-4xl mb-3">{s.emoji}</div>
-                <h3 className="font-heading text-2xl font-bold text-white mb-1">{s.name.toUpperCase()}</h3>
-                <p className="text-white/60 text-sm">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <h2 className="font-heading text-4xl font-bold text-brand-brown mb-2">HOW IT WORKS</h2>
-        <p className="text-brand-brown/60 mb-12">From discovery to daily habit in three steps.</p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="bg-white rounded-2xl p-6 border border-border">
-              <div className="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-4">
-                <Icon size={20} className="text-brand-orange" />
-              </div>
-              <h3 className="font-heading text-xl font-bold text-brand-brown mb-2">{title.toUpperCase()}</h3>
-              <p className="text-brand-brown/60 text-sm leading-relaxed">{desc}</p>
+        <div className="grid md:grid-cols-3 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden">
+          {features.map(({ num, title, desc }) => (
+            <div key={title} className="bg-[#F0EDE5] p-10 hover:bg-white transition-colors duration-500 group">
+              <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/30 mb-6 block">{num}</span>
+              <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-[#1a1a1a] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
+              <p className="text-sm font-light text-[#1a1a1a]/50 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Coming soon CTA */}
-      <section className="bg-brand-orange py-16 text-center">
-        <h2 className="font-heading text-5xl font-bold text-white mb-3">COMING SOON.</h2>
-        <p className="text-white/80 mb-8 text-lg max-w-md mx-auto">We're putting the finishing touches on something great. Drop your email and we'll let you know the moment we go live.</p>
-        {submitted ? (
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-full font-semibold">
-            ✅ You're on the list!
-          </div>
-        ) : (
-          <form onSubmit={(e) => handleNotify(e, "bottom_cta")} className="flex items-center gap-2 max-w-sm mx-auto">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="Your email address"
-              className="flex-1 px-4 py-3 rounded-full border-2 border-white/30 bg-white/10 text-white placeholder:text-white/50 text-sm focus:outline-none focus:border-white transition-colors"
-            />
-            <button
-              type="submit"
-              className="bg-white text-brand-orange px-5 py-3 rounded-full font-bold text-sm hover:bg-brand-cream transition-colors whitespace-nowrap"
-            >
-              Notify me
-            </button>
-          </form>
-        )}
+      {/* ── Sports section ── */}
+      <section className="gradient-green-block noise mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
+          <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em] text-white">
+            SPORTS<br />WE COVER.
+          </h2>
+          <p className="text-sm font-light text-white/40 max-w-xs leading-relaxed">
+            Every court, every sport, one platform. Whether you play for fun or train to compete.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {sports.map(s => (
+            <div key={s.name} className="border border-white/10 rounded-2xl p-8 hover:border-white/25 hover:bg-white/5 transition-all duration-500 group">
+              <div className="text-4xl mb-6">{s.emoji}</div>
+              <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
+              <p className="text-sm font-light text-white/40 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Court Owners CTA */}
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <div className="bg-brand-green rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 tracking-wide">
-              🏟️ FOR VENUE OWNERS
-            </div>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-              OWN A COURT?<br />LET'S TALK.
+      {/* ── Coming soon CTA ── */}
+      <section className="max-w-[1400px] mx-auto px-8 py-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-12">
+          <div className="flex-1">
+            <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">Coming soon</p>
+            <h2 className="font-heading font-bold text-[clamp(3rem,7vw,8rem)] leading-[0.88] tracking-[-0.04em] text-[#1a1a1a]">
+              DON'T<br />
+              MISS<br />
+              <span className="text-brand-orange">LAUNCH.</span>
             </h2>
-            <p className="text-white/70 text-base leading-relaxed">
-              We're partnering with Padel, Squash, and Pickleball venues across Thailand. Get your courts in front of thousands of active players — manage bookings, set availability, and grow your community on Dibbers.
+          </div>
+          <div className="md:max-w-sm w-full">
+            {submitted ? (
+              <div className="bg-brand-green/10 border border-brand-green/20 rounded-2xl p-8 text-center">
+                <div className="text-3xl mb-3">✅</div>
+                <p className="font-medium text-brand-green">You're on the list!</p>
+                <p className="text-sm font-light text-[#1a1a1a]/40 mt-1">We'll reach out when we go live.</p>
+              </div>
+            ) : (
+              <form onSubmit={(e) => handleNotify(e, "bottom_cta")} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="Your email address"
+                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white/80 text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-brand-orange text-white py-3.5 rounded-xl text-sm font-medium tracking-wide hover:bg-[#d4581f] transition-colors duration-300"
+                >
+                  Get notified
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Venue owners ── */}
+      <section className="max-w-[1400px] mx-auto px-8 pb-24">
+        <div className="border border-[#1a1a1a]/10 rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center bg-white/60 backdrop-blur-sm">
+          <div>
+            <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">For venue owners</p>
+            <h2 className="font-heading font-bold text-[clamp(2rem,4vw,4.5rem)] leading-none tracking-[-0.03em] text-[#1a1a1a] mb-6">
+              OWN A<br />COURT?
+            </h2>
+            <p className="text-base font-light text-[#1a1a1a]/50 leading-relaxed max-w-sm">
+              We're partnering with venues across Thailand. Get your courts in front of thousands of active players — manage bookings, set availability, grow your community.
             </p>
           </div>
-          <div className="bg-white/10 rounded-2xl p-8 text-center">
-            <p className="text-white/80 text-sm mb-2">Ready to list your venue?</p>
-            <p className="font-heading text-2xl font-bold text-white mb-1">Get in touch with us</p>
-            <p className="text-white/60 text-sm mb-6">Our team will walk you through everything — no commitment required.</p>
+          <div className="flex flex-col items-start gap-6">
+            <p className="text-sm font-light text-[#1a1a1a]/40 leading-relaxed">
+              Our team will walk you through everything — no commitment required.
+            </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-2 bg-brand-orange text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-brand-orange/90 transition-colors"
+              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange transition-colors duration-300 group"
             >
-              ✉️ admin@dibbers.app
+              admin@dibbers.app
+              <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-brand-brown text-white/40 text-center py-6 text-sm font-body">
-        <div className="flex items-center justify-center gap-4 flex-wrap">
-          <span>© 2026 Dibbers · Thailand's Court Sports Platform</span>
-          <span className="hidden sm:inline">·</span>
-          <Link to="/terms" className="hover:text-white/70 transition-colors">Terms of Service</Link>
-          <Link to="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+      {/* ── Footer ── */}
+      <footer className="border-t border-[#1a1a1a]/10 px-8 py-8 max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <span className="text-xs font-light tracking-wide text-[#1a1a1a]/30">© 2026 Dibbers · Thailand's Court Sports Platform</span>
+          <div className="flex items-center gap-6">
+            <Link to="/terms" className="text-xs font-light text-[#1a1a1a]/30 hover:text-[#1a1a1a]/60 transition-colors tracking-wide">Terms of Service</Link>
+            <Link to="/privacy" className="text-xs font-light text-[#1a1a1a]/30 hover:text-[#1a1a1a]/60 transition-colors tracking-wide">Privacy Policy</Link>
+          </div>
         </div>
       </footer>
     </div>
