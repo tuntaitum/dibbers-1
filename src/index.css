@@ -121,8 +121,8 @@
 
   /* Gradient hero background */
   .gradient-hero {
-    background: radial-gradient(ellipse at 0% 110%, #EA672D55 0%, transparent 45%),
-                radial-gradient(ellipse at 100% -10%, #00452A44 0%, transparent 45%),
+    background: radial-gradient(ellipse at -5% 105%, #EA672D 0%, #EA672D99 25%, transparent 55%),
+                radial-gradient(ellipse at 105% -5%, #00452A 0%, #00452Acc 20%, transparent 50%),
                 #F7F5F0;
   }
 
