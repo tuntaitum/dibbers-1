@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, CalendarCheck, BarChart2, Flame, Mail } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -18,9 +19,15 @@ export default function Landing() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleNotify = (e) => {
+  const handleNotify = async (e, source = "hero") => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    await base44.entities.WaitlistEntry.create({
+      email,
+      source,
+      submitted_at: new Date().toISOString(),
+    });
+    setSubmitted(true);
   };
 
   return (
@@ -142,7 +149,7 @@ export default function Landing() {
             ✅ You're on the list!
           </div>
         ) : (
-          <form onSubmit={handleNotify} className="flex items-center gap-2 max-w-sm mx-auto">
+          <form onSubmit={(e) => handleNotify(e, "bottom_cta")} className="flex items-center gap-2 max-w-sm mx-auto">
             <input
               type="email"
               required

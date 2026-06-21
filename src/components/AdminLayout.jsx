@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Building2, Users, ShieldCheck, Menu, X, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Building2, Users, ShieldCheck, Menu, X, ChevronRight, Mail } from "lucide-react";
 
 const navItems = [
   { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/admin/venues", label: "Venues", icon: Building2 },
   { path: "/admin/users", label: "Users", icon: Users },
+  { path: "/admin/waitlist", label: "Waitlist", icon: Mail },
 ];
 
 export default function AdminLayout() {

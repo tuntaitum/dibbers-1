@@ -1,0 +1,19 @@
+{
+  "name": "WaitlistEntry",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "source": {
+      "type": "string",
+      "description": "Which form on the page they used, e.g. hero or bottom_cta"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["email"]
+}

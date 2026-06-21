@@ -39,6 +39,7 @@ import VenueSettings from '@/pages/venue/VenueSettings';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminVenues from '@/pages/admin/AdminVenues';
 import AdminUsers from '@/pages/admin/AdminUsers';
+import AdminWaitlist from '@/pages/admin/AdminWaitlist';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -98,6 +99,7 @@ const AuthenticatedApp = () => {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/venues" element={<AdminVenues />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/waitlist" element={<AdminWaitlist />} />
         </Route>
       </Route>
 
