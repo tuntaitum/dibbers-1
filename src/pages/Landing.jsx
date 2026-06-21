@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { MapPin, CalendarCheck, BarChart2, Flame, Mail } from "lucide-react";
 
 const sports = [
@@ -190,7 +191,12 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="bg-brand-brown text-white/40 text-center py-6 text-sm font-body">
-        © 2026 Dibbers · Thailand's Court Sports Platform
+        <div className="flex items-center justify-center gap-4 flex-wrap">
+          <span>© 2026 Dibbers · Thailand's Court Sports Platform</span>
+          <span className="hidden sm:inline">·</span>
+          <Link to="/terms" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+          <Link to="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+        </div>
       </footer>
     </div>
   );

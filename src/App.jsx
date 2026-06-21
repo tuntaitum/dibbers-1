@@ -15,6 +15,8 @@ import AdminLayout from '@/components/AdminLayout';
 // Public
 import Landing from '@/pages/Landing';
 import HomeLaunch from '@/pages/HomeLaunch';
+import Terms from '@/pages/Terms';
+import Privacy from '@/pages/Privacy';
 
 // Player
 import Explore from '@/pages/player/Explore';
@@ -62,6 +64,8 @@ const AuthenticatedApp = () => {
       {/* Public */}
       <Route path="/" element={<Landing />} />
       <Route path="/homewhenlaunch" element={<HomeLaunch />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/privacy" element={<Privacy />} />
 
       {/* Player app — Explore is fully public; Stats/Profile/Bookings require login */}
       <Route element={<PlayerLayout />}>
