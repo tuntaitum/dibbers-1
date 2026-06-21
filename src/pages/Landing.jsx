@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
@@ -15,23 +15,60 @@ const features = [
   { num: "03", title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
 ];
 
+/* ── Scroll-reveal hook ── */
+function useFadeIn(threshold = 0.15) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
 export default function Landing() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
+  const heroRef = useRef(null);
+
+  /* Parallax blobs on mousemove */
+  const handleMouseMove = (e) => {
+    const rect = heroRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMouse({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
 
   const handleNotify = async (e, source = "hero") => {
     e.preventDefault();
     if (!email) return;
-    await base44.entities.WaitlistEntry.create({
-      email,
-      source,
-      submitted_at: new Date().toISOString(),
-    });
+    await base44.entities.WaitlistEntry.create({ email, source, submitted_at: new Date().toISOString() });
     setSubmitted(true);
   };
 
+  const [howRef, howVisible] = useFadeIn();
+  const [sportsRef, sportsVisible] = useFadeIn();
+  const [ctaRef, ctaVisible] = useFadeIn();
+  const [venueRef, venueVisible] = useFadeIn();
+
+  /* Blob transform based on mouse */
+  const blobOrange = {
+    transform: `translate(${(mouse.x - 0.5) * -30}px, ${(mouse.y - 0.5) * -20}px)`,
+    transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+  };
+  const blobGreen = {
+    transform: `translate(${(mouse.x - 0.5) * 25}px, ${(mouse.y - 0.5) * 15}px)`,
+    transition: "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+  };
+
   return (
-    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a]">
+    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a] overflow-x-hidden">
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -49,8 +86,30 @@ export default function Landing() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className="gradient-hero noise min-h-[92vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-12">
+      <section
+        ref={heroRef}
+        onMouseMove={handleMouseMove}
+        className="noise relative min-h-[92vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden bg-[#F7F5F0]"
+      >
+        {/* Animated blobs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+          <div
+            style={blobOrange}
+            className="absolute -bottom-24 -left-24 w-[520px] h-[520px] rounded-full"
+            aria-hidden
+          >
+            <div className="w-full h-full rounded-full bg-brand-orange opacity-80 blur-[80px]" />
+          </div>
+          <div
+            style={blobGreen}
+            className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full"
+            aria-hidden
+          >
+            <div className="w-full h-full rounded-full bg-brand-green opacity-70 blur-[90px]" />
+          </div>
+        </div>
+
+        <div className="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-12">
           {/* Left: headline */}
           <div className="flex-1">
             <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/50 mb-8">
@@ -65,7 +124,7 @@ export default function Landing() {
           </div>
 
           {/* Right: sub-copy + form */}
-          <div className="md:max-w-xs">
+          <div className="md:max-w-xs relative z-10">
             <p className="text-base font-light text-[#1a1a1a]/60 leading-relaxed mb-8">
               Dibbers is coming to Thailand. Discover and book courts — log sessions, build streaks, and make every hour on court count.
             </p>
@@ -85,7 +144,7 @@ export default function Landing() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white/60 backdrop-blur-sm text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
+                  className="w-full px-4 py-3.5 rounded-xl border border-[#1a1a1a]/15 bg-white/70 backdrop-blur-sm text-[#1a1a1a] text-sm placeholder:text-[#1a1a1a]/30 focus:outline-none focus:border-brand-orange transition-colors font-light"
                 />
                 <button
                   type="submit"
@@ -104,9 +163,9 @@ export default function Landing() {
         </div>
 
         {/* Sports tags at the bottom */}
-        <div className="flex items-center gap-4 mt-16 flex-wrap">
+        <div className="relative z-10 flex items-center gap-4 mt-16 flex-wrap">
           {sports.map(s => (
-            <div key={s.name} className="flex items-center gap-2 border border-[#1a1a1a]/15 bg-white/40 backdrop-blur-sm rounded-full px-4 py-2">
+            <div key={s.name} className="flex items-center gap-2 border border-[#1a1a1a]/15 bg-white/50 backdrop-blur-sm rounded-full px-4 py-2 hover:bg-white/80 transition-colors duration-300">
               <span className="text-base">{s.emoji}</span>
               <span className="text-xs font-medium tracking-[0.1em] uppercase text-[#1a1a1a]/70">{s.name}</span>
             </div>
@@ -116,7 +175,10 @@ export default function Landing() {
       </section>
 
       {/* ── How it works ── */}
-      <section className="max-w-[1400px] mx-auto px-8 py-24">
+      <section
+        ref={howRef}
+        className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${howVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
           <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em] text-[#1a1a1a]">
             HOW IT<br />WORKS.
@@ -127,8 +189,12 @@ export default function Landing() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-px bg-[#1a1a1a]/10 rounded-2xl overflow-hidden">
-          {features.map(({ num, title, desc }) => (
-            <div key={title}               className="bg-[#F7F5F0] p-10 hover:bg-white transition-colors duration-500 group">
+          {features.map(({ num, title, desc }, i) => (
+            <div
+              key={title}
+              style={{ transitionDelay: `${i * 80}ms` }}
+              className={`bg-[#F7F5F0] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-lg transition-all duration-500 group cursor-default ${howVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
               <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/30 mb-6 block">{num}</span>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-[#1a1a1a] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
               <p className="text-sm font-light text-[#1a1a1a]/50 leading-relaxed">{desc}</p>
@@ -138,7 +204,13 @@ export default function Landing() {
       </section>
 
       {/* ── Sports section ── */}
-      <section className="gradient-green-block noise mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden">
+      <section
+        ref={sportsRef}
+        className={`noise mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        style={{
+          background: "radial-gradient(ellipse at 0% 100%, #EA672D55 0%, transparent 50%), radial-gradient(ellipse at 100% 0%, #002a1a 0%, transparent 60%), #00452A"
+        }}
+      >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
           <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em] text-white">
             SPORTS<br />WE COVER.
@@ -149,9 +221,13 @@ export default function Landing() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
-          {sports.map(s => (
-            <div key={s.name} className="border border-white/10 rounded-2xl p-8 hover:border-white/25 hover:bg-white/5 transition-all duration-500 group">
-              <div className="text-4xl mb-6">{s.emoji}</div>
+          {sports.map((s, i) => (
+            <div
+              key={s.name}
+              style={{ transitionDelay: `${i * 80}ms` }}
+              className={`border border-white/10 rounded-2xl p-8 hover:border-white/30 hover:bg-white/8 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            >
+              <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
               <p className="text-sm font-light text-white/40 leading-relaxed">{s.desc}</p>
             </div>
@@ -160,7 +236,10 @@ export default function Landing() {
       </section>
 
       {/* ── Coming soon CTA ── */}
-      <section className="max-w-[1400px] mx-auto px-8 py-24">
+      <section
+        ref={ctaRef}
+        className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-12">
           <div className="flex-1">
             <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">Coming soon</p>
@@ -200,8 +279,11 @@ export default function Landing() {
       </section>
 
       {/* ── Venue owners ── */}
-      <section className="max-w-[1400px] mx-auto px-8 pb-24">
-        <div className="border border-[#1a1a1a]/10 rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center bg-white/60 backdrop-blur-sm">
+      <section
+        ref={venueRef}
+        className={`max-w-[1400px] mx-auto px-8 pb-24 transition-all duration-700 ${venueVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
+        <div className="border border-[#1a1a1a]/10 rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center bg-white/60 hover:bg-white/80 transition-colors duration-500 backdrop-blur-sm">
           <div>
             <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">For venue owners</p>
             <h2 className="font-heading font-bold text-[clamp(2rem,4vw,4.5rem)] leading-none tracking-[-0.03em] text-[#1a1a1a] mb-6">
@@ -217,7 +299,7 @@ export default function Landing() {
             </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange transition-colors duration-300 group"
+              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 group"
             >
               admin@dibbers.app
               <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
