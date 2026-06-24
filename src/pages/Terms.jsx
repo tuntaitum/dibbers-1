@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { noiseOverlay, gradientBanner } from "@/lib/portalDesign";
+import { noiseOverlay, gradientBannerOrange } from "@/lib/portalDesign";
 
 export default function Terms() {
   return (
@@ -12,7 +12,7 @@ export default function Terms() {
       </nav>
 
       <main className="max-w-4xl mx-auto px-6 pt-8">
-        <div className="relative rounded-3xl px-6 md:px-8 py-8 mb-10 overflow-hidden" style={gradientBanner}>
+        <div className="relative rounded-3xl px-6 md:px-8 py-8 mb-10 overflow-hidden" style={gradientBannerOrange}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
           <div className="relative z-10">
             <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">TERMS OF SERVICE</h1>

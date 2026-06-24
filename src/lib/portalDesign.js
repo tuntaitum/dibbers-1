@@ -24,17 +24,37 @@ export const frostedCard = {
   boxShadow: "0 8px 32px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
 };
 
-export const gradientBanner = {
+export const gradientBannerOrange = {
   background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8",
   borderRadius: "1.5rem",
-  boxShadow: "0 24px 64px -16px rgba(0,0,0,0.15), 0 8px 24px -8px rgba(0,0,0,0.08)",
+  boxShadow: "0 24px 64px -16px rgba(234,103,45,0.18), 0 8px 24px -8px rgba(0,0,0,0.08)",
+};
+
+export const gradientBannerGreen = {
+  background: "radial-gradient(ellipse at 0% 105%, #EA672D44 0%, transparent 50%), radial-gradient(ellipse at 100% 0%, #002a1a 0%, transparent 60%), #00452A",
+  borderRadius: "1.5rem",
+  boxShadow: "0 24px 64px -16px rgba(0,69,42,0.35), 0 8px 24px -8px rgba(0,0,0,0.15)",
 };
 
 export const gradientBannerDark = {
-  background: "radial-gradient(ellipse at 0% 105%, #EA672D 0%, #c04e20 20%, transparent 50%), radial-gradient(ellipse at 100% -5%, #002a1a 0%, transparent 55%), #00452A",
+  background: "radial-gradient(ellipse at 100% 100%, #EA672D 0%, #d4581f 25%, transparent 60%), radial-gradient(ellipse at 0% 0%, #1a1a1a 0%, transparent 50%), #111",
   borderRadius: "1.5rem",
-  boxShadow: "0 24px 64px -16px rgba(0,69,42,0.4), 0 8px 24px -8px rgba(0,0,0,0.2)",
+  boxShadow: "0 24px 64px -16px rgba(0,0,0,0.3), 0 8px 24px -8px rgba(0,0,0,0.15)",
 };
+
+export const gradientBannerBrown = {
+  background: "radial-gradient(ellipse at 0% 100%, #EA672D 0%, transparent 50%), radial-gradient(ellipse at 100% 0%, #3a231a 0%, transparent 60%), #5D372A",
+  borderRadius: "1.5rem",
+  boxShadow: "0 24px 64px -16px rgba(93,55,42,0.35), 0 8px 24px -8px rgba(0,0,0,0.12)",
+};
+
+export const gradientBannerSky = {
+  background: "radial-gradient(ellipse at -5% 108%, #D2E8FF 0%, #B0D4F5cc 20%, transparent 55%), radial-gradient(ellipse at 108% -5%, #5D372A22 0%, transparent 50%), #F2EFE8",
+  borderRadius: "1.5rem",
+  boxShadow: "0 24px 64px -16px rgba(100,150,200,0.15), 0 8px 24px -8px rgba(0,0,0,0.06)",
+};
+
+export const gradientBanner = gradientBannerOrange;
 
 export const frostedCardHover = {
   background: "rgba(255,255,255,0.7)",

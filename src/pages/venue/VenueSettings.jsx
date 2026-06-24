@@ -52,7 +52,7 @@ export default function VenueSettings() {
 
   return (
     <div className="min-h-screen pb-10" style={{ background: "#F7F5F0" }}>
-      <PageBanner title="SETTINGS">
+      <PageBanner title="SETTINGS" variant="brown">
         {venues.length > 1 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {venues.map(v => (

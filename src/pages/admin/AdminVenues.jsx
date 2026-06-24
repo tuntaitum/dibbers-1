@@ -58,7 +58,7 @@ export default function AdminVenues() {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
-      <PageBanner title="VENUES" subtitle="Review and manage venue applications" />
+      <PageBanner title="VENUES" subtitle="Review and manage venue applications" variant="green" />
 
       {/* Tabs */}
       <div className="px-6 md:px-10 py-3 overflow-x-auto no-scrollbar border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#F7F5F0" }}>

@@ -31,10 +31,11 @@ export default function AdminWaitlist() {
       <PageBanner
         title="WAITLIST"
         subtitle={`${entries.length} sign-ups collected`}
+        variant="dark"
         action={entries.length > 0 && (
           <button
             onClick={exportCSV}
-            className="bg-brand-green text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-brand-green/90 transition-colors"
+            className="bg-brand-orange text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#ff7a3d] transition-colors"
           >
             Export CSV
           </button>

@@ -102,7 +102,7 @@ export default function MyCourts() {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
-      <PageBanner title="MY COURTS">
+      <PageBanner title="MY COURTS" variant="orange">
         {venues.length > 1 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {venues.map(v => (
