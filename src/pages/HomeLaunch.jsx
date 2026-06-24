@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, CalendarCheck, BarChart2, Flame } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -9,151 +9,269 @@ const sports = [
 ];
 
 const features = [
-  { icon: MapPin, title: "Discover", desc: "Browse courts near you, filter by sport, price, and availability in seconds." },
-  { icon: CalendarCheck, title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
-  { icon: BarChart2, title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
+  { num: "01", title: "Discover", desc: "Browse courts near you. Filter by sport, price, and availability in seconds." },
+  { num: "02", title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
+  { num: "03", title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
 ];
 
+const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+
+const noiseOverlay = {
+  backgroundImage: NOISE_SVG,
+  backgroundSize: "180px 180px",
+  mixBlendMode: "overlay",
+  opacity: 0.4,
+};
+
+const frostedCard = {
+  background: "rgba(255,255,255,0.55)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
+  border: "1px solid rgba(255,255,255,0.85)",
+  boxShadow: "0 8px 32px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
+};
+
+function useFadeIn(threshold = 0.12) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
 export default function HomeLaunch() {
+  const [sportsRef, sportsVisible] = useFadeIn();
+  const [featuresRef, featuresVisible] = useFadeIn();
+  const [ctaRef, ctaVisible] = useFadeIn();
+  const [venueRef, venueVisible] = useFadeIn();
+
   return (
-    <div className="min-h-screen bg-brand-cream font-body">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-16 w-auto" />
+    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a] overflow-x-hidden">
+
+      {/* ── Nav ── */}
+      <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
+        <img
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
+          alt="Dibbers"
+          className="h-12 w-auto brightness-0"
+        />
         <div className="flex items-center gap-3">
-          <Link to="/login" className="text-brand-brown font-medium text-sm hover:text-brand-orange transition-colors">Sign in</Link>
-          <Link to="/register" className="bg-brand-orange text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-brand-orange/90 transition-colors">
+          <Link to="/login" className="text-[#1a1a1a]/60 font-medium text-sm hover:text-brand-orange transition-colors">Sign in</Link>
+          <Link to="/register" className="bg-[#1a1a1a] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-brand-orange transition-colors">
             Get started
           </Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 pt-12 pb-20 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-3 py-1.5 rounded-full text-xs font-semibold mb-5">
-            <Flame size={13} /> Thailand's sports lifestyle platform
-          </div>
-          <h1 className="font-heading text-6xl md:text-7xl font-bold text-brand-brown leading-none mb-5">
-            PLAY MORE.<br />
-            <span className="text-brand-orange">TRACK IT.</span><br />
-            BELONG.
-          </h1>
-          <p className="text-brand-brown/70 text-lg mb-8 leading-relaxed max-w-md">
-            Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
-          </p>
-          <div className="flex items-center gap-3 flex-wrap">
-            <Link to="/register" className="bg-brand-orange text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-brand-orange/90 transition-all hover:gap-3">
-              Start playing <ArrowRight size={16} />
-            </Link>
-            <Link to="/explore" className="border-2 border-brand-brown/20 text-brand-brown px-6 py-3 rounded-full font-semibold hover:border-brand-brown/40 transition-colors">
-              Browse courts
-            </Link>
-          </div>
-        </div>
-        <div className="relative hidden md:block">
-          <div className="bg-brand-green rounded-3xl p-8 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" style={{backgroundImage: "repeating-linear-gradient(45deg, #EA672D 0, #EA672D 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px"}} />
-            <div className="relative z-10 text-white">
-              <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1 rounded-full text-xs font-bold mb-5 tracking-wide">
-                <Flame size={12} /> COMING SOON TO THAILAND
-              </div>
-              <h3 className="font-heading text-4xl font-bold text-white leading-tight mb-3">
-                YOUR COURT.<br />YOUR STREAK.<br />YOUR GAME.
-              </h3>
-              <p className="text-white/60 text-sm leading-relaxed mb-6">
-                We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
-              </p>
-              <div className="grid grid-cols-3 gap-3 mb-6">
-                {sports.map(s => (
-                  <div key={s.name} className="bg-white/10 rounded-2xl p-3 text-center">
-                    <div className="text-2xl mb-1">{s.emoji}</div>
-                    <div className="font-semibold text-xs">{s.name}</div>
-                  </div>
-                ))}
-              </div>
-              <Link to="/register" className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-xl font-bold text-sm hover:bg-brand-orange/90 transition-colors">
-                Join the waitlist <ArrowRight size={15} />
+      {/* ══════════════════════════════════════
+          HERO — gradient color block with noise
+      ══════════════════════════════════════ */}
+      <section
+        className="relative min-h-[88vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden"
+        style={{ background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
+      >
+        <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
+
+        <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center h-full">
+          {/* Left: headline */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-brand-orange/15 text-brand-orange px-3 py-1.5 rounded-full text-xs font-semibold mb-6 tracking-wide">
+              Thailand's sports lifestyle platform
+            </div>
+            <h1 className="font-heading font-bold text-[clamp(4rem,9vw,9rem)] leading-[0.88] tracking-[-0.04em] text-[#1a1a1a]">
+              PLAY<br />
+              <span className="text-brand-orange">MORE.</span><br />
+              TRACK<br />
+              IT.
+            </h1>
+            <p className="text-base font-light text-[#1a1a1a]/60 leading-relaxed mb-8 max-w-md mt-6">
+              Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
+            </p>
+            <div className="flex items-center gap-3 flex-wrap">
+              <Link to="/register" className="bg-[#1a1a1a] text-white px-6 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-brand-orange transition-all duration-300 group">
+                Start playing <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
+              <Link to="/explore" className="text-[#1a1a1a] border border-[#1a1a1a]/15 px-6 py-3.5 rounded-xl font-semibold hover:bg-white/50 transition-colors backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.3)" }}>
+                Browse courts
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: frosted glass card */}
+          <div className="relative hidden md:block">
+            <div className="rounded-3xl p-8 overflow-hidden relative" style={{ background: "rgba(0,69,42,0.85)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 24px 64px -12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
+              <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ ...noiseOverlay, opacity: 0.3 }} />
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1 rounded-full text-xs font-bold mb-5 tracking-wide">
+                  COMING SOON TO THAILAND
+                </div>
+                <h3 className="font-heading text-4xl font-bold text-white leading-tight mb-3 tracking-[-0.03em]">
+                  YOUR COURT.<br />YOUR STREAK.<br />YOUR GAME.
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed mb-6 font-light">
+                  We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
+                </p>
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  {sports.map(s => (
+                    <div key={s.name} className="bg-white/8 rounded-2xl p-3 text-center border border-white/5">
+                      <div className="text-2xl mb-1">{s.emoji}</div>
+                      <div className="font-semibold text-xs text-white/80">{s.name}</div>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/register" className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3.5 rounded-xl font-bold text-sm hover:bg-[#ff7a3d] transition-colors">
+                  Join the waitlist <ArrowUpRight size={15} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sports */}
-      <section className="bg-brand-brown py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="font-heading text-4xl font-bold text-white mb-2">SPORTS WE COVER</h2>
-          <p className="text-white/60 mb-10">Every court, every sport, one platform.</p>
-          <div className="grid md:grid-cols-3 gap-4">
-            {sports.map(s => (
-              <div key={s.name} className="bg-white/10 rounded-2xl p-6 hover:bg-white/15 transition-colors">
-                <div className="text-4xl mb-3">{s.emoji}</div>
-                <h3 className="font-heading text-2xl font-bold text-white mb-1">{s.name.toUpperCase()}</h3>
-                <p className="text-white/60 text-sm">{s.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* ══════════════════════════════════════
+          HOW IT WORKS
+      ══════════════════════════════════════ */}
+      <section
+        ref={featuresRef}
+        className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
+          <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em]">
+            HOW IT<br />WORKS.
+          </h2>
+          <p className="text-sm font-light text-[#1a1a1a]/40 max-w-xs">
+            From discovery to daily habit — three steps to your next session.
+          </p>
         </div>
-      </section>
 
-      {/* Features */}
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <h2 className="font-heading text-4xl font-bold text-brand-brown mb-2">HOW IT WORKS</h2>
-        <p className="text-brand-brown/60 mb-12">From discovery to daily habit in three steps.</p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="bg-white rounded-2xl p-6 border border-border">
-              <div className="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-4">
-                <Icon size={20} className="text-brand-orange" />
-              </div>
-              <h3 className="font-heading text-xl font-bold text-brand-brown mb-2">{title.toUpperCase()}</h3>
-              <p className="text-brand-brown/60 text-sm leading-relaxed">{desc}</p>
+        <div className="grid md:grid-cols-3 gap-px bg-[#1a1a1a]/8 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
+          {features.map(({ num, title, desc }, i) => (
+            <div
+              key={title}
+              style={{ transitionDelay: `${i * 80}ms` }}
+              className={`bg-[#F7F5F0] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
+              <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/25 mb-6 block">{num}</span>
+              <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
+              <p className="text-sm font-light text-[#1a1a1a]/50 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-brand-orange py-16 text-center">
-        <h2 className="font-heading text-5xl font-bold text-white mb-3">READY TO PLAY?</h2>
-        <p className="text-white/80 mb-8 text-lg">Join thousands of players across Thailand.</p>
-        <Link to="/register" className="bg-white text-brand-orange px-8 py-3 rounded-full font-bold text-lg hover:bg-brand-cream transition-colors inline-flex items-center gap-2">
-          Create your account <ArrowRight size={18} />
-        </Link>
+      {/* ══════════════════════════════════════
+          SPORTS — dark green gradient color block
+      ══════════════════════════════════════ */}
+      <section
+        ref={sportsRef}
+        className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        style={{
+          background: "radial-gradient(ellipse at 0% 105%, #EA672D 0%, #c04e20 20%, transparent 50%), radial-gradient(ellipse at 100% -5%, #002a1a 0%, transparent 55%), #00452A",
+          boxShadow: "0 40px 100px -20px rgba(0,69,42,0.5), 0 12px 32px -8px rgba(0,0,0,0.25)",
+        }}
+      >
+        <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
+        <div className="absolute top-0 left-0 right-0 h-px rounded-t-3xl" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }} />
+
+        <div className="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
+          <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em] text-white">
+            SPORTS<br />WE COVER.
+          </h2>
+          <p className="text-sm font-light text-white/40 max-w-xs leading-relaxed">
+            Every court, every sport, one platform. Whether you play for fun or train to compete.
+          </p>
+        </div>
+
+        <div className="relative z-10 grid md:grid-cols-3 gap-4">
+          {sports.map((s, i) => (
+            <div
+              key={s.name}
+              style={{ transitionDelay: `${i * 80}ms`, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
+              className={`rounded-2xl p-8 hover:bg-white/12 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            >
+              <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
+              <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
+              <p className="text-sm font-light text-white/45 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Court Owners CTA */}
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <div className="bg-brand-green rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 tracking-wide">
-              🏟️ FOR VENUE OWNERS
-            </div>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-              OWN A COURT?<br />LET'S TALK.
+      {/* ══════════════════════════════════════
+          CTA — orange gradient color block
+      ══════════════════════════════════════ */}
+      <section
+        ref={ctaRef}
+        className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        style={{
+          background: "radial-gradient(ellipse at 100% 100%, #EA672D 0%, #d4581f 25%, transparent 60%), radial-gradient(ellipse at 0% 0%, #1a1a1a 0%, transparent 50%), #111",
+          boxShadow: "0 40px 100px -20px rgba(234,103,45,0.35), 0 12px 32px -8px rgba(0,0,0,0.3)",
+        }}
+      >
+        <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
+        <div className="absolute top-0 left-0 right-0 h-px rounded-t-3xl" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
+
+        <div className="relative z-10 text-center">
+          <h2 className="font-heading font-bold text-[clamp(3rem,7vw,8rem)] leading-[0.88] tracking-[-0.04em] text-white mb-4">
+            READY TO<br /><span className="text-brand-orange">PLAY?</span>
+          </h2>
+          <p className="text-white/50 mb-8 text-lg font-light">Join thousands of players across Thailand.</p>
+          <Link to="/register" className="inline-flex items-center gap-2 bg-white text-brand-orange px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#F7F5F0] hover:scale-[1.02] transition-all duration-300">
+            Create your account <ArrowUpRight size={18} />
+          </Link>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          VENUE OWNERS — frosted glass
+      ══════════════════════════════════════ */}
+      <section
+        ref={venueRef}
+        className={`max-w-[1400px] mx-auto px-8 pb-24 transition-all duration-700 ${venueVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
+        <div
+          className="relative rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center overflow-hidden"
+          style={frostedCard}
+        >
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ ...noiseOverlay, opacity: 0.25 }} />
+          <div className="relative z-10">
+            <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">For venue owners</p>
+            <h2 className="font-heading font-bold text-[clamp(2rem,4vw,4.5rem)] leading-none tracking-[-0.03em] mb-6">
+              OWN A<br />COURT?
             </h2>
-            <p className="text-white/70 text-base leading-relaxed">
-              We're partnering with Padel, Squash, and Pickleball venues across Thailand. Get your courts in front of thousands of active players — manage bookings, set availability, and grow your community on Dibbers.
+            <p className="text-base font-light text-[#1a1a1a]/50 leading-relaxed max-w-sm">
+              We're partnering with Padel, Squash, and Pickleball venues across Thailand. Get your courts in front of thousands of active players — manage bookings, set availability, grow your community.
             </p>
           </div>
-          <div className="bg-white/10 rounded-2xl p-8 text-center">
-            <p className="text-white/80 text-sm mb-2">Ready to list your venue?</p>
-            <p className="font-heading text-2xl font-bold text-white mb-1">Get in touch with us</p>
-            <p className="text-white/60 text-sm mb-6">Our team will walk you through everything — no commitment required.</p>
+          <div className="relative z-10 flex flex-col items-start gap-6">
+            <p className="text-sm font-light text-[#1a1a1a]/40 leading-relaxed">
+              Our team will walk you through everything — no commitment required.
+            </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-2 bg-brand-orange text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-brand-orange/90 transition-colors"
+              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 group shadow-lg shadow-black/20"
             >
-              ✉️ admin@dibbers.app
+              admin@dibbers.app
+              <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-brand-brown text-white/40 text-center py-6 text-sm font-body">
-        © 2026 Dibbers · Thailand's Court Sports Platform
+      {/* ── Footer ── */}
+      <footer className="border-t border-[#1a1a1a]/8 px-8 py-8 max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <span className="text-xs font-light tracking-wide text-[#1a1a1a]/30">© 2026 Dibbers · Thailand's Court Sports Platform</span>
+          <div className="flex items-center gap-6">
+            <Link to="/terms" className="text-xs font-light text-[#1a1a1a]/30 hover:text-[#1a1a1a]/60 transition-colors tracking-wide">Terms of Service</Link>
+            <Link to="/privacy" className="text-xs font-light text-[#1a1a1a]/30 hover:text-[#1a1a1a]/60 transition-colors tracking-wide">Privacy Policy</Link>
+          </div>
+        </div>
       </footer>
     </div>
   );
