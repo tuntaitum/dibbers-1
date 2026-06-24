@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { noiseOverlayDark, gradientBannerDark } from "@/lib/portalDesign";
 
 const SPORTS = ["Padel", "Squash", "Pickleball"];
 const AMENITIES = ["Changing rooms", "Parking", "Showers", "Equipment rental", "Café / snack bar", "Air conditioning", "Lockers", "Coaching available"];
@@ -44,7 +45,7 @@ export default function VenueOnboarding() {
   };
 
   if (submitted) return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center" style={{ background: "#F7F5F0" }}>
       <div className="bg-white rounded-3xl p-8 max-w-sm w-full border border-border animate-fade-in">
         <div className="w-16 h-16 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 size={36} className="text-brand-green" />
@@ -57,18 +58,23 @@ export default function VenueOnboarding() {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-8">
-      <div className="bg-brand-green px-6 pt-8 pb-5">
-        <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate(-1)} className="text-white/60 hover:text-white mb-3 flex items-center gap-1">
-          <ArrowLeft size={16} /> Back
-        </button>
-        <h1 className="font-heading text-4xl font-bold text-white">LIST YOUR VENUE</h1>
-        <div className="flex gap-1 mt-4">
-          {[1, 2, 3].map(i => (
-            <div key={i} className={`flex-1 h-1 rounded-full transition-all ${i <= step ? "bg-brand-orange" : "bg-white/20"}`} />
-          ))}
+    <div className="min-h-screen pb-8" style={{ background: "#F7F5F0" }}>
+      <div className="px-6 pt-8">
+        <div className="relative rounded-3xl px-6 md:px-8 pt-6 pb-6 overflow-hidden" style={gradientBannerDark}>
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+          <div className="relative z-10">
+            <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate(-1)} className="text-white/60 hover:text-white mb-3 flex items-center gap-1">
+              <ArrowLeft size={16} /> Back
+            </button>
+            <h1 className="font-heading text-4xl font-bold text-white">LIST YOUR VENUE</h1>
+            <div className="flex gap-1 mt-4">
+              {[1, 2, 3].map(i => (
+                <div key={i} className={`flex-1 h-1 rounded-full transition-all ${i <= step ? "bg-brand-orange" : "bg-white/20"}`} />
+              ))}
+            </div>
+            <p className="text-white/60 text-xs mt-2">Step {step} of 3</p>
+          </div>
         </div>
-        <p className="text-white/60 text-xs mt-2">Step {step} of 3</p>
       </div>
 
       <div className="px-6 py-6">

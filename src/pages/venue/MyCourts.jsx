@@ -3,7 +3,8 @@ import { base44 } from "@/api/base44Client";
 import { useSearchParams } from "react-router-dom";
 import { ToggleLeft, ToggleRight, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
-import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
+import { frostedCard } from "@/lib/portalDesign";
+import PageBanner from "@/components/PageBanner";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const HOURS = Array.from({ length: 17 }, (_, i) => {
@@ -101,12 +102,9 @@ export default function MyCourts() {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
-      {/* Header */}
-      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
-        <div className="absolute inset-0" style={noiseOverlay} />
-        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">MY COURTS</h1>
+      <PageBanner title="MY COURTS">
         {venues.length > 1 && (
-          <div className="relative z-10 flex gap-2 mt-3 overflow-x-auto no-scrollbar">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {venues.map(v => (
               <button key={v.id} onClick={() => switchVenue(v)} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${selectedVenue?.id === v.id ? "bg-brand-orange text-white border-brand-orange" : "text-[#1a1a1a]/50 border-[#1a1a1a]/12"}`}>
                 {v.name}
@@ -114,7 +112,7 @@ export default function MyCourts() {
             ))}
           </div>
         )}
-      </div>
+      </PageBanner>
 
       <div className="px-6 md:px-10 py-5">
         {!selectedVenue ? (

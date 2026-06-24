@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Loader2 } from "lucide-react";
-import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
+import { frostedCard } from "@/lib/portalDesign";
+import PageBanner from "@/components/PageBanner";
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -13,12 +14,7 @@ export default function AdminUsers() {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
-      {/* Header */}
-      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
-        <div className="absolute inset-0" style={noiseOverlay} />
-        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">USERS</h1>
-        <p className="relative z-10 text-[#1a1a1a]/40 text-sm mt-1 font-light">{users.length} registered users</p>
-      </div>
+      <PageBanner title="USERS" subtitle={`${users.length} registered users`} />
 
       <div className="px-6 md:px-10 py-4">
         {loading ? (

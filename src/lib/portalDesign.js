@@ -24,6 +24,18 @@ export const frostedCard = {
   boxShadow: "0 8px 32px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
 };
 
+export const gradientBanner = {
+  background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8",
+  borderRadius: "1.5rem",
+  boxShadow: "0 24px 64px -16px rgba(0,0,0,0.15), 0 8px 24px -8px rgba(0,0,0,0.08)",
+};
+
+export const gradientBannerDark = {
+  background: "radial-gradient(ellipse at 0% 105%, #EA672D 0%, #c04e20 20%, transparent 50%), radial-gradient(ellipse at 100% -5%, #002a1a 0%, transparent 55%), #00452A",
+  borderRadius: "1.5rem",
+  boxShadow: "0 24px 64px -16px rgba(0,69,42,0.4), 0 8px 24px -8px rgba(0,0,0,0.2)",
+};
+
 export const frostedCardHover = {
   background: "rgba(255,255,255,0.7)",
   backdropFilter: "blur(16px)",

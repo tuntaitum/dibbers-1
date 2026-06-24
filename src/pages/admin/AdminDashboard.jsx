@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
-import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
+import { frostedCard } from "@/lib/portalDesign";
+import PageBanner from "@/components/PageBanner";
 
 export default function AdminDashboard() {
   const [venues, setVenues] = useState([]);
@@ -32,12 +33,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
-      {/* Header — linen with noise */}
-      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
-        <div className="absolute inset-0" style={noiseOverlay} />
-        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">ADMIN OVERVIEW</h1>
-        <p className="relative z-10 text-[#1a1a1a]/40 text-sm mt-1 font-light">Platform health at a glance</p>
-      </div>
+      <PageBanner title="ADMIN OVERVIEW" subtitle="Platform health at a glance" />
 
       <div className="px-6 md:px-10 py-5 space-y-5">
         {pending.length > 0 && (

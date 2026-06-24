@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { format } from "date-fns";
-import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
+import { frostedCard } from "@/lib/portalDesign";
+import PageBanner from "@/components/PageBanner";
 
 export default function AdminWaitlist() {
   const [entries, setEntries] = useState([]);
@@ -26,27 +27,22 @@ export default function AdminWaitlist() {
   };
 
   return (
-    <div className="p-6 md:p-10" style={{ background: "#F7F5F0", minHeight: "100vh" }}>
-      {/* Header with noise */}
-      <div className="relative -mx-6 md:-mx-10 -mt-6 md:-mt-10 px-6 md:px-10 pt-8 pb-6 mb-8 overflow-hidden">
-        <div className="absolute inset-0" style={noiseOverlay} />
-        <div className="relative z-10 flex items-center justify-between">
-          <div>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">WAITLIST</h1>
-            <p className="text-[#1a1a1a]/40 text-sm mt-1 font-light">{entries.length} sign-ups collected</p>
-          </div>
-          {entries.length > 0 && (
-            <button
-              onClick={exportCSV}
-              className="bg-brand-green text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-brand-green/90 transition-colors"
-            >
-              Export CSV
-            </button>
-          )}
-        </div>
-      </div>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      <PageBanner
+        title="WAITLIST"
+        subtitle={`${entries.length} sign-ups collected`}
+        action={entries.length > 0 && (
+          <button
+            onClick={exportCSV}
+            className="bg-brand-green text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-brand-green/90 transition-colors"
+          >
+            Export CSV
+          </button>
+        )}
+      />
 
-      {loading ? (
+      <div className="px-6 md:px-10 py-5">
+        {loading ? (
         <div className="flex items-center justify-center py-20">
           <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
         </div>
@@ -83,6 +79,7 @@ export default function AdminWaitlist() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

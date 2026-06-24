@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
+import { frostedCard } from "@/lib/portalDesign";
+import PageBanner from "@/components/PageBanner";
 
 const SPORTS = ["Padel", "Squash", "Pickleball"];
 const AMENITIES = ["Changing rooms", "Parking", "Showers", "Equipment rental", "Café / snack bar", "Air conditioning", "Lockers", "Coaching available"];
@@ -51,18 +52,15 @@ export default function VenueSettings() {
 
   return (
     <div className="min-h-screen pb-10" style={{ background: "#F7F5F0" }}>
-      {/* Header */}
-      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
-        <div className="absolute inset-0" style={noiseOverlay} />
-        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">SETTINGS</h1>
+      <PageBanner title="SETTINGS">
         {venues.length > 1 && (
-          <div className="relative z-10 flex gap-2 mt-3 overflow-x-auto no-scrollbar">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {venues.map(v => (
               <button key={v.id} onClick={() => { setSelected(v); setForm(v); }} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${selected?.id === v.id ? "bg-brand-orange text-white border-brand-orange" : "text-[#1a1a1a]/50 border-[#1a1a1a]/12"}`}>{v.name}</button>
             ))}
           </div>
         )}
-      </div>
+      </PageBanner>
 
       <div className="px-6 md:px-10 py-5 space-y-5">
         {/* Venue Details */}
