@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
-import { Building2, Users, CalendarCheck, Clock } from "lucide-react";
+import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 export default function AdminDashboard() {
   const [venues, setVenues] = useState([]);
@@ -23,56 +23,59 @@ export default function AdminDashboard() {
   const approved = venues.filter(v => v.status === "approved");
   const totalRevenue = bookings.filter(b => b.payment_status === "paid").reduce((s, b) => s + (b.price || 0), 0);
 
+  const stats = [
+    { label: "Live Venues", value: approved.length, color: "text-brand-green" },
+    { label: "Pending", value: pending.length, color: "text-brand-orange" },
+    { label: "Bookings", value: bookings.length, color: "text-brand-brown" },
+    { label: "Revenue", value: `฿${totalRevenue.toLocaleString()}`, color: "text-brand-orange" },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-brand-brown px-6 pt-8 pb-6">
-        <h1 className="font-heading text-4xl font-bold text-white">ADMIN OVERVIEW</h1>
-        <p className="text-white/60 text-sm mt-0.5">Platform health at a glance</p>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      {/* Header — linen with noise */}
+      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
+        <div className="absolute inset-0" style={noiseOverlay} />
+        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">ADMIN OVERVIEW</h1>
+        <p className="relative z-10 text-[#1a1a1a]/40 text-sm mt-1 font-light">Platform health at a glance</p>
       </div>
 
-      <div className="px-6 py-5 space-y-5">
+      <div className="px-6 md:px-10 py-5 space-y-5">
         {pending.length > 0 && (
-          <Link to="/admin/venues" className="block bg-brand-orange/10 border border-brand-orange/30 rounded-2xl p-4 hover:bg-brand-orange/15 transition-colors">
+          <Link to="/admin/venues" className="block rounded-2xl p-5 hover:scale-[1.01] transition-transform" style={{ background: "rgba(234,103,45,0.08)", border: "1px solid rgba(234,103,45,0.2)" }}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-heading text-lg font-bold text-brand-orange">{pending.length} VENUE{pending.length > 1 ? "S" : ""} PENDING REVIEW</p>
-                <p className="text-brand-brown/70 text-sm">Tap to review and approve</p>
+                <p className="text-[#1a1a1a]/50 text-sm font-light">Tap to review and approve</p>
               </div>
               <span className="bg-brand-orange text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">{pending.length}</span>
             </div>
           </Link>
         )}
 
+        {/* Stats — no icons, frosted cards */}
         <div className="grid grid-cols-2 gap-3">
-          {[
-            { icon: Building2, label: "LIVE VENUES", value: approved.length, color: "text-brand-green" },
-            { icon: Clock, label: "PENDING", value: pending.length, color: "text-brand-orange" },
-            { icon: CalendarCheck, label: "BOOKINGS", value: bookings.length, color: "text-brand-brown" },
-            { icon: Users, label: "REVENUE", value: `฿${totalRevenue.toLocaleString()}`, color: "text-brand-orange" },
-          ].map(({ icon: Icon, label, value, color }) => (
-            <div key={label} className="bg-white rounded-2xl border border-border p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Icon size={16} className={color} />
-                <span className="text-xs text-muted-foreground font-semibold">{label}</span>
-              </div>
-              <p className={`font-stat text-4xl ${color}`}>{value}</p>
+          {stats.map(({ label, value, color }) => (
+            <div key={label} className="rounded-2xl p-5" style={frostedCard}>
+              <span className="text-xs text-[#1a1a1a]/35 font-semibold tracking-[0.15em] uppercase">{label}</span>
+              <p className={`font-stat text-4xl mt-2 ${color}`}>{value}</p>
             </div>
           ))}
         </div>
 
+        {/* Recent bookings */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-heading text-xl font-bold text-brand-brown">RECENT BOOKINGS</h2>
+            <h2 className="font-heading text-xl font-bold text-[#1a1a1a]">RECENT BOOKINGS</h2>
             <Link to="/admin/venues" className="text-brand-orange text-xs font-semibold">Manage venues →</Link>
           </div>
           <div className="space-y-2">
             {bookings.length === 0 ? (
-              <p className="text-muted-foreground text-sm text-center py-6">No bookings yet.</p>
+              <p className="text-[#1a1a1a]/40 text-sm text-center py-6 font-light">No bookings yet.</p>
             ) : bookings.slice(0, 5).map(b => (
-              <div key={b.id} className="bg-white rounded-xl border border-border p-3 flex items-center justify-between">
+              <div key={b.id} className="rounded-xl p-3 flex items-center justify-between" style={frostedCard}>
                 <div>
-                  <p className="font-semibold text-brand-brown text-sm">{b.venue_name}</p>
-                  <p className="text-muted-foreground text-xs">{b.player_name} · {b.date} · {b.start_time}</p>
+                  <p className="font-semibold text-[#1a1a1a] text-sm">{b.venue_name}</p>
+                  <p className="text-[#1a1a1a]/40 text-xs font-light">{b.player_name} · {b.date} · {b.start_time}</p>
                 </div>
                 <span className="font-stat text-lg text-brand-orange">฿{b.price}</span>
               </div>

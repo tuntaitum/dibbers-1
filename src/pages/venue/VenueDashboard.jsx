@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
-import { CalendarCheck, Building2, TrendingUp, Clock, Plus, AlertCircle } from "lucide-react";
+import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 import SportBadge from "@/components/SportBadge";
 
 export default function VenueDashboard() {
@@ -18,7 +18,6 @@ export default function VenueDashboard() {
         base44.entities.Booking.filter({}, "-created_date", 20),
       ]);
       setVenues(vs);
-      // Filter bookings for this owner's venues
       const venueIds = new Set(vs.map(v => v.id));
       setBookings(bks.filter(b => venueIds.has(b.venue_id)));
       setLoading(false);
@@ -31,84 +30,62 @@ export default function VenueDashboard() {
   const pendingVenues = venues.filter(v => v.status === "pending");
   const approvedVenues = venues.filter(v => v.status === "approved");
 
+  const stats = [
+    { label: "Today", value: todayBookings.length, sub: "bookings today", color: "text-brand-orange" },
+    { label: "Upcoming", value: upcoming.length, sub: "total upcoming", color: "text-brand-green" },
+    { label: "Venues", value: approvedVenues.length, sub: "live venues", color: "text-brand-brown" },
+    { label: "Revenue", value: `฿${bookings.filter(b => b.payment_status === "paid").reduce((s, b) => s + (b.price || 0), 0).toLocaleString()}`, sub: "total collected", color: "text-brand-green" },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-brand-green px-6 pt-8 pb-6">
-        <h1 className="font-heading text-4xl font-bold text-white">DASHBOARD</h1>
-        <p className="text-white/60 text-sm mt-0.5">Welcome back, {user?.full_name || "Venue Owner"}</p>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      {/* Header */}
+      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
+        <div className="absolute inset-0" style={noiseOverlay} />
+        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">DASHBOARD</h1>
+        <p className="relative z-10 text-[#1a1a1a]/40 text-sm mt-1 font-light">Welcome back, {user?.full_name || "Venue Owner"}</p>
       </div>
 
-      <div className="px-6 py-5 space-y-5">
+      <div className="px-6 md:px-10 py-5 space-y-5">
         {/* Pending approval notice */}
         {pendingVenues.length > 0 && (
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
-            <AlertCircle size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold text-amber-800 text-sm">Venue pending approval</p>
-              <p className="text-amber-700 text-xs mt-0.5">{pendingVenues.map(v => v.name).join(", ")} — awaiting admin review.</p>
-            </div>
+          <div className="rounded-2xl p-4" style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)" }}>
+            <p className="font-semibold text-amber-800 text-sm">Venue pending approval</p>
+            <p className="text-amber-700 text-xs mt-0.5 font-light">{pendingVenues.map(v => v.name).join(", ")} — awaiting admin review.</p>
           </div>
         )}
 
-        {/* Stats */}
+        {/* Stats — no icons */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white rounded-2xl border border-border p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <CalendarCheck size={16} className="text-brand-orange" />
-              <span className="text-xs text-muted-foreground font-semibold">TODAY</span>
+          {stats.map(({ label, value, sub, color }) => (
+            <div key={label} className="rounded-2xl p-5" style={frostedCard}>
+              <span className="text-xs text-[#1a1a1a]/35 font-semibold tracking-[0.15em] uppercase">{label}</span>
+              <p className={`font-stat text-4xl mt-2 ${color}`}>{value}</p>
+              <p className="text-xs text-[#1a1a1a]/35 mt-1 font-light">{sub}</p>
             </div>
-            <p className="font-stat text-4xl text-brand-brown">{todayBookings.length}</p>
-            <p className="text-xs text-muted-foreground">bookings today</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-border p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp size={16} className="text-brand-green" />
-              <span className="text-xs text-muted-foreground font-semibold">UPCOMING</span>
-            </div>
-            <p className="font-stat text-4xl text-brand-brown">{upcoming.length}</p>
-            <p className="text-xs text-muted-foreground">total upcoming</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-border p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Building2 size={16} className="text-brand-orange" />
-              <span className="text-xs text-muted-foreground font-semibold">VENUES</span>
-            </div>
-            <p className="font-stat text-4xl text-brand-brown">{approvedVenues.length}</p>
-            <p className="text-xs text-muted-foreground">live venues</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-border p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Clock size={16} className="text-brand-green" />
-              <span className="text-xs text-muted-foreground font-semibold">REVENUE</span>
-            </div>
-            <p className="font-stat text-4xl text-brand-brown">฿{bookings.filter(b => b.payment_status === "paid").reduce((s, b) => s + (b.price || 0), 0).toLocaleString()}</p>
-            <p className="text-xs text-muted-foreground">total collected</p>
-          </div>
+          ))}
         </div>
 
         {/* My Venues */}
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-heading text-xl font-bold text-brand-brown">MY VENUES</h2>
-            <Link to="/venue/new" className="flex items-center gap-1 bg-brand-orange text-white px-3 py-1.5 rounded-full text-xs font-semibold">
-              <Plus size={12} /> Add Venue
-            </Link>
+            <h2 className="font-heading text-xl font-bold text-[#1a1a1a]">MY VENUES</h2>
+            <Link to="/venue/new" className="bg-brand-orange text-white px-4 py-1.5 rounded-full text-xs font-semibold">Add Venue</Link>
           </div>
           {venues.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-border p-8 text-center">
-              <Building2 size={32} className="mx-auto text-muted-foreground mb-2" />
-              <p className="font-heading text-lg text-brand-brown mb-1">NO VENUES YET</p>
-              <p className="text-muted-foreground text-sm mb-4">List your first court to start accepting bookings.</p>
+            <div className="rounded-2xl p-8 text-center" style={frostedCard}>
+              <p className="font-heading text-lg text-[#1a1a1a] mb-1">NO VENUES YET</p>
+              <p className="text-[#1a1a1a]/40 text-sm mb-4 font-light">List your first court to start accepting bookings.</p>
               <Link to="/venue/new" className="bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold">Add your venue</Link>
             </div>
           ) : (
             <div className="space-y-3">
               {venues.map(v => (
-                <Link key={v.id} to={`/venue/courts?venueId=${v.id}`} className="block bg-white rounded-2xl border border-border p-4 hover:border-brand-orange/40 transition-all">
+                <Link key={v.id} to={`/venue/courts?venueId=${v.id}`} className="block rounded-2xl p-4 hover:scale-[1.01] transition-transform" style={frostedCard}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-heading text-lg font-bold text-brand-brown">{v.name}</h3>
-                      <p className="text-muted-foreground text-xs">{v.address}</p>
+                      <h3 className="font-heading text-lg font-bold text-[#1a1a1a]">{v.name}</h3>
+                      <p className="text-[#1a1a1a]/40 text-xs font-light">{v.address}</p>
                     </div>
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
                       v.status === "approved" ? "bg-brand-green/10 text-brand-green" :
@@ -131,18 +108,18 @@ export default function VenueDashboard() {
         {upcoming.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="font-heading text-xl font-bold text-brand-brown">UPCOMING BOOKINGS</h2>
+              <h2 className="font-heading text-xl font-bold text-[#1a1a1a]">UPCOMING BOOKINGS</h2>
               <Link to="/venue/bookings" className="text-brand-orange text-xs font-semibold">View all</Link>
             </div>
             <div className="space-y-2">
               {upcoming.slice(0, 3).map(b => (
-                <div key={b.id} className="bg-white rounded-xl border border-border p-3 flex items-center justify-between">
+                <div key={b.id} className="rounded-xl p-3 flex items-center justify-between" style={frostedCard}>
                   <div>
-                    <p className="font-semibold text-brand-brown text-sm">{b.player_name}</p>
-                    <p className="text-muted-foreground text-xs">{b.court_name} · {b.date} · {b.start_time}–{b.end_time}</p>
+                    <p className="font-semibold text-[#1a1a1a] text-sm">{b.player_name}</p>
+                    <p className="text-[#1a1a1a]/40 text-xs font-light">{b.court_name} · {b.date} · {b.start_time}–{b.end_time}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-stat text-lg text-brand-orange">฿{b.price}</p>
+                  <div className="text-right flex flex-col items-end gap-1">
+                    <span className="font-stat text-lg text-brand-orange">฿{b.price}</span>
                     <SportBadge sport={b.sport} />
                   </div>
                 </div>

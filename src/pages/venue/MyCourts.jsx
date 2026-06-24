@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { useSearchParams } from "react-router-dom";
-import { Plus, Clock, ToggleLeft, ToggleRight, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { ToggleLeft, ToggleRight, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const HOURS = Array.from({ length: 17 }, (_, i) => {
@@ -93,19 +94,21 @@ export default function MyCourts() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-brand-green px-6 pt-8 pb-5">
-        <h1 className="font-heading text-4xl font-bold text-white">MY COURTS</h1>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      {/* Header */}
+      <div className="relative px-6 md:px-10 pt-8 pb-6 overflow-hidden">
+        <div className="absolute inset-0" style={noiseOverlay} />
+        <h1 className="relative z-10 font-heading text-4xl md:text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a]">MY COURTS</h1>
         {venues.length > 1 && (
-          <div className="flex gap-2 mt-3 overflow-x-auto no-scrollbar">
+          <div className="relative z-10 flex gap-2 mt-3 overflow-x-auto no-scrollbar">
             {venues.map(v => (
-              <button key={v.id} onClick={() => switchVenue(v)} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${selectedVenue?.id === v.id ? "bg-brand-orange text-white border-brand-orange" : "bg-white/10 text-white border-white/20"}`}>
+              <button key={v.id} onClick={() => switchVenue(v)} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${selectedVenue?.id === v.id ? "bg-brand-orange text-white border-brand-orange" : "text-[#1a1a1a]/50 border-[#1a1a1a]/12"}`}>
                 {v.name}
               </button>
             ))}
@@ -113,35 +116,33 @@ export default function MyCourts() {
         )}
       </div>
 
-      <div className="px-6 py-5">
+      <div className="px-6 md:px-10 py-5">
         {!selectedVenue ? (
           <div className="text-center py-20">
-            <p className="font-heading text-xl text-brand-brown">No approved venues yet.</p>
+            <p className="font-heading text-xl text-[#1a1a1a]">No approved venues yet.</p>
           </div>
         ) : (
           <>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="font-heading text-xl font-bold text-brand-brown">{selectedVenue.name}</h2>
-                <p className="text-xs text-muted-foreground">{courts.length} court{courts.length !== 1 ? "s" : ""}</p>
+                <h2 className="font-heading text-xl font-bold text-[#1a1a1a]">{selectedVenue.name}</h2>
+                <p className="text-xs text-[#1a1a1a]/40 font-light">{courts.length} court{courts.length !== 1 ? "s" : ""}</p>
               </div>
-              <button onClick={() => setAddingCourt(!addingCourt)} className="flex items-center gap-1 bg-brand-orange text-white px-3 py-1.5 rounded-full text-xs font-semibold">
-                <Plus size={12} /> Add court
-              </button>
+              <button onClick={() => setAddingCourt(!addingCourt)} className="bg-brand-orange text-white px-4 py-1.5 rounded-full text-xs font-semibold">Add court</button>
             </div>
 
             {addingCourt && (
-              <div className="bg-white rounded-2xl border border-border p-4 mb-4 animate-fade-in space-y-3">
-                <h3 className="font-heading text-lg font-bold text-brand-brown">NEW COURT</h3>
-                <input value={newCourt.name} onChange={e => setNewCourt(n => ({ ...n, name: e.target.value }))} placeholder="Court name (e.g. Court 1)" className="w-full border border-border rounded-xl px-4 py-2.5 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown" />
+              <div className="rounded-2xl p-4 mb-4 animate-fade-in space-y-3" style={frostedCard}>
+                <h3 className="font-heading text-lg font-bold text-[#1a1a1a]">NEW COURT</h3>
+                <input value={newCourt.name} onChange={e => setNewCourt(n => ({ ...n, name: e.target.value }))} placeholder="Court name (e.g. Court 1)" className="w-full border border-[#1a1a1a]/12 rounded-xl px-4 py-2.5 text-sm font-body focus:outline-none focus:border-brand-orange text-[#1a1a1a]" />
                 <div className="flex gap-2">
                   {["Padel", "Squash", "Pickleball"].map(s => (
-                    <button key={s} onClick={() => setNewCourt(n => ({ ...n, sport: s }))} className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all ${newCourt.sport === s ? "bg-brand-orange text-white border-brand-orange" : "bg-white text-brand-brown border-border"}`}>{s}</button>
+                    <button key={s} onClick={() => setNewCourt(n => ({ ...n, sport: s }))} className={`flex-1 py-2 rounded-xl text-xs font-semibold border transition-all ${newCourt.sport === s ? "bg-brand-orange text-white border-brand-orange" : "text-[#1a1a1a]/50 border-[#1a1a1a]/12"}`}>{s}</button>
                   ))}
                 </div>
-                <input type="number" value={newCourt.price_per_hour} onChange={e => setNewCourt(n => ({ ...n, price_per_hour: e.target.value }))} placeholder="Price per hour (฿)" className="w-full border border-border rounded-xl px-4 py-2.5 text-sm font-body focus:outline-none focus:border-brand-orange text-brand-brown" />
+                <input type="number" value={newCourt.price_per_hour} onChange={e => setNewCourt(n => ({ ...n, price_per_hour: e.target.value }))} placeholder="Price per hour (฿)" className="w-full border border-[#1a1a1a]/12 rounded-xl px-4 py-2.5 text-sm font-body focus:outline-none focus:border-brand-orange text-[#1a1a1a]" />
                 <div className="flex gap-2">
-                  <button onClick={() => setAddingCourt(false)} className="flex-1 py-2 border border-border rounded-xl text-sm text-brand-brown font-semibold">Cancel</button>
+                  <button onClick={() => setAddingCourt(false)} className="flex-1 py-2 border border-[#1a1a1a]/12 rounded-xl text-sm text-[#1a1a1a] font-semibold">Cancel</button>
                   <button onClick={createCourt} className="flex-1 py-2 bg-brand-orange text-white rounded-xl text-sm font-semibold">Create</button>
                 </div>
               </div>
@@ -152,23 +153,21 @@ export default function MyCourts() {
                 const courtSchedules = schedules.filter(s => s.court_id === court.id);
                 const expanded = expandedCourt === court.id;
                 return (
-                  <div key={court.id} className="bg-white rounded-2xl border border-border overflow-hidden">
+                  <div key={court.id} className="rounded-2xl overflow-hidden" style={frostedCard}>
                     <div className="p-4">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div>
-                            <h3 className="font-heading text-lg font-bold text-brand-brown">{court.name}</h3>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <SportBadge sport={court.sport} />
-                              <span className="text-xs text-muted-foreground">฿{court.price_per_hour}/hr</span>
-                            </div>
+                        <div>
+                          <h3 className="font-heading text-lg font-bold text-[#1a1a1a]">{court.name}</h3>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <SportBadge sport={court.sport} />
+                            <span className="text-xs text-[#1a1a1a]/40 font-light">฿{court.price_per_hour}/hr</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <button onClick={() => toggleCourt(court)} className="text-muted-foreground hover:text-brand-orange transition-colors">
                             {court.status === "active" ? <ToggleRight size={24} className="text-brand-green" /> : <ToggleLeft size={24} />}
                           </button>
-                          <button onClick={() => setExpandedCourt(expanded ? null : court.id)} className="text-muted-foreground hover:text-brand-brown transition-colors p-1">
+                          <button onClick={() => setExpandedCourt(expanded ? null : court.id)} className="text-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-colors p-1">
                             {expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                           </button>
                         </div>
@@ -176,42 +175,41 @@ export default function MyCourts() {
                     </div>
 
                     {expanded && (
-                      <div className="border-t border-border p-4 bg-brand-cream/50 animate-fade-in">
+                      <div className="border-t border-[#1a1a1a]/8 p-4 animate-fade-in" style={{ background: "rgba(235,232,220,0.4)" }}>
                         <div className="flex items-center justify-between mb-3">
-                          <h4 className="font-heading text-base font-bold text-brand-brown flex items-center gap-1"><Clock size={14} /> RECURRING SCHEDULE</h4>
+                          <h4 className="font-heading text-base font-bold text-[#1a1a1a]">RECURRING SCHEDULE</h4>
                           <button onClick={() => setAddingSchedule(court.id)} className="text-xs text-brand-orange font-semibold hover:underline">+ Add slot</button>
                         </div>
                         {courtSchedules.length === 0 ? (
-                          <p className="text-muted-foreground text-xs">No recurring slots set. Add slots to make this court bookable.</p>
+                          <p className="text-[#1a1a1a]/40 text-xs font-light">No recurring slots set. Add slots to make this court bookable.</p>
                         ) : (
                           <div className="space-y-1.5">
                             {courtSchedules.map(sc => (
-                              <div key={sc.id} className="flex items-center justify-between bg-white rounded-xl px-3 py-2">
-                                <span className="text-sm font-semibold text-brand-brown">{DAYS[sc.day_of_week]}</span>
-                                <span className="text-xs text-muted-foreground">{sc.start_time} – {sc.end_time}</span>
+                              <div key={sc.id} className="flex items-center justify-between bg-white/60 rounded-xl px-3 py-2">
+                                <span className="text-sm font-semibold text-[#1a1a1a]">{DAYS[sc.day_of_week]}</span>
+                                <span className="text-xs text-[#1a1a1a]/40 font-light">{sc.start_time} – {sc.end_time}</span>
                                 <span className="font-stat text-sm text-brand-orange">฿{sc.price}</span>
-                                <button onClick={() => deleteSchedule(sc.id)} className="text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
+                                <button onClick={() => deleteSchedule(sc.id)} className="text-[#1a1a1a]/30 hover:text-destructive transition-colors"><Trash2 size={14} /></button>
                               </div>
                             ))}
                           </div>
                         )}
-
                         {addingSchedule === court.id && (
-                          <div className="mt-3 bg-white rounded-xl p-3 space-y-2 animate-fade-in">
-                            <select value={newSchedule.day_of_week} onChange={e => setNewSchedule(s => ({ ...s, day_of_week: parseInt(e.target.value) }))} className="w-full border border-border rounded-lg px-3 py-2 text-sm text-brand-brown focus:outline-none focus:border-brand-orange">
+                          <div className="mt-3 bg-white/70 rounded-xl p-3 space-y-2 animate-fade-in">
+                            <select value={newSchedule.day_of_week} onChange={e => setNewSchedule(s => ({ ...s, day_of_week: parseInt(e.target.value) }))} className="w-full border border-[#1a1a1a]/12 rounded-lg px-3 py-2 text-sm text-[#1a1a1a] focus:outline-none focus:border-brand-orange">
                               {DAYS.map((d, i) => <option key={i} value={i}>{d}</option>)}
                             </select>
                             <div className="flex gap-2">
-                              <select value={newSchedule.start_time} onChange={e => setNewSchedule(s => ({ ...s, start_time: e.target.value }))} className="flex-1 border border-border rounded-lg px-2 py-2 text-sm text-brand-brown focus:outline-none focus:border-brand-orange">
+                              <select value={newSchedule.start_time} onChange={e => setNewSchedule(s => ({ ...s, start_time: e.target.value }))} className="flex-1 border border-[#1a1a1a]/12 rounded-lg px-2 py-2 text-sm text-[#1a1a1a] focus:outline-none focus:border-brand-orange">
                                 {HOURS.map(h => <option key={h} value={h}>{h}</option>)}
                               </select>
-                              <select value={newSchedule.end_time} onChange={e => setNewSchedule(s => ({ ...s, end_time: e.target.value }))} className="flex-1 border border-border rounded-lg px-2 py-2 text-sm text-brand-brown focus:outline-none focus:border-brand-orange">
+                              <select value={newSchedule.end_time} onChange={e => setNewSchedule(s => ({ ...s, end_time: e.target.value }))} className="flex-1 border border-[#1a1a1a]/12 rounded-lg px-2 py-2 text-sm text-[#1a1a1a] focus:outline-none focus:border-brand-orange">
                                 {HOURS.map(h => <option key={h} value={h}>{h}</option>)}
                               </select>
                             </div>
-                            <input type="number" value={newSchedule.price} onChange={e => setNewSchedule(s => ({ ...s, price: e.target.value }))} placeholder="Price ฿" className="w-full border border-border rounded-lg px-3 py-2 text-sm text-brand-brown focus:outline-none focus:border-brand-orange" />
+                            <input type="number" value={newSchedule.price} onChange={e => setNewSchedule(s => ({ ...s, price: e.target.value }))} placeholder="Price ฿" className="w-full border border-[#1a1a1a]/12 rounded-lg px-3 py-2 text-sm text-[#1a1a1a] focus:outline-none focus:border-brand-orange" />
                             <div className="flex gap-2">
-                              <button onClick={() => setAddingSchedule(null)} className="flex-1 py-2 border border-border rounded-lg text-xs text-brand-brown font-semibold">Cancel</button>
+                              <button onClick={() => setAddingSchedule(null)} className="flex-1 py-2 border border-[#1a1a1a]/12 rounded-lg text-xs text-[#1a1a1a] font-semibold">Cancel</button>
                               <button onClick={() => createSchedule(court.id)} className="flex-1 py-2 bg-brand-orange text-white rounded-lg text-xs font-semibold">Add</button>
                             </div>
                           </div>
@@ -222,9 +220,9 @@ export default function MyCourts() {
                 );
               })}
               {courts.length === 0 && (
-                <div className="text-center py-12 bg-white rounded-2xl border border-border">
-                  <p className="font-heading text-lg text-brand-brown mb-1">NO COURTS YET</p>
-                  <p className="text-muted-foreground text-sm">Add your first court to start accepting bookings.</p>
+                <div className="text-center py-12 rounded-2xl" style={frostedCard}>
+                  <p className="font-heading text-lg text-[#1a1a1a] mb-1">NO COURTS YET</p>
+                  <p className="text-[#1a1a1a]/40 text-sm font-light">Add your first court to start accepting bookings.</p>
                 </div>
               )}
             </div>
