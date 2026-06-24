@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from "react-router-dom";
 import { Compass, CalendarDays, BarChart2, User, LogIn } from "lucide-react";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import { useAuth } from "@/lib/AuthContext";
+import { frostedCard, noiseOverlay } from "@/lib/portalDesign";
 
 const tabs = [
   { path: "/explore", label: "Explore", icon: Compass },
@@ -58,38 +59,41 @@ export default function PlayerLayout() {
     );
   }
 
-  // Web layout — full-width with top navigation bar
+  // Web layout — floating frosted glass top nav
   return (
-    <div className="min-h-screen bg-background">
-      {/* Top nav bar */}
-      <nav className="bg-brand-brown border-b border-white/10 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-8 flex items-center justify-between h-14">
-          <Link to="/explore"><img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-10 w-auto" /></Link>
-          <div className="flex items-center gap-1">
-            {tabs.map(({ path, label, icon: Icon }) => {
-              const active = location.pathname === path;
-              return (
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      {/* Floating top nav */}
+      <nav className="sticky top-4 z-50 mx-auto max-w-6xl px-4">
+        <div className="relative rounded-2xl px-4 py-2.5 overflow-hidden" style={frostedCard}>
+          <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
+          <div className="relative z-10 flex items-center justify-between">
+            <Link to="/explore"><img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-9 w-auto brightness-0" /></Link>
+            <div className="flex items-center gap-1">
+              {tabs.map(({ path, label, icon: Icon }) => {
+                const active = location.pathname === path;
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                      active ? "bg-brand-orange text-white" : "text-[#1a1a1a]/55 hover:bg-white/30 hover:text-[#1a1a1a]"
+                    }`}
+                  >
+                    <Icon size={16} />
+                    {label}
+                  </Link>
+                );
+              })}
+              {!isAuthenticated && (
                 <Link
-                  key={path}
-                  to={path}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                    active ? "bg-brand-orange/20 text-brand-orange" : "text-white/60 hover:text-white hover:bg-white/10"
-                  }`}
+                  to="/login"
+                  className="ml-2 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-[#1a1a1a] text-white hover:bg-brand-orange transition-all"
                 >
-                  <Icon size={16} />
-                  {label}
+                  <LogIn size={16} />
+                  Sign in
                 </Link>
-              );
-            })}
-            {!isAuthenticated && (
-              <Link
-                to="/login"
-                className="ml-2 flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-brand-orange text-white hover:bg-brand-orange/90 transition-all"
-              >
-                <LogIn size={16} />
-                Sign in
-              </Link>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </nav>
