@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { MapPin, RefreshCw } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
@@ -10,12 +10,13 @@ import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/port
 
 export default function Explore() {
   const isMobile = useIsMobileApp();
+  const [searchParams] = useSearchParams();
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [sport, setSport] = useState("All");
-  const [priceIdx, setPriceIdx] = useState(0);
-  const [location, setLocation] = useState("All");
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [sport, setSport] = useState(searchParams.get("sport") || "All");
+  const [priceIdx, setPriceIdx] = useState(parseInt(searchParams.get("price")) || 0);
+  const [location, setLocation] = useState(searchParams.get("location") || "All");
   const [userCoords, setUserCoords] = useState(null);
   const [locating, setLocating] = useState(false);
 

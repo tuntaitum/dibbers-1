@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { MapPin, RefreshCw, Navigation } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/portalDesign";
 import ExploreFilterBar, { SPORTS, PRICE_RANGES } from "@/components/explore/ExploreFilterBar";
 
 export default function ExploreWeb({ venues, loading, userCoords, locating, getLocation, distanceLabel, locations = [], location, setLocation }) {
-  const [search, setSearch] = useState("");
-  const [sport, setSport] = useState("All");
-  const [priceIdx, setPriceIdx] = useState(0);
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [sport, setSport] = useState(searchParams.get("sport") || "All");
+  const [priceIdx, setPriceIdx] = useState(parseInt(searchParams.get("price")) || 0);
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
   const heroRef = useRef(null);
 

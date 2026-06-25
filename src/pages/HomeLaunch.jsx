@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import ExploreSearch from "@/components/home/ExploreSearch";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -102,33 +103,20 @@ export default function HomeLaunch() {
             </div>
           </div>
 
-          {/* Right: frosted glass card */}
-          <div className="relative hidden md:block">
-            <div className="rounded-3xl p-8 overflow-hidden relative" style={{ background: "rgba(0,69,42,0.85)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 24px 64px -12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
-              <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ ...noiseOverlay, opacity: 0.3 }} />
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1 rounded-full text-xs font-bold mb-5 tracking-wide">
-                  COMING SOON TO THAILAND
-                </div>
-                <h3 className="font-heading text-4xl font-bold text-white leading-tight mb-3 tracking-[-0.03em]">
-                  YOUR COURT.<br />YOUR STREAK.<br />YOUR GAME.
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-6 font-light">
-                  We're launching soon with courts across Bangkok and beyond. Be among the first players to discover, book, and track your sessions on Dibbers.
-                </p>
-                <div className="grid grid-cols-3 gap-3 mb-6">
-                  {sports.map(s => (
-                    <div key={s.name} className="bg-white/8 rounded-2xl p-3 text-center border border-white/5">
-                      <div className="text-2xl mb-1">{s.emoji}</div>
-                      <div className="font-semibold text-xs text-white/80">{s.name}</div>
-                    </div>
-                  ))}
-                </div>
-                <Link to="/register" className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3.5 rounded-xl font-bold text-sm hover:bg-[#ff7a3d] transition-colors">
-                  Join the waitlist <ArrowUpRight size={15} />
-                </Link>
+          {/* Right: search filters card */}
+          <div className="relative">
+            <div className="mb-4">
+              <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange px-3 py-1.5 rounded-full text-xs font-bold tracking-wide mb-3">
+                FIND YOUR COURT
               </div>
+              <h3 className="font-heading text-3xl font-bold text-[#1a1a1a] leading-tight tracking-[-0.03em]">
+                Search courts<br />across Thailand.
+              </h3>
+              <p className="text-[#1a1a1a]/50 text-sm font-light mt-2">
+                Filter by sport, location, and price — then dive straight into booking.
+              </p>
             </div>
+            <ExploreSearch />
           </div>
         </div>
       </section>
