@@ -5,7 +5,7 @@ import SportBadge from "@/components/SportBadge";
 import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/portalDesign";
 import ExploreFilterBar, { SPORTS, PRICE_RANGES } from "@/components/explore/ExploreFilterBar";
 
-export default function ExploreWeb({ venues, loading, userCoords, locating, getLocation, distanceLabel }) {
+export default function ExploreWeb({ venues, loading, userCoords, locating, getLocation, distanceLabel, locations = [], location, setLocation }) {
   const [search, setSearch] = useState("");
   const [sport, setSport] = useState("All");
   const [priceIdx, setPriceIdx] = useState(0);
@@ -21,9 +21,10 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());
     const matchSport = sport === "All" || (v.sports || []).includes(sport);
+    const matchLocation = location === "All" || v.city === location;
     const pr = PRICE_RANGES[priceIdx];
     const matchPrice = !v.price_per_hour || (v.price_per_hour >= pr.min && v.price_per_hour <= pr.max);
-    return matchSearch && matchSport && matchPrice;
+    return matchSearch && matchSport && matchLocation && matchPrice;
   });
 
   const blobOrange = {
@@ -191,6 +192,9 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
         setSport={setSport}
         priceIdx={priceIdx}
         setPriceIdx={setPriceIdx}
+        location={location}
+        setLocation={setLocation}
+        locations={locations}
       />
     </div>
   );

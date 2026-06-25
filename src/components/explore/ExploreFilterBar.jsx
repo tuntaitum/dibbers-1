@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, X, Check } from "lucide-react";
+import { Search, X, Check, MapPin } from "lucide-react";
 import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 export const SPORTS = [
@@ -18,14 +18,15 @@ export const PRICE_RANGES = [
 
 export default function ExploreFilterBar({
   search, setSearch, sport, setSport, priceIdx, setPriceIdx,
+  location, setLocation, locations = [],
   bottomClass = "bottom-6",
   maxW = "max-w-3xl",
 }) {
-  const [panel, setPanel] = useState("none"); // "none" | "search" | "price"
-  const hasFilters = search.trim() || sport !== "All" || priceIdx !== 0;
+  const [panel, setPanel] = useState("none"); // "none" | "search" | "price" | "location"
+  const hasFilters = search.trim() || sport !== "All" || priceIdx !== 0 || location !== "All";
 
   const togglePanel = (p) => setPanel(panel === p ? "none" : p);
-  const clearAll = () => { setSearch(""); setSport("All"); setPriceIdx(0); setPanel("none"); };
+  const clearAll = () => { setSearch(""); setSport("All"); setPriceIdx(0); setLocation("All"); setPanel("none"); };
 
   return (
     <div className={`fixed ${bottomClass} left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] ${maxW} z-40`}>
@@ -65,6 +66,23 @@ export default function ExploreFilterBar({
                     }`}
                   >
                     {pr.label}
+                  </button>
+                ))}
+              </div>
+            )}
+            {panel === "location" && (
+              <div className="flex items-center gap-2 flex-wrap max-h-40 overflow-y-auto">
+                {["All", ...locations].map(loc => (
+                  <button
+                    key={loc}
+                    onClick={() => setLocation(loc)}
+                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                      location === loc
+                        ? "bg-brand-brown text-white border-brand-brown"
+                        : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-brown/50"
+                    }`}
+                  >
+                    {loc === "All" ? "All locations" : loc}
                   </button>
                 ))}
               </div>
@@ -122,6 +140,19 @@ export default function ExploreFilterBar({
           >
             <span className="text-xs font-bold">฿</span>
             {priceIdx !== 0 && <Check size={12} />}
+          </button>
+
+          {/* Location toggle */}
+          <button
+            onClick={() => togglePanel("location")}
+            className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              panel === "location" || location !== "All"
+                ? "bg-brand-brown text-white"
+                : "text-[#1a1a1a]/50 hover:bg-white/40"
+            }`}
+          >
+            <MapPin size={14} />
+            {location !== "All" && <span className="hidden sm:inline max-w-[80px] truncate">{location}</span>}
           </button>
 
           {/* Clear */}
