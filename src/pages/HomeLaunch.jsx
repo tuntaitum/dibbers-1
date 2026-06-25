@@ -4,16 +4,16 @@ import { ArrowUpRight } from "lucide-react";
 import ExploreSearch from "@/components/home/ExploreSearch";
 
 const sports = [
-  { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
-  { name: "Pickleball", emoji: "🏓", desc: "Thailand's fastest growing sport" },
-  { name: "Squash", emoji: "🏸", desc: "Premium indoor courts near you" },
-];
+{ name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
+{ name: "Pickleball", emoji: "🏓", desc: "Thailand's fastest growing sport" },
+{ name: "Squash", emoji: "🏸", desc: "Premium indoor courts near you" }];
+
 
 const features = [
-  { num: "01", title: "Discover", desc: "Browse courts near you. Filter by sport, price, and availability in seconds." },
-  { num: "02", title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
-  { num: "03", title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." },
-];
+{ num: "01", title: "Discover", desc: "Browse courts near you. Filter by sport, price, and availability in seconds." },
+{ num: "02", title: "Book", desc: "Reserve any slot instantly. Pay in-app or at the venue — your choice." },
+{ num: "03", title: "Track", desc: "Log every session, build weekly streaks, and watch your game hours grow." }];
+
 
 const NOISE_SVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
@@ -21,7 +21,7 @@ const noiseOverlay = {
   backgroundImage: NOISE_SVG,
   backgroundSize: "180px 180px",
   mixBlendMode: "overlay",
-  opacity: 0.4,
+  opacity: 0.4
 };
 
 const frostedCard = {
@@ -29,7 +29,7 @@ const frostedCard = {
   backdropFilter: "blur(16px)",
   WebkitBackdropFilter: "blur(16px)",
   border: "1px solid rgba(255,255,255,0.85)",
-  boxShadow: "0 8px 32px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)",
+  boxShadow: "0 8px 32px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)"
 };
 
 function useFadeIn(threshold = 0.12) {
@@ -38,7 +38,7 @@ function useFadeIn(threshold = 0.12) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold });
+    const obs = new IntersectionObserver(([e]) => {if (e.isIntersecting) {setVisible(true);obs.disconnect();}}, { threshold });
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
@@ -59,8 +59,8 @@ export default function HomeLaunch() {
         <img
           src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
           alt="Dibbers"
-          className="h-12 w-auto brightness-0"
-        />
+          className="h-12 w-auto brightness-0" />
+        
         <div className="flex items-center gap-3">
           <Link to="/login" className="text-[#1a1a1a]/60 font-medium text-sm hover:text-brand-orange transition-colors">Sign in</Link>
           <Link to="/register" className="bg-[#1a1a1a] text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-brand-orange transition-colors">
@@ -70,12 +70,12 @@ export default function HomeLaunch() {
       </nav>
 
       {/* ══════════════════════════════════════
-          HERO — gradient color block with noise
-      ══════════════════════════════════════ */}
+           HERO — gradient color block with noise
+        ══════════════════════════════════════ */}
       <section
         className="relative min-h-[88vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden"
-        style={{ background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
-      >
+        style={{ background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}>
+        
         <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
 
         <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center h-full">
@@ -93,7 +93,7 @@ export default function HomeLaunch() {
             <p className="text-base font-light text-[#1a1a1a]/60 leading-relaxed mb-8 max-w-md mt-6">
               Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
             </p>
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-3 flex-wrap hidden">
               <Link to="/register" className="bg-[#1a1a1a] text-white px-6 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-brand-orange transition-all duration-300 group">
                 Start playing <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
@@ -122,12 +122,12 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-          HOW IT WORKS
-      ══════════════════════════════════════ */}
+           HOW IT WORKS
+        ══════════════════════════════════════ */}
       <section
         ref={featuresRef}
-        className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
+        className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4">
           <h2 className="font-heading font-bold text-[clamp(2.5rem,5vw,5rem)] leading-none tracking-[-0.03em]">
             HOW IT<br />WORKS.
@@ -138,31 +138,31 @@ export default function HomeLaunch() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-px bg-[#1a1a1a]/8 rounded-2xl overflow-hidden shadow-xl shadow-black/5">
-          {features.map(({ num, title, desc }, i) => (
-            <div
-              key={title}
-              style={{ transitionDelay: `${i * 80}ms` }}
-              className={`bg-[#FAFAFA] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            >
+          {features.map(({ num, title, desc }, i) =>
+          <div
+            key={title}
+            style={{ transitionDelay: `${i * 80}ms` }}
+            className={`bg-[#FAFAFA] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+            
               <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/25 mb-6 block">{num}</span>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
               <p className="text-sm font-light text-[#1a1a1a]/50 leading-relaxed">{desc}</p>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
       {/* ══════════════════════════════════════
-          SPORTS — dark green gradient color block
-      ══════════════════════════════════════ */}
+           SPORTS — dark green gradient color block
+        ══════════════════════════════════════ */}
       <section
         ref={sportsRef}
         className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         style={{
           background: "radial-gradient(ellipse at 0% 105%, #EA672D 0%, #c04e20 20%, transparent 50%), radial-gradient(ellipse at 100% -5%, #002a1a 0%, transparent 55%), #00452A",
-          boxShadow: "0 40px 100px -20px rgba(0,69,42,0.5), 0 12px 32px -8px rgba(0,0,0,0.25)",
-        }}
-      >
+          boxShadow: "0 40px 100px -20px rgba(0,69,42,0.5), 0 12px 32px -8px rgba(0,0,0,0.25)"
+        }}>
+        
         <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
         <div className="absolute top-0 left-0 right-0 h-px rounded-t-3xl" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }} />
 
@@ -176,31 +176,31 @@ export default function HomeLaunch() {
         </div>
 
         <div className="relative z-10 grid md:grid-cols-3 gap-4">
-          {sports.map((s, i) => (
-            <div
-              key={s.name}
-              style={{ transitionDelay: `${i * 80}ms`, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
-              className={`rounded-2xl p-8 hover:bg-white/12 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-            >
+          {sports.map((s, i) =>
+          <div
+            key={s.name}
+            style={{ transitionDelay: `${i * 80}ms`, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
+            className={`rounded-2xl p-8 hover:bg-white/12 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            
               <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
               <p className="text-sm font-light text-white/45 leading-relaxed">{s.desc}</p>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
       {/* ══════════════════════════════════════
-          CTA — orange gradient color block
-      ══════════════════════════════════════ */}
+           CTA — orange gradient color block
+        ══════════════════════════════════════ */}
       <section
         ref={ctaRef}
         className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         style={{
           background: "radial-gradient(ellipse at 100% 100%, #EA672D 0%, #d4581f 25%, transparent 60%), radial-gradient(ellipse at 0% 0%, #1a1a1a 0%, transparent 50%), #111",
-          boxShadow: "0 40px 100px -20px rgba(234,103,45,0.35), 0 12px 32px -8px rgba(0,0,0,0.3)",
-        }}
-      >
+          boxShadow: "0 40px 100px -20px rgba(234,103,45,0.35), 0 12px 32px -8px rgba(0,0,0,0.3)"
+        }}>
+        
         <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
         <div className="absolute top-0 left-0 right-0 h-px rounded-t-3xl" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
 
@@ -216,16 +216,16 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-          VENUE OWNERS — frosted glass
-      ══════════════════════════════════════ */}
+           VENUE OWNERS — frosted glass
+        ══════════════════════════════════════ */}
       <section
         ref={venueRef}
-        className={`max-w-[1400px] mx-auto px-8 pb-24 transition-all duration-700 ${venueVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      >
+        className={`max-w-[1400px] mx-auto px-8 pb-24 transition-all duration-700 ${venueVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        
         <div
           className="relative rounded-3xl p-10 md:p-14 grid md:grid-cols-2 gap-10 items-center overflow-hidden"
-          style={frostedCard}
-        >
+          style={frostedCard}>
+          
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ ...noiseOverlay, opacity: 0.25 }} />
           <div className="relative z-10">
             <p className="text-xs font-light tracking-[0.2em] uppercase text-[#1a1a1a]/30 mb-6">For venue owners</p>
@@ -242,8 +242,8 @@ export default function HomeLaunch() {
             </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 group shadow-lg shadow-black/20"
-            >
+              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 group shadow-lg shadow-black/20">
+              
               admin@dibbers.app
               <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
@@ -261,6 +261,6 @@ export default function HomeLaunch() {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 }
