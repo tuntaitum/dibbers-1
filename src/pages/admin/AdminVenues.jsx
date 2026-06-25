@@ -14,20 +14,20 @@ export default function AdminVenues() {
   const [acting, setActing] = useState(null);
 
   useEffect(() => {
-    base44.entities.Venue.list().then(vs => { setVenues(vs); setLoading(false); });
+    base44.entities.Venue.list().then((vs) => {setVenues(vs);setLoading(false);});
   }, []);
 
   const approve = async (venue) => {
     setActing(venue.id);
     const updated = await base44.entities.Venue.update(venue.id, { status: "approved" });
-    setVenues(vs => vs.map(v => v.id === venue.id ? updated : v));
+    setVenues((vs) => vs.map((v) => v.id === venue.id ? updated : v));
     setActing(null);
   };
 
   const reject = async (venue) => {
     setActing(venue.id);
     const updated = await base44.entities.Venue.update(venue.id, { status: "rejected", rejection_reason: rejectReason });
-    setVenues(vs => vs.map(v => v.id === venue.id ? updated : v));
+    setVenues((vs) => vs.map((v) => v.id === venue.id ? updated : v));
     setRejectId(null);
     setRejectReason("");
     setActing(null);
@@ -36,61 +36,61 @@ export default function AdminVenues() {
   const suspend = async (venue) => {
     setActing(venue.id);
     const updated = await base44.entities.Venue.update(venue.id, { status: "suspended" });
-    setVenues(vs => vs.map(v => v.id === venue.id ? updated : v));
+    setVenues((vs) => vs.map((v) => v.id === venue.id ? updated : v));
     setActing(null);
   };
 
   const reactivate = async (venue) => {
     setActing(venue.id);
     const updated = await base44.entities.Venue.update(venue.id, { status: "approved" });
-    setVenues(vs => vs.map(v => v.id === venue.id ? updated : v));
+    setVenues((vs) => vs.map((v) => v.id === venue.id ? updated : v));
     setActing(null);
   };
 
   const tabs = [
-    { key: "pending", label: `Pending (${venues.filter(v => v.status === "pending").length})` },
-    { key: "approved", label: `Approved (${venues.filter(v => v.status === "approved").length})` },
-    { key: "rejected", label: `Rejected (${venues.filter(v => v.status === "rejected").length})` },
-    { key: "suspended", label: `Suspended (${venues.filter(v => v.status === "suspended").length})` },
-  ];
+  { key: "pending", label: `Pending (${venues.filter((v) => v.status === "pending").length})` },
+  { key: "approved", label: `Approved (${venues.filter((v) => v.status === "approved").length})` },
+  { key: "rejected", label: `Rejected (${venues.filter((v) => v.status === "rejected").length})` },
+  { key: "suspended", label: `Suspended (${venues.filter((v) => v.status === "suspended").length})` }];
 
-  const displayed = venues.filter(v => v.status === tab);
+
+  const displayed = venues.filter((v) => v.status === tab);
 
   return (
     <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="VENUES" subtitle="Review and manage venue applications" variant="green" />
 
       {/* Tabs — 2-row grid */}
-      <div className="px-6 md:px-10 py-3 border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
+      <div className="px-6 md:px-10 py-3 border-b border-[#1a1a1a]/8 sticky top-0 z-10 opacity-100" style={{ background: "#FAFAFA" }}>
         <div className="grid grid-cols-2 gap-2">
-          {tabs.map(t => (
-            <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>
-          ))}
+          {tabs.map((t) =>
+          <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>
+          )}
         </div>
       </div>
 
       <div className="px-6 md:px-10 py-4">
-        {loading ? (
-          <div className="flex justify-center py-20"><Loader2 className="animate-spin text-brand-orange" size={28} /></div>
-        ) : displayed.length === 0 ? (
-          <div className="text-center py-20">
+        {loading ?
+        <div className="flex justify-center py-20"><Loader2 className="animate-spin text-brand-orange" size={28} /></div> :
+        displayed.length === 0 ?
+        <div className="text-center py-20">
             <p className="font-heading text-xl text-[#1a1a1a]">No {tab} venues</p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {displayed.map(venue => (
-              <div key={venue.id} className="rounded-2xl p-5" style={frostedCard}>
+          </div> :
+
+        <div className="space-y-4">
+            {displayed.map((venue) =>
+          <div key={venue.id} className="rounded-2xl p-5" style={frostedCard}>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div>
                     <h3 className="font-heading text-xl font-bold text-[#1a1a1a]">{venue.name}</h3>
                     <p className="text-xs text-[#1a1a1a]/40 mt-0.5 font-light">{venue.address || venue.city}</p>
                   </div>
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                    venue.status === "approved" ? "bg-brand-green/10 text-brand-green" :
-                    venue.status === "pending" ? "bg-amber-100 text-amber-700" :
-                    venue.status === "suspended" ? "bg-muted text-muted-foreground" :
-                    "bg-destructive/10 text-destructive"
-                  }`}>
+              venue.status === "approved" ? "bg-brand-green/10 text-brand-green" :
+              venue.status === "pending" ? "bg-amber-100 text-amber-700" :
+              venue.status === "suspended" ? "bg-muted text-muted-foreground" :
+              "bg-destructive/10 text-destructive"}`
+              }>
                     {venue.status.charAt(0).toUpperCase() + venue.status.slice(1)}
                   </span>
                 </div>
@@ -105,40 +105,40 @@ export default function AdminVenues() {
                 </div>
 
                 <div className="flex gap-2 mb-3 flex-wrap">
-                  {(venue.sports || []).map(s => <SportBadge key={s} sport={s} />)}
+                  {(venue.sports || []).map((s) => <SportBadge key={s} sport={s} />)}
                 </div>
 
-                {venue.rejection_reason && (
-                  <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-2 mb-3">
+                {venue.rejection_reason &&
+            <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-2 mb-3">
                     <p className="text-xs text-destructive">Rejection reason: {venue.rejection_reason}</p>
                   </div>
-                )}
+            }
 
                 {/* Actions — no icons */}
                 <div className="flex gap-2 flex-wrap">
-                  {venue.status === "pending" && (
-                    <>
+                  {venue.status === "pending" &&
+              <>
                       <button onClick={() => approve(venue)} disabled={acting === venue.id} className="flex-1 bg-brand-green text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-60">Approve</button>
                       <button onClick={() => setRejectId(venue.id)} disabled={acting === venue.id} className="flex-1 bg-destructive text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-60">Reject</button>
                     </>
-                  )}
-                  {venue.status === "approved" && (
-                    <button onClick={() => suspend(venue)} disabled={acting === venue.id} className="bg-muted text-muted-foreground py-2.5 px-4 rounded-xl text-sm font-semibold disabled:opacity-60 hover:bg-muted/80">Suspend</button>
-                  )}
-                  {(venue.status === "suspended" || venue.status === "rejected") && (
-                    <button onClick={() => reactivate(venue)} disabled={acting === venue.id} className="bg-brand-green text-white py-2.5 px-4 rounded-xl text-sm font-semibold disabled:opacity-60">Reactivate</button>
-                  )}
+              }
+                  {venue.status === "approved" &&
+              <button onClick={() => suspend(venue)} disabled={acting === venue.id} className="bg-muted text-muted-foreground py-2.5 px-4 rounded-xl text-sm font-semibold disabled:opacity-60 hover:bg-muted/80">Suspend</button>
+              }
+                  {(venue.status === "suspended" || venue.status === "rejected") &&
+              <button onClick={() => reactivate(venue)} disabled={acting === venue.id} className="bg-brand-green text-white py-2.5 px-4 rounded-xl text-sm font-semibold disabled:opacity-60">Reactivate</button>
+              }
                 </div>
 
-                {rejectId === venue.id && (
-                  <div className="mt-3 animate-fade-in">
+                {rejectId === venue.id &&
+            <div className="mt-3 animate-fade-in">
                     <textarea
-                      value={rejectReason}
-                      onChange={e => setRejectReason(e.target.value)}
-                      placeholder="Reason for rejection (optional)..."
-                      rows={2}
-                      className="w-full border border-[#1a1a1a]/12 rounded-xl px-3 py-2.5 text-sm font-body focus:outline-none focus:border-destructive text-[#1a1a1a] resize-none mb-2"
-                    />
+                value={rejectReason}
+                onChange={(e) => setRejectReason(e.target.value)}
+                placeholder="Reason for rejection (optional)..."
+                rows={2}
+                className="w-full border border-[#1a1a1a]/12 rounded-xl px-3 py-2.5 text-sm font-body focus:outline-none focus:border-destructive text-[#1a1a1a] resize-none mb-2" />
+              
                     <div className="flex gap-2">
                       <button onClick={() => setRejectId(null)} className="flex-1 py-2 border border-[#1a1a1a]/12 rounded-xl text-sm text-[#1a1a1a] font-semibold">Cancel</button>
                       <button onClick={() => reject(venue)} disabled={acting === venue.id} className="flex-1 py-2 bg-destructive text-white rounded-xl text-sm font-semibold disabled:opacity-60">
@@ -146,12 +146,12 @@ export default function AdminVenues() {
                       </button>
                     </div>
                   </div>
-                )}
+            }
               </div>
-            ))}
+          )}
           </div>
-        )}
+        }
       </div>
-    </div>
-  );
+    </div>);
+
 }
