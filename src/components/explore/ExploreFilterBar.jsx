@@ -92,7 +92,23 @@ export default function ExploreFilterBar({
 
         {/* Main bar */}
         <div className="relative z-10 flex items-center gap-1 px-2 py-2">
-          {/* Sport pills */}
+          {/* Location toggle — most prominent */}
+          <button
+            onClick={() => togglePanel("location")}
+            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
+              panel === "location" || location !== "All"
+                ? "bg-brand-brown text-white"
+                : "bg-brand-brown/10 text-brand-brown"
+            }`}
+          >
+            <MapPin size={15} />
+            <span className="max-w-[120px] truncate">{location === "All" ? "All locations" : location}</span>
+          </button>
+
+          {/* Divider */}
+          <div className="flex-shrink-0 w-px h-5 bg-[#1a1a1a]/10 mx-0.5" />
+
+          {/* Sport pills — second priority */}
           <div className="flex items-center gap-1 flex-1 overflow-x-auto no-scrollbar">
             {SPORTS.map(s => {
               const active = sport === s.key;
@@ -116,19 +132,6 @@ export default function ExploreFilterBar({
           {/* Divider */}
           <div className="flex-shrink-0 w-px h-5 bg-[#1a1a1a]/10 mx-0.5" />
 
-          {/* Search toggle */}
-          <button
-            onClick={() => togglePanel("search")}
-            className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-              panel === "search" || search
-                ? "bg-brand-brown text-white"
-                : "text-[#1a1a1a]/50 hover:bg-white/40"
-            }`}
-          >
-            <Search size={14} />
-            {search ? <Check size={12} /> : null}
-          </button>
-
           {/* Price toggle */}
           <button
             onClick={() => togglePanel("price")}
@@ -142,17 +145,17 @@ export default function ExploreFilterBar({
             {priceIdx !== 0 && <Check size={12} />}
           </button>
 
-          {/* Location toggle */}
+          {/* Search toggle */}
           <button
-            onClick={() => togglePanel("location")}
+            onClick={() => togglePanel("search")}
             className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-              panel === "location" || location !== "All"
+              panel === "search" || search
                 ? "bg-brand-brown text-white"
                 : "text-[#1a1a1a]/50 hover:bg-white/40"
             }`}
           >
-            <MapPin size={14} />
-            {location !== "All" && <span className="hidden sm:inline max-w-[80px] truncate">{location}</span>}
+            <Search size={14} />
+            {search ? <Check size={12} /> : null}
           </button>
 
           {/* Clear */}
