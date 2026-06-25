@@ -262,7 +262,7 @@ export default function HomeLaunch() {
       {/* ── Sticky "Find Your Court" button ── */}
       <a
         href="#search-courts"
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 bg-brand-orange text-white px-5 py-3 rounded-full text-xs font-bold tracking-wide shadow-lg shadow-brand-orange/30 hover:bg-brand-brown transition-all duration-300"
+        className="fixed bottom-10 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 bg-brand-orange text-white px-6 py-3.5 rounded-full text-xs font-bold tracking-wide shadow-xl shadow-brand-orange/30 hover:bg-brand-brown transition-all duration-300"
       >
         FIND YOUR COURT
       </a>
