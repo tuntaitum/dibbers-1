@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Loader2 } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
-import { frostedCard } from "@/lib/portalDesign";
+import { frostedCard, noiseOverlay } from "@/lib/portalDesign";
 import PageBanner from "@/components/PageBanner";
 
 export default function VenueBookings() {
@@ -35,14 +35,19 @@ export default function VenueBookings() {
     <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <PageBanner title="BOOKINGS" subtitle="All court reservations" variant="dark" />
 
-      {/* Tabs */}
-      <div className="px-6 md:px-10 py-3 flex gap-2 border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
-        {[
-          { key: "upcoming", label: `Upcoming (${upcoming.length})` },
-          { key: "past", label: `Past (${past.length})` },
-        ].map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>
-        ))}
+      {/* Floating sticky tabs */}
+      <div className="px-6 md:px-10 py-2 sticky top-20 z-20">
+        <div className="relative rounded-2xl px-2 py-2 overflow-hidden" style={frostedCard}>
+          <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
+          <div className="relative z-10 flex gap-2">
+            {[
+              { key: "upcoming", label: `Upcoming (${upcoming.length})` },
+              { key: "past", label: `Past (${past.length})` },
+            ].map(t => (
+              <button key={t.key} onClick={() => setTab(t.key)} className={`flex-1 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${tab === t.key ? "bg-brand-orange text-white shadow-lg shadow-brand-orange/20" : "text-[#1a1a1a]/50 hover:bg-white/40 hover:text-[#1a1a1a]/70"}`}>{t.label}</button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="px-6 md:px-10 py-4">
