@@ -52,7 +52,7 @@ export default function HomeLaunch() {
   const [venueRef, venueVisible] = useFadeIn();
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-body text-[#1a1a1a] overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-body text-[#1a1a1a] overflow-x-hidden scroll-smooth" style={{ paddingBottom: "100px" }}>
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -104,9 +104,9 @@ export default function HomeLaunch() {
           </div>
 
           {/* Right: search filters card */}
-          <div className="relative" id="search-courts">
+          <div className="relative scroll-mt-32" id="search-courts">
             <div className="mb-4">
-              <h3 className="font-heading text-3xl font-bold text-[#1a1a1a] leading-tight tracking-[-0.03em]">
+              <h3 className="font-heading text-3xl font-bold text-[#1a1a1a] leading-tight tracking-[-0.03em] mt-4">
                 Search courts<br />across Thailand.
               </h3>
               <p className="text-[#1a1a1a]/50 text-sm font-light mt-2">
