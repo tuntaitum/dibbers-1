@@ -70,8 +70,8 @@ export default function HomeLaunch() {
       </nav>
 
       {/* ══════════════════════════════════════
-           HERO — gradient color block with noise
-        ══════════════════════════════════════ */}
+            HERO — gradient color block with noise
+         ══════════════════════════════════════ */}
       <section
         className="relative min-h-[88vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden"
         style={{ background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}>
@@ -93,14 +93,14 @@ export default function HomeLaunch() {
             <p className="text-base font-light text-[#1a1a1a]/60 leading-relaxed mb-8 max-w-md mt-6">
               Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
             </p>
-            <div className="flex items-center gap-3 flex-wrap hidden">
-              <Link to="/register" className="bg-[#1a1a1a] text-white px-6 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-brand-orange transition-all duration-300 group">
-                Start playing <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-              <Link to="/explore" className="text-[#1a1a1a] border border-[#1a1a1a]/15 px-6 py-3.5 rounded-xl font-semibold hover:bg-white/50 transition-colors backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.3)" }}>
-                Browse courts
-              </Link>
-            </div>
+            
+
+
+
+
+
+
+            
           </div>
 
           {/* Right: search filters card */}
@@ -122,8 +122,8 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-           HOW IT WORKS
-        ══════════════════════════════════════ */}
+            HOW IT WORKS
+         ══════════════════════════════════════ */}
       <section
         ref={featuresRef}
         className={`max-w-[1400px] mx-auto px-8 py-24 transition-all duration-700 ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
@@ -153,8 +153,8 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-           SPORTS — dark green gradient color block
-        ══════════════════════════════════════ */}
+            SPORTS — dark green gradient color block
+         ══════════════════════════════════════ */}
       <section
         ref={sportsRef}
         className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -191,8 +191,8 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-           CTA — orange gradient color block
-        ══════════════════════════════════════ */}
+            CTA — orange gradient color block
+         ══════════════════════════════════════ */}
       <section
         ref={ctaRef}
         className={`relative mx-8 rounded-3xl mb-8 px-10 py-20 max-w-[calc(1400px-4rem)] xl:mx-auto overflow-hidden transition-all duration-700 ${ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -216,8 +216,8 @@ export default function HomeLaunch() {
       </section>
 
       {/* ══════════════════════════════════════
-           VENUE OWNERS — frosted glass
-        ══════════════════════════════════════ */}
+            VENUE OWNERS — frosted glass
+         ══════════════════════════════════════ */}
       <section
         ref={venueRef}
         className={`max-w-[1400px] mx-auto px-8 pb-24 transition-all duration-700 ${venueVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
