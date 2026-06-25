@@ -114,23 +114,25 @@ export default function MyBookings() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2 min-w-0">
                       <SportBadge sport={b.sport} />
                       <span className="font-stat text-xl text-brand-orange">฿{b.price}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-muted-foreground">{b.reference_code}</span>
-                      {b.booking_status === "confirmed" && b.date >= now && (
-                        <button
-                          onClick={() => cancel(b)}
-                          disabled={cancelling === b.id}
-                          className="text-xs text-destructive font-semibold hover:underline disabled:opacity-50"
-                        >
-                          {cancelling === b.id ? "..." : "Cancel"}
-                        </button>
-                      )}
-                    </div>
+                    {b.booking_status === "confirmed" && b.date >= now && (
+                      <button
+                        onClick={() => cancel(b)}
+                        disabled={cancelling === b.id}
+                        className="text-xs text-destructive font-semibold border border-destructive/20 px-3 py-1.5 rounded-full hover:bg-destructive/5 disabled:opacity-50 flex-shrink-0"
+                      >
+                        {cancelling === b.id ? "..." : "Cancel"}
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-1.5 bg-muted/50 rounded-lg px-2.5 py-1.5">
+                    <span className="text-[10px] text-muted-foreground font-semibold tracking-wide">REF:</span>
+                    <span className="text-xs font-mono text-muted-foreground">{b.reference_code}</span>
                   </div>
 
                   {b.payment_status === "pending" && b.payment_mode === "pay_at_venue" && b.booking_status === "confirmed" && (

@@ -132,7 +132,7 @@ export default function Stats() {
               <Flame size={20} className="text-white animate-streak-pulse" />
               <p className="text-white/80 text-sm font-semibold">WEEKLY STREAK</p>
             </div>
-            <p className="font-stat text-6xl text-white leading-none">{profile?.current_streak_weeks || 0}</p>
+            <p className="font-stat text-5xl text-white leading-none">{profile?.current_streak_weeks || 0}</p>
             <p className="text-white/70 text-sm mt-1">consecutive weeks</p>
           </div>
           <div className="text-right">
@@ -157,7 +157,7 @@ export default function Stats() {
               <Clock size={16} className="text-brand-orange" />
               <span className="text-xs text-muted-foreground font-semibold">TOTAL HOURS</span>
             </div>
-            <p className="font-stat text-5xl text-brand-brown">{profile?.total_hours_played || 0}</p>
+            <p className="font-stat text-4xl text-brand-brown">{profile?.total_hours_played || 0}</p>
             <p className="text-muted-foreground text-xs mt-0.5">hours on court</p>
           </div>
           <div className="bg-white rounded-2xl border border-border p-4">
@@ -165,7 +165,7 @@ export default function Stats() {
               <CalendarCheck size={16} className="text-brand-green" />
               <span className="text-xs text-muted-foreground font-semibold">SESSIONS</span>
             </div>
-            <p className="font-stat text-5xl text-brand-brown">{profile?.total_sessions || 0}</p>
+            <p className="font-stat text-4xl text-brand-brown">{profile?.total_sessions || 0}</p>
             <p className="text-muted-foreground text-xs mt-0.5">total sessions</p>
           </div>
           <div className="bg-white rounded-2xl border border-border p-4">
@@ -173,7 +173,7 @@ export default function Stats() {
               <Zap size={16} className="text-brand-orange" />
               <span className="text-xs text-muted-foreground font-semibold">THIS WEEK</span>
             </div>
-            <p className="font-stat text-5xl text-brand-brown">{profile?.sessions_this_week || 0}</p>
+            <p className="font-stat text-4xl text-brand-brown">{profile?.sessions_this_week || 0}</p>
             <p className="text-muted-foreground text-xs mt-0.5">sessions played</p>
           </div>
           <div className="bg-white rounded-2xl border border-border p-4">
@@ -181,7 +181,7 @@ export default function Stats() {
               <TrendingUp size={16} className="text-brand-green" />
               <span className="text-xs text-muted-foreground font-semibold">THIS MONTH</span>
             </div>
-            <p className="font-stat text-5xl text-brand-brown">{profile?.sessions_this_month || 0}</p>
+            <p className="font-stat text-4xl text-brand-brown">{profile?.sessions_this_month || 0}</p>
             <p className="text-muted-foreground text-xs mt-0.5">sessions played</p>
           </div>
         </div>

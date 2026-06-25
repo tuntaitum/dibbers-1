@@ -18,37 +18,35 @@ export default function PlayerLayout() {
 
   if (isMobile) {
     return (
-      <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
-        <div className="relative w-full max-w-[430px] min-h-screen flex flex-col shadow-2xl overflow-x-hidden" style={{ background: "#FAFAFA" }}>
-          <main className="flex-1 overflow-y-auto pb-24 overflow-x-hidden">
-            <Outlet />
-          </main>
+      <div className="relative min-h-screen flex flex-col overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+        <main className="flex-1 pb-28 overflow-x-hidden">
+          <Outlet />
+        </main>
 
-          {/* Floating bottom frosted glass tab bar */}
-          <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[400px] z-50">
-            <div className="relative rounded-2xl px-2 py-2 overflow-hidden" style={frostedCard}>
-              <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
-              <div className="relative z-10 flex items-center justify-around">
-                {tabs.map(({ path, label, icon: Icon }) => {
-                  const active = location.pathname === path || location.pathname.startsWith(path + "/");
-                  return (
-                    <Link key={path} to={path} className="flex flex-col items-center gap-1 px-3 py-1 group">
-                      <div className={`w-8 h-8 flex items-center justify-center rounded-xl transition-all ${active ? "bg-brand-orange/20" : ""}`}>
-                        <Icon
-                          size={22}
-                          className={active ? "text-brand-orange" : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors"}
-                        />
-                      </div>
-                      <span className={`text-[10px] font-body font-semibold tracking-wide ${active ? "text-brand-orange" : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70"} transition-colors`}>
-                        {label}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
+        {/* Floating bottom frosted glass tab bar */}
+        <nav className="fixed bottom-3 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-[420px] z-50">
+          <div className="relative rounded-2xl px-1.5 py-1.5 overflow-hidden" style={frostedCard}>
+            <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
+            <div className="relative z-10 flex items-center justify-around">
+              {tabs.map(({ path, label, icon: Icon }) => {
+                const active = location.pathname === path || location.pathname.startsWith(path + "/");
+                return (
+                  <Link key={path} to={path} className="flex flex-col items-center gap-0.5 px-4 py-2 group">
+                    <div className={`w-7 h-7 flex items-center justify-center rounded-lg transition-all ${active ? "bg-brand-orange/20" : ""}`}>
+                      <Icon
+                        size={21}
+                        className={active ? "text-brand-orange" : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors"}
+                      />
+                    </div>
+                    <span className={`text-[9px] font-body font-semibold tracking-wide ${active ? "text-brand-orange" : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70"} transition-colors`}>
+                      {label}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </div>
     );
   }

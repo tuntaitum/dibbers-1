@@ -92,23 +92,20 @@ export default function ExploreFilterBar({
 
         {/* Main bar */}
         <div className="relative z-10 flex items-center gap-1 px-2 py-2">
-          {/* Location toggle — most prominent */}
+          {/* Location toggle */}
           <button
             onClick={() => togglePanel("location")}
-            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
+            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
               panel === "location" || location !== "All"
                 ? "bg-brand-brown text-white"
                 : "bg-brand-brown/10 text-brand-brown"
             }`}
           >
-            <MapPin size={15} />
-            <span className="max-w-[120px] truncate">{location === "All" ? "All locations" : location}</span>
+            <MapPin size={16} />
+            <span className="max-w-[110px] truncate">{location === "All" ? "Location" : location}</span>
           </button>
 
-          {/* Divider */}
-          <div className="flex-shrink-0 w-px h-5 bg-[#1a1a1a]/10 mx-0.5" />
-
-          {/* Sport pills — second priority */}
+          {/* Sport pills */}
           <div className="flex items-center gap-1 flex-1 overflow-x-auto no-scrollbar">
             {SPORTS.map(s => {
               const active = sport === s.key;
@@ -116,55 +113,51 @@ export default function ExploreFilterBar({
                 <button
                   key={s.key}
                   onClick={() => setSport(s.key)}
-                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                     active
                       ? "bg-brand-orange text-white"
                       : "text-[#1a1a1a]/50 hover:bg-white/40 hover:text-[#1a1a1a]/70"
                   }`}
                 >
-                  <span className="text-sm">{s.emoji}</span>
+                  <span>{s.emoji}</span>
                   {s.label}
                 </button>
               );
             })}
           </div>
 
-          {/* Divider */}
-          <div className="flex-shrink-0 w-px h-5 bg-[#1a1a1a]/10 mx-0.5" />
-
           {/* Price toggle */}
           <button
             onClick={() => togglePanel("price")}
-            className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl text-sm font-bold transition-all ${
               panel === "price" || priceIdx !== 0
                 ? "bg-brand-green text-white"
                 : "text-[#1a1a1a]/50 hover:bg-white/40"
             }`}
           >
-            <span className="text-xs font-bold">฿</span>
-            {priceIdx !== 0 && <Check size={12} />}
+            ฿
+            {priceIdx !== 0 && <Check size={12} className="ml-0.5" />}
           </button>
 
           {/* Search toggle */}
           <button
             onClick={() => togglePanel("search")}
-            className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl transition-all ${
               panel === "search" || search
                 ? "bg-brand-brown text-white"
                 : "text-[#1a1a1a]/50 hover:bg-white/40"
             }`}
           >
-            <Search size={14} />
-            {search ? <Check size={12} /> : null}
+            <Search size={16} />
           </button>
 
           {/* Clear */}
           {hasFilters && (
             <button
               onClick={clearAll}
-              className="flex-shrink-0 flex items-center px-2 py-1.5 rounded-xl text-xs font-semibold text-destructive/60 hover:text-destructive hover:bg-destructive/5 transition-all"
+              className="flex-shrink-0 flex items-center justify-center w-9 h-10 rounded-xl text-destructive/60 hover:text-destructive hover:bg-destructive/5 transition-all"
             >
-              <X size={14} />
+              <X size={15} />
             </button>
           )}
         </div>

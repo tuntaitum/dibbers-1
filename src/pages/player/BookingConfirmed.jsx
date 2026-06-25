@@ -32,10 +32,8 @@ export default function BookingConfirmed() {
   }, [bookingId]);
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen flex items-start justify-center overflow-x-hidden" style={{ background: "#FAFAFA" }}>
-      <div className="w-full max-w-[430px] min-h-screen bg-brand-green shadow-2xl overflow-x-hidden">
-        {children}
-      </div>
+    <div className="min-h-screen bg-brand-green overflow-x-hidden">
+      {children}
     </div>
   ) : (
     <div className="min-h-screen bg-brand-green">

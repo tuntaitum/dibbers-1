@@ -228,7 +228,7 @@ export default function Explore() {
         setLocation={setLocation}
         locations={locations}
         bottomClass="bottom-24"
-        maxW="max-w-[400px]"
+        maxW="max-w-[420px]"
       />
     </div>
   );

@@ -122,10 +122,8 @@ export default function BookingPayment() {
   };
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen flex items-start justify-center overflow-x-hidden" style={{ background: "#FAFAFA" }}>
-      <div className="w-full max-w-[430px] min-h-screen shadow-2xl overflow-x-hidden" style={{ background: "#FAFAFA" }}>
-        {children}
-      </div>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+      {children}
     </div>
   ) : (
     <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
