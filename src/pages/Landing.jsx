@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import useIsMobileApp from "@/hooks/useIsMobileApp";
+import LandingMobile from "@/pages/LandingMobile";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -41,6 +43,7 @@ const noiseOverlay = {
 };
 
 export default function Landing() {
+  const isMobile = useIsMobileApp();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
@@ -63,6 +66,8 @@ export default function Landing() {
   const [sportsRef, sportsVisible] = useFadeIn();
   const [ctaRef, ctaVisible] = useFadeIn();
   const [venueRef, venueVisible] = useFadeIn();
+
+  if (isMobile) return <LandingMobile />;
 
   const blobOrange = {
     transform: `translate(${(mouse.x - 0.5) * -40}px, ${(mouse.y - 0.5) * -25}px)`,
