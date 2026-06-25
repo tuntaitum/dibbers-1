@@ -122,13 +122,13 @@ export default function BookingPayment() {
   };
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-      <div className="w-full max-w-[430px] min-h-screen shadow-2xl" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+      <div className="w-full max-w-[430px] min-h-screen shadow-2xl" style={{ background: "#FAFAFA" }}>
         {children}
       </div>
     </div>
   ) : (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <TopNav items={PLAYER_TABS} showSignIn />
       {children}
     </div>

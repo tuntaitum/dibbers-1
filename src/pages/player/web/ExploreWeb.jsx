@@ -40,7 +40,7 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
   };
 
   return (
-    <div className="min-h-screen pb-32" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen pb-32" style={{ background: "#FAFAFA" }}>
       {/* ── Dynamic Hero ── */}
       <div className="px-8 pt-6">
         <div

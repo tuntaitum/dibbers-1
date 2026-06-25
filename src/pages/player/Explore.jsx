@@ -74,7 +74,7 @@ export default function Explore() {
   });
 
   return (
-    <div className="min-h-screen pb-44" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen pb-44" style={{ background: "#FAFAFA" }}>
       {/* ── Dynamic Hero ── */}
       <div className="px-4 pt-5">
         <div className="relative rounded-3xl px-5 py-7 overflow-hidden" style={gradientBannerExploreBold}>

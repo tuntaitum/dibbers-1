@@ -48,7 +48,7 @@ export default function MyBookings() {
   const pad = isMobile ? "px-4" : "max-w-3xl mx-auto px-8";
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
         <div className="relative rounded-3xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientBrown}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
@@ -59,7 +59,7 @@ export default function MyBookings() {
         </div>
       </div>
 
-      <div className={`${pad} py-3 flex gap-2 sticky top-0 z-10`} style={{ background: "#F7F5F0" }}>
+      <div className={`${pad} py-3 flex gap-2 sticky top-0 z-10`} style={{ background: "#FAFAFA" }}>
         {[
           { key: "upcoming", label: `Upcoming (${upcoming.length})` },
           { key: "past", label: `Past (${past.length})` },

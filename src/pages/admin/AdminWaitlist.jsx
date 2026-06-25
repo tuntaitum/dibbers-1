@@ -27,7 +27,7 @@ export default function AdminWaitlist() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner
         title="WAITLIST"
         subtitle={`${entries.length} sign-ups collected`}

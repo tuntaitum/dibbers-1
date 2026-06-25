@@ -53,7 +53,7 @@ export default function VenueOnboarding() {
   };
 
   if (submitted) return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <TopNav items={VENUE_TABS} logoLink="/venue/dashboard" activeBg="bg-brand-green" />
       <div className="flex flex-col items-center justify-center p-6 text-center min-h-[calc(100vh-80px)]">
         <div className="bg-white rounded-3xl p-8 max-w-sm w-full border border-border animate-fade-in">
@@ -69,7 +69,7 @@ export default function VenueOnboarding() {
   );
 
   return (
-    <div className="min-h-screen pb-8" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen pb-8" style={{ background: "#FAFAFA" }}>
       <TopNav items={VENUE_TABS} logoLink="/venue/dashboard" activeBg="bg-brand-green" />
       <div className="px-6 pt-8">
         <div className="relative rounded-3xl px-6 md:px-8 pt-6 pb-6 overflow-hidden" style={gradientBannerDark}>

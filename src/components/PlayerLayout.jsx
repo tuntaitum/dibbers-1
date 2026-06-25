@@ -18,8 +18,8 @@ export default function PlayerLayout() {
 
   if (isMobile) {
     return (
-      <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-        <div className="relative w-full max-w-[430px] min-h-screen flex flex-col shadow-2xl" style={{ background: "#F7F5F0" }}>
+      <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+        <div className="relative w-full max-w-[430px] min-h-screen flex flex-col shadow-2xl" style={{ background: "#FAFAFA" }}>
           <main className="flex-1 overflow-y-auto pb-24">
             <Outlet />
           </main>
@@ -54,7 +54,7 @@ export default function PlayerLayout() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <TopNav items={tabs} showSignIn />
       <main className="pt-4">
         <Outlet />

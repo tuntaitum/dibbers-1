@@ -74,7 +74,7 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a] overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-body text-[#1a1a1a] overflow-x-hidden">
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -98,7 +98,7 @@ export default function Landing() {
         ref={heroRef}
         onMouseMove={handleMouseMove}
         className="relative min-h-[92vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden"
-        style={{ background: "#F7F5F0", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
+        style={{ background: "#FAFAFA", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
       >
         {/* Gradient base */}
         <div
@@ -227,7 +227,7 @@ export default function Landing() {
             <div
               key={title}
               style={{ transitionDelay: `${i * 80}ms` }}
-              className={`bg-[#F7F5F0] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${howVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`bg-[#FAFAFA] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${howVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
             >
               <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/25 mb-6 block">{num}</span>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>

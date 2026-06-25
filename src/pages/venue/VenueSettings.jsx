@@ -45,13 +45,13 @@ export default function VenueSettings() {
   };
 
   if (!selected) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#FAFAFA" }}>
       <p className="text-[#1a1a1a]/40 font-light">No venues found.</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen pb-10" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen pb-10" style={{ background: "#FAFAFA" }}>
       <PageBanner title="SETTINGS" variant="brown">
         {venues.length > 1 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">

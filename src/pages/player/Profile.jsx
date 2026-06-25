@@ -54,7 +54,7 @@ export default function Profile() {
   const logout = () => base44.auth.logout("/");
 
   if (!user) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#FAFAFA" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
@@ -62,7 +62,7 @@ export default function Profile() {
   const pad = isMobile ? "px-4" : "max-w-2xl mx-auto px-8";
 
   return (
-    <div className="min-h-screen pb-8" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen pb-8" style={{ background: "#FAFAFA" }}>
       <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
         <div className="relative rounded-3xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientGreen}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />

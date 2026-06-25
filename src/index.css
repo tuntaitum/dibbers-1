@@ -7,9 +7,9 @@
 
 @layer base {
   :root {
-    --background: 44 20% 90%;
+    --background: 0 0% 98%;
     --foreground: 15 41% 26%;
-    --card: 44 20% 93%;
+    --card: 0 0% 97%;
     --card-foreground: 15 41% 26%;
     --popover: 0 0% 100%;
     --popover-foreground: 15 41% 26%;
@@ -28,7 +28,7 @@
     --ring: 22 82% 55%;
     --radius: 0.75rem;
 
-    --color-cream: #EBE8DC;
+    --color-cream: #FAFAFA;
     --color-sky: #D2E8FF;
     --color-brown: #5D372A;
     --color-orange: #EA672D;

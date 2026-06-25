@@ -32,7 +32,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="ADMIN OVERVIEW" subtitle="Platform health at a glance" variant="orange" />
 
       <div className="px-6 md:px-10 py-5 space-y-5">

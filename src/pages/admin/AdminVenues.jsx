@@ -57,11 +57,11 @@ export default function AdminVenues() {
   const displayed = venues.filter(v => v.status === tab);
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="VENUES" subtitle="Review and manage venue applications" variant="green" />
 
       {/* Tabs */}
-      <div className="px-6 md:px-10 py-3 overflow-x-auto no-scrollbar border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#F7F5F0" }}>
+      <div className="px-6 md:px-10 py-3 overflow-x-auto no-scrollbar border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
         <div className="flex gap-2 min-w-max">
           {tabs.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all whitespace-nowrap ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>

@@ -12,7 +12,7 @@ const PLAYER_TABS = [
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen font-body" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen font-body" style={{ background: "#FAFAFA" }}>
       <div className="pt-4">
         <TopNav items={PLAYER_TABS} logoLink="/" showSignIn />
       </div>

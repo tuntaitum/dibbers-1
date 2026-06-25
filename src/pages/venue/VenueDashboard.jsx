@@ -39,7 +39,7 @@ export default function VenueDashboard() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="DASHBOARD" subtitle={`Welcome back, ${user?.full_name || "Venue Owner"}`} variant="green" />
 
       <div className="px-6 md:px-10 py-5 space-y-5">

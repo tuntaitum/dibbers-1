@@ -109,4 +109,4 @@ export const venueSidebarBg = {
   background: "radial-gradient(ellipse at 0% 100%, rgba(234,103,45,0.18) 0%, transparent 50%), radial-gradient(ellipse at 100% 0%, #002a1a 0%, transparent 60%), #00452A",
 };
 
-export const linenBg = "#F7F5F0";
+export const linenBg = "#FAFAFA";

@@ -32,11 +32,11 @@ export default function VenueBookings() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="BOOKINGS" subtitle="All court reservations" variant="dark" />
 
       {/* Tabs */}
-      <div className="px-6 md:px-10 py-3 flex gap-2 border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#F7F5F0" }}>
+      <div className="px-6 md:px-10 py-3 flex gap-2 border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
         {[
           { key: "upcoming", label: `Upcoming (${upcoming.length})` },
           { key: "past", label: `Past (${past.length})` },

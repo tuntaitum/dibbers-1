@@ -13,7 +13,7 @@ export default function AdminUsers() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="USERS" subtitle={`${users.length} registered users`} variant="brown" />
 
       <div className="px-6 md:px-10 py-4">

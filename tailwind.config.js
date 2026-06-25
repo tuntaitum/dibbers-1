@@ -61,7 +61,7 @@ module.exports = {
   				ring: 'hsl(var(--sidebar-ring))'
   			},
         brand: {
-          cream: '#EBE8DC',
+          cream: '#FAFAFA',
           sky: '#D2E8FF',
           brown: '#5D372A',
           orange: '#EA672D',

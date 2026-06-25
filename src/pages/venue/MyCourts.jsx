@@ -95,13 +95,13 @@ export default function MyCourts() {
   };
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#FAFAFA" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
 
   return (
-    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="MY COURTS" variant="orange">
         {venues.length > 1 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">

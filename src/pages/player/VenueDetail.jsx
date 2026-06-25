@@ -53,13 +53,13 @@ export default function VenueDetail() {
   }, [selectedCourt, selectedDate]);
 
   const loadingShell = isMobile ? (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-      <div className="w-full max-w-[430px] min-h-screen flex items-center justify-center shadow-2xl" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+      <div className="w-full max-w-[430px] min-h-screen flex items-center justify-center shadow-2xl" style={{ background: "#FAFAFA" }}>
         <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
       </div>
     </div>
   ) : (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#FAFAFA" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
@@ -67,15 +67,15 @@ export default function VenueDetail() {
   if (loading) return loadingShell;
 
   if (!venue) return isMobile ? (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-      <div className="w-full max-w-[430px] min-h-screen flex flex-col items-center justify-center gap-3 shadow-2xl" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+      <div className="w-full max-w-[430px] min-h-screen flex flex-col items-center justify-center gap-3 shadow-2xl" style={{ background: "#FAFAFA" }}>
         <p className="text-2xl">🏟️</p>
         <p className="font-heading text-xl text-brand-brown">Venue not found</p>
         <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
       </div>
     </div>
   ) : (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-3" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-3" style={{ background: "#FAFAFA" }}>
       <p className="text-2xl">🏟️</p>
       <p className="font-heading text-xl text-brand-brown">Venue not found</p>
       <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
@@ -98,8 +98,8 @@ export default function VenueDetail() {
   }
 
   return (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-      <div className="w-full max-w-[430px] min-h-screen pb-8 shadow-2xl" style={{ background: "#F7F5F0" }}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+      <div className="w-full max-w-[430px] min-h-screen pb-8 shadow-2xl" style={{ background: "#FAFAFA" }}>
         <div className="px-4 pt-4">
           <TopNav items={PLAYER_TABS} showSignIn />
         </div>

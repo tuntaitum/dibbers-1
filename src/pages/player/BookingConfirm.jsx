@@ -84,13 +84,13 @@ export default function BookingConfirm() {
   };
 
   const Shell = ({ children, bg }) => isMobile ? (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
-      <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || ""}`} style={!bg ? { background: "#F7F5F0" } : undefined}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
+      <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || ""}`} style={!bg ? { background: "#FAFAFA" } : undefined}>
         {children}
       </div>
     </div>
   ) : (
-    <div className={`min-h-screen ${bg || ""}`} style={!bg ? { background: "#F7F5F0" } : undefined}>
+    <div className={`min-h-screen ${bg || ""}`} style={!bg ? { background: "#FAFAFA" } : undefined}>
       <TopNav items={PLAYER_TABS} showSignIn />
       {children}
     </div>

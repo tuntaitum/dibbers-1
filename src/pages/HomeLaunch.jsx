@@ -51,7 +51,7 @@ export default function HomeLaunch() {
   const [venueRef, venueVisible] = useFadeIn();
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0] font-body text-[#1a1a1a] overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAFAFA] font-body text-[#1a1a1a] overflow-x-hidden">
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -154,7 +154,7 @@ export default function HomeLaunch() {
             <div
               key={title}
               style={{ transitionDelay: `${i * 80}ms` }}
-              className={`bg-[#F7F5F0] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`bg-[#FAFAFA] p-10 hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-500 group cursor-default ${featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
             >
               <span className="text-xs font-light tracking-[0.2em] text-[#1a1a1a]/25 mb-6 block">{num}</span>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] mb-3 group-hover:text-brand-orange transition-colors">{title.toUpperCase()}</h3>
@@ -221,7 +221,7 @@ export default function HomeLaunch() {
             READY TO<br /><span className="text-brand-orange">PLAY?</span>
           </h2>
           <p className="text-white/50 mb-8 text-lg font-light">Join thousands of players across Thailand.</p>
-          <Link to="/register" className="inline-flex items-center gap-2 bg-white text-brand-orange px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#F7F5F0] hover:scale-[1.02] transition-all duration-300">
+          <Link to="/register" className="inline-flex items-center gap-2 bg-white text-brand-orange px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#FAFAFA] hover:scale-[1.02] transition-all duration-300">
             Create your account <ArrowUpRight size={18} />
           </Link>
         </div>
