@@ -60,11 +60,11 @@ export default function AdminVenues() {
     <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       <PageBanner title="VENUES" subtitle="Review and manage venue applications" variant="green" />
 
-      {/* Tabs */}
-      <div className="px-6 md:px-10 py-3 overflow-x-auto no-scrollbar border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
-        <div className="flex gap-2 min-w-max">
+      {/* Tabs — 2-row grid */}
+      <div className="px-6 md:px-10 py-3 border-b border-[#1a1a1a]/8 sticky top-0 z-10" style={{ background: "#FAFAFA" }}>
+        <div className="grid grid-cols-2 gap-2">
           {tabs.map(t => (
-            <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all whitespace-nowrap ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>
+            <button key={t.key} onClick={() => setTab(t.key)} className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${tab === t.key ? "bg-brand-orange text-white" : "text-[#1a1a1a]/50 border border-[#1a1a1a]/12"}`}>{t.label}</button>
           ))}
         </div>
       </div>
