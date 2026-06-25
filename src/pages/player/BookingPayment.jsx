@@ -4,6 +4,15 @@ import { base44 } from "@/api/base44Client";
 import { ArrowLeft, CreditCard, Building2, Lock, ShieldCheck, Phone, User, Mail, Sparkles } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import TopNav from "@/components/TopNav";
+import { frostedGradientBrown, noiseOverlayDark } from "@/lib/portalDesign";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 function genRef() {
   return "DBB" + Math.random().toString(36).toUpperCase().substring(2, 8);
@@ -113,13 +122,16 @@ export default function BookingPayment() {
   };
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
-      <div className="w-full max-w-[430px] min-h-screen bg-background shadow-2xl">
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
+      <div className="w-full max-w-[430px] min-h-screen shadow-2xl" style={{ background: "#F7F5F0" }}>
         {children}
       </div>
     </div>
   ) : (
-    <div className="min-h-screen bg-background">{children}</div>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      <TopNav items={PLAYER_TABS} showSignIn />
+      {children}
+    </div>
   );
 
   if (loading) return (
@@ -137,17 +149,22 @@ export default function BookingPayment() {
   return (
     <Shell>
       {/* Header */}
-      <div className={`bg-brand-brown flex items-center gap-3 ${isMobile ? "px-4 pt-5 pb-5" : "px-8 py-5"}`}>
-        <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
-          <ArrowLeft size={22} />
-        </button>
-        <div>
-          <h1 className="font-heading text-3xl font-bold text-white leading-none">PAYMENT</h1>
-          <p className="text-white/50 text-xs mt-0.5">Secure checkout</p>
-        </div>
-        <div className="ml-auto flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
-          <Lock size={12} className="text-white/60" />
-          <span className="text-white/60 text-xs font-semibold">SSL secured</span>
+      <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
+        <div className="relative rounded-3xl px-5 md:px-8 py-5 md:py-6 overflow-hidden" style={frostedGradientBrown}>
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+          <div className="relative z-10 flex items-center gap-3">
+            <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
+              <ArrowLeft size={22} />
+            </button>
+            <div>
+              <h1 className="font-heading text-3xl font-bold text-white leading-none">PAYMENT</h1>
+              <p className="text-white/50 text-xs mt-0.5">Secure checkout</p>
+            </div>
+            <div className="ml-auto flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
+              <Lock size={12} className="text-white/60" />
+              <span className="text-white/60 text-xs font-semibold">SSL secured</span>
+            </div>
+          </div>
         </div>
       </div>
 

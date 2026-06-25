@@ -3,6 +3,14 @@ import { base44 } from "@/api/base44Client";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { noiseOverlayDark, gradientBannerDark } from "@/lib/portalDesign";
+import TopNav from "@/components/TopNav";
+
+const VENUE_TABS = [
+  { path: "/venue/dashboard", label: "Dashboard" },
+  { path: "/venue/courts", label: "My Courts" },
+  { path: "/venue/bookings", label: "Bookings" },
+  { path: "/venue/settings", label: "Settings" },
+];
 
 const SPORTS = ["Padel", "Squash", "Pickleball"];
 const AMENITIES = ["Changing rooms", "Parking", "Showers", "Equipment rental", "Café / snack bar", "Air conditioning", "Lockers", "Coaching available"];
@@ -45,20 +53,24 @@ export default function VenueOnboarding() {
   };
 
   if (submitted) return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center" style={{ background: "#F7F5F0" }}>
-      <div className="bg-white rounded-3xl p-8 max-w-sm w-full border border-border animate-fade-in">
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      <TopNav items={VENUE_TABS} logoLink="/venue/dashboard" activeBg="bg-brand-green" />
+      <div className="flex flex-col items-center justify-center p-6 text-center min-h-[calc(100vh-80px)]">
+        <div className="bg-white rounded-3xl p-8 max-w-sm w-full border border-border animate-fade-in">
         <div className="w-16 h-16 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 size={36} className="text-brand-green" />
         </div>
         <h2 className="font-heading text-3xl font-bold text-brand-brown mb-2">APPLICATION SUBMITTED!</h2>
         <p className="text-muted-foreground text-sm mb-6">Your venue is pending admin review. You'll be able to manage courts once approved.</p>
         <button onClick={() => navigate("/venue/dashboard")} className="w-full bg-brand-green text-white py-3 rounded-xl font-semibold">Go to dashboard</button>
+        </div>
       </div>
     </div>
   );
 
   return (
     <div className="min-h-screen pb-8" style={{ background: "#F7F5F0" }}>
+      <TopNav items={VENUE_TABS} logoLink="/venue/dashboard" activeBg="bg-brand-green" />
       <div className="px-6 pt-8">
         <div className="relative rounded-3xl px-6 md:px-8 pt-6 pb-6 overflow-hidden" style={gradientBannerDark}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />

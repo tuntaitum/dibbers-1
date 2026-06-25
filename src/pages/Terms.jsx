@@ -1,15 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { noiseOverlay, gradientBannerOrange } from "@/lib/portalDesign";
+import TopNav from "@/components/TopNav";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 export default function Terms() {
   return (
     <div className="min-h-screen font-body" style={{ background: "#F7F5F0" }}>
-      <nav className="flex items-center justify-between px-6 py-4 max-w-4xl mx-auto">
-        <Link to="/">
-          <img src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png" alt="Dibbers" className="h-12 w-auto" />
-        </Link>
-      </nav>
+      <div className="pt-4">
+        <TopNav items={PLAYER_TABS} logoLink="/" showSignIn />
+      </div>
 
       <main className="max-w-4xl mx-auto px-6 pt-8">
         <div className="relative rounded-3xl px-6 md:px-8 py-8 mb-10 overflow-hidden" style={gradientBannerOrange}>

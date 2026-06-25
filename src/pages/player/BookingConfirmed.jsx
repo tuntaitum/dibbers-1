@@ -4,6 +4,14 @@ import { base44 } from "@/api/base44Client";
 import { CheckCircle2, CalendarDays, MapPin, Clock, Home, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import TopNav from "@/components/TopNav";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 export default function BookingConfirmed() {
   const isMobile = useIsMobileApp();
@@ -24,13 +32,16 @@ export default function BookingConfirmed() {
   }, [bookingId]);
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
       <div className="w-full max-w-[430px] min-h-screen bg-brand-green shadow-2xl">
         {children}
       </div>
     </div>
   ) : (
-    <div className="min-h-screen bg-brand-green">{children}</div>
+    <div className="min-h-screen bg-brand-green">
+      <TopNav items={PLAYER_TABS} showSignIn />
+      {children}
+    </div>
   );
 
   if (loading) return (

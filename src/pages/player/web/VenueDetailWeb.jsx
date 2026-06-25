@@ -2,21 +2,26 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, MapPin, Clock, ChevronRight } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import TopNav from "@/components/TopNav";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, setSelectedCourt, selectedDate, setSelectedDate, dates }) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header bar */}
-      <div className="bg-brand-brown px-8 py-4 flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white transition-colors">
-          <ArrowLeft size={22} />
-        </button>
-        <h1 className="font-heading text-3xl font-bold text-white">{venue.name}</h1>
-      </div>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      <TopNav items={PLAYER_TABS} showSignIn />
 
       <div className="max-w-6xl mx-auto px-8 py-8">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-1 text-[#1a1a1a]/50 hover:text-[#1a1a1a] text-sm font-semibold mb-4 transition-colors">
+          <ArrowLeft size={16} /> Back
+        </button>
         <div className="grid grid-cols-5 gap-8">
           {/* Left: venue info */}
           <div className="col-span-3">

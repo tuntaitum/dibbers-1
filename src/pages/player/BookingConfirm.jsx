@@ -4,6 +4,15 @@ import { base44 } from "@/api/base44Client";
 import { ArrowLeft, CheckCircle2, CreditCard, Building2 } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import TopNav from "@/components/TopNav";
+import { frostedGradientBrown, noiseOverlayDark } from "@/lib/portalDesign";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 function genRef() {
   return "DBB" + Math.random().toString(36).toUpperCase().substring(2, 8);
@@ -75,13 +84,14 @@ export default function BookingConfirm() {
   };
 
   const Shell = ({ children, bg }) => isMobile ? (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
-      <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || "bg-background"}`}>
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
+      <div className={`w-full max-w-[430px] min-h-screen shadow-2xl ${bg || ""}`} style={!bg ? { background: "#F7F5F0" } : undefined}>
         {children}
       </div>
     </div>
   ) : (
-    <div className={`min-h-screen ${bg || "bg-background"}`}>
+    <div className={`min-h-screen ${bg || ""}`} style={!bg ? { background: "#F7F5F0" } : undefined}>
+      <TopNav items={PLAYER_TABS} showSignIn />
       {children}
     </div>
   );
@@ -147,11 +157,16 @@ export default function BookingConfirm() {
 
   return (
     <Shell>
-      <div className={`bg-brand-brown flex items-center gap-3 ${isMobile ? "px-4 pt-5 pb-5" : "px-8 py-5"}`}>
-        <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
-          <ArrowLeft size={22} />
-        </button>
-        <h1 className="font-heading text-3xl font-bold text-white">CONFIRM BOOKING</h1>
+      <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
+        <div className="relative rounded-3xl px-5 md:px-8 py-5 md:py-6 overflow-hidden" style={frostedGradientBrown}>
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+          <div className="relative z-10 flex items-center gap-3">
+            <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
+              <ArrowLeft size={22} />
+            </button>
+            <h1 className="font-heading text-3xl font-bold text-white">CONFIRM BOOKING</h1>
+          </div>
+        </div>
       </div>
 
       <div className={`${isMobile ? "px-4 py-5" : "max-w-lg mx-auto px-8 py-8"} space-y-4`}>

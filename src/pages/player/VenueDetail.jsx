@@ -6,6 +6,14 @@ import SportBadge from "@/components/SportBadge";
 import { format, addDays } from "date-fns";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import VenueDetailWeb from "@/pages/player/web/VenueDetailWeb";
+import TopNav from "@/components/TopNav";
+
+const PLAYER_TABS = [
+  { path: "/explore", label: "Explore" },
+  { path: "/bookings", label: "Bookings" },
+  { path: "/stats", label: "Stats" },
+  { path: "/profile", label: "Profile" },
+];
 
 export default function VenueDetail() {
   const isMobile = useIsMobileApp();
@@ -45,13 +53,13 @@ export default function VenueDetail() {
   }, [selectedCourt, selectedDate]);
 
   const loadingShell = isMobile ? (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
-      <div className="w-full max-w-[430px] min-h-screen bg-background flex items-center justify-center shadow-2xl">
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
+      <div className="w-full max-w-[430px] min-h-screen flex items-center justify-center shadow-2xl" style={{ background: "#F7F5F0" }}>
         <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
       </div>
     </div>
   ) : (
-    <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
@@ -59,15 +67,15 @@ export default function VenueDetail() {
   if (loading) return loadingShell;
 
   if (!venue) return isMobile ? (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
-      <div className="w-full max-w-[430px] min-h-screen bg-background flex flex-col items-center justify-center gap-3 shadow-2xl">
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
+      <div className="w-full max-w-[430px] min-h-screen flex flex-col items-center justify-center gap-3 shadow-2xl" style={{ background: "#F7F5F0" }}>
         <p className="text-2xl">🏟️</p>
         <p className="font-heading text-xl text-brand-brown">Venue not found</p>
         <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
       </div>
     </div>
   ) : (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-3">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-3" style={{ background: "#F7F5F0" }}>
       <p className="text-2xl">🏟️</p>
       <p className="font-heading text-xl text-brand-brown">Venue not found</p>
       <button onClick={() => navigate(-1)} className="text-brand-orange text-sm font-semibold">← Go back</button>
@@ -90,10 +98,13 @@ export default function VenueDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-200 flex items-start justify-center">
-      <div className="w-full max-w-[430px] min-h-screen bg-background pb-8 shadow-2xl">
+    <div className="min-h-screen flex items-start justify-center" style={{ background: "#F7F5F0" }}>
+      <div className="w-full max-w-[430px] min-h-screen pb-8 shadow-2xl" style={{ background: "#F7F5F0" }}>
+        <div className="px-4 pt-4">
+          <TopNav items={PLAYER_TABS} showSignIn />
+        </div>
         {/* Hero */}
-        <div className="relative">
+        <div className="relative mt-4">
           {venue.photos?.[0] ? (
             <img src={venue.photos[0]} alt={venue.name} className="w-full h-56 object-cover" />
           ) : (
