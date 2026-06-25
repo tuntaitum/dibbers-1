@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Search, SlidersHorizontal, RefreshCw } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
-import { noiseOverlay, frostedCard, gradientBannerSky } from "@/lib/portalDesign";
+import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/portalDesign";
 
 const SPORTS = ["All", "Padel", "Squash", "Pickleball"];
 const PRICE_RANGES = [
@@ -29,7 +29,7 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
       {/* Header — sky gradient banner */}
       <div className="px-8 pt-8">
-        <div className="relative rounded-3xl px-8 py-8 overflow-hidden" style={gradientBannerSky}>
+        <div className="relative rounded-3xl px-8 py-8 overflow-hidden" style={gradientBannerExploreBold}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
           <div className="relative z-10 max-w-6xl mx-auto">
             <h1 className="font-heading text-5xl font-bold tracking-[-0.03em] text-[#1a1a1a] mb-1">EXPLORE COURTS</h1>

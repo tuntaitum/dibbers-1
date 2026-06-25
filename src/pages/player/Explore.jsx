@@ -5,7 +5,7 @@ import { MapPin, Search, SlidersHorizontal, RefreshCw } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import ExploreWeb from "@/pages/player/web/ExploreWeb";
-import { noiseOverlay, frostedCard, gradientBannerSky } from "@/lib/portalDesign";
+import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/portalDesign";
 
 const SPORTS = ["All", "Padel", "Squash", "Pickleball"];
 const PRICE_RANGES = [
@@ -85,7 +85,7 @@ export default function Explore() {
     <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
       {/* Header — sky gradient banner */}
       <div className="px-4 pt-5">
-        <div className="relative rounded-3xl px-5 py-6 overflow-hidden" style={gradientBannerSky}>
+        <div className="relative rounded-3xl px-5 py-6 overflow-hidden" style={gradientBannerExploreBold}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
           <div className="relative z-10">
             <h1 className="font-heading text-4xl font-bold tracking-[-0.03em] text-[#1a1a1a] mb-1">EXPLORE</h1>

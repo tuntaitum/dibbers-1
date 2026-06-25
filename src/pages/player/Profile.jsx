@@ -4,6 +4,7 @@ import { User, Edit2, LogOut, Building2, ChevronRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import { frostedGradientGreen, noiseOverlayDark } from "@/lib/portalDesign";
 
 const SPORTS = ["Padel", "Squash", "Pickleball"];
 
@@ -53,7 +54,7 @@ export default function Profile() {
   const logout = () => base44.auth.logout("/");
 
   if (!user) return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#F7F5F0" }}>
       <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
     </div>
   );
@@ -61,26 +62,29 @@ export default function Profile() {
   const pad = isMobile ? "px-4" : "max-w-2xl mx-auto px-8";
 
   return (
-    <div className="min-h-screen bg-background pb-8">
-      <div className={`bg-brand-brown ${isMobile ? "px-4 pt-5 pb-8" : "px-8 py-8"}`}>
-        <div className={isMobile ? "" : "max-w-2xl mx-auto"}>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
-            <button onClick={() => setEditing(!editing)} className="bg-white/10 text-white p-2 rounded-xl hover:bg-white/20 transition-colors">
-              <Edit2 size={16} />
-            </button>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center">
-              {profile?.avatar_url ? (
-                <img src={profile.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover" />
-              ) : (
-                <User size={28} className="text-brand-orange" />
-              )}
+    <div className="min-h-screen pb-8" style={{ background: "#F7F5F0" }}>
+      <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
+        <div className="relative rounded-3xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientGreen}>
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
+              <button onClick={() => setEditing(!editing)} className="bg-white/10 text-white p-2 rounded-xl hover:bg-white/20 transition-colors">
+                <Edit2 size={16} />
+              </button>
             </div>
-            <div>
-              <p className="font-heading text-2xl font-bold text-white">{profile?.display_name || user.full_name || "Player"}</p>
-              <p className="text-white/60 text-sm">{user.email}</p>
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center">
+                {profile?.avatar_url ? (
+                  <img src={profile.avatar_url} alt="" className="w-16 h-16 rounded-full object-cover" />
+                ) : (
+                  <User size={28} className="text-brand-orange" />
+                )}
+              </div>
+              <div>
+                <p className="font-heading text-2xl font-bold text-white">{profile?.display_name || user.full_name || "Player"}</p>
+                <p className="text-white/60 text-sm">{user.email}</p>
+              </div>
             </div>
           </div>
         </div>

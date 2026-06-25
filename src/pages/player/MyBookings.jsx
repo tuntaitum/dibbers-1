@@ -3,6 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { CalendarDays, Clock, Loader2 } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
+import { frostedGradientBrown, noiseOverlayDark } from "@/lib/portalDesign";
 
 const statusConfig = {
   confirmed: { label: "Confirmed", color: "bg-brand-green/10 text-brand-green" },
@@ -47,15 +48,18 @@ export default function MyBookings() {
   const pad = isMobile ? "px-4" : "max-w-3xl mx-auto px-8";
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className={`bg-brand-brown ${isMobile ? "px-4 pt-5 pb-5" : "px-8 py-8"}`}>
-        <div className={isMobile ? "" : "max-w-3xl mx-auto"}>
-          <h1 className="font-heading text-4xl font-bold text-white">MY BOOKINGS</h1>
-          <p className="text-white/60 text-sm mt-0.5">Manage your court time</p>
+    <div className="min-h-screen" style={{ background: "#F7F5F0" }}>
+      <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
+        <div className="relative rounded-3xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientBrown}>
+          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+          <div className="relative z-10">
+            <h1 className="font-heading text-4xl font-bold text-white">MY BOOKINGS</h1>
+            <p className="text-white/60 text-sm mt-0.5">Manage your court time</p>
+          </div>
         </div>
       </div>
 
-      <div className={`${pad} py-3 flex gap-2 border-b border-border bg-brand-cream sticky top-0 z-10`}>
+      <div className={`${pad} py-3 flex gap-2 sticky top-0 z-10`} style={{ background: "#F7F5F0" }}>
         {[
           { key: "upcoming", label: `Upcoming (${upcoming.length})` },
           { key: "past", label: `Past (${past.length})` },
