@@ -51,21 +51,21 @@ export default function ExploreSearch() {
       {/* Sport pills */}
       <div className="px-5 pt-5 pb-3">
         <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-3">Sport</p>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="grid grid-cols-4 gap-2">
           {SPORTS.map(s => {
             const active = sport === s.key;
             return (
               <button
                 key={s.key}
                 onClick={() => setSport(s.key)}
-                className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                className={`flex items-center justify-center gap-1.5 px-2 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   active
                     ? "bg-brand-orange text-white shadow-lg shadow-brand-orange/25"
                     : "bg-white/60 text-[#1a1a1a]/55 hover:bg-white hover:text-[#1a1a1a]/80 border border-[#1a1a1a]/8"
                 }`}
               >
                 <span>{s.emoji}</span>
-                {s.label}
+                <span className="truncate">{s.label}</span>
               </button>
             );
           })}
@@ -92,12 +92,12 @@ export default function ExploreSearch() {
             <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "location" ? "rotate-180" : ""}`} />
           </button>
           {openSection === "location" && (
-            <div className="mt-2 flex flex-wrap gap-1.5 animate-fade-in max-h-32 overflow-y-auto">
+            <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in max-h-32 overflow-y-auto">
               {["All", ...cities].map(loc => (
                 <button
                   key={loc}
                   onClick={() => { setLocation(loc); setOpenSection(null); }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border truncate ${
                     location === loc
                       ? "bg-brand-brown text-white border-brand-brown"
                       : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-brown/40"
@@ -125,12 +125,12 @@ export default function ExploreSearch() {
             <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "price" ? "rotate-180" : ""}`} />
           </button>
           {openSection === "price" && (
-            <div className="mt-2 flex flex-wrap gap-1.5 animate-fade-in">
+            <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in">
               {PRICE_RANGES.map((pr, i) => (
                 <button
                   key={pr.label}
                   onClick={() => { setPriceIdx(i); setOpenSection(null); }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border truncate ${
                     priceIdx === i
                       ? "bg-brand-green text-white border-brand-green"
                       : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-green/40"
