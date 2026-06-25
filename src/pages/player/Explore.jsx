@@ -81,9 +81,9 @@ export default function Explore() {
   });
 
   return (
-    <div className="min-h-screen pb-44 overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       {/* ── Dynamic Hero ── */}
-      <div className="px-4 pt-5">
+      <div className="px-4 pt-20">
         <div className="relative rounded-3xl px-5 py-7 overflow-hidden" style={gradientBannerExploreBold}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlay} />
 
@@ -227,7 +227,7 @@ export default function Explore() {
         location={location}
         setLocation={setLocation}
         locations={locations}
-        bottomClass="bottom-24"
+        topClass="top-4"
         maxW="max-w-[420px]"
       />
     </div>

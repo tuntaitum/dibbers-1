@@ -19,7 +19,7 @@ export const PRICE_RANGES = [
 export default function ExploreFilterBar({
   search, setSearch, sport, setSport, priceIdx, setPriceIdx,
   location, setLocation, locations = [],
-  bottomClass = "bottom-6",
+  topClass = "top-20",
   maxW = "max-w-3xl",
 }) {
   const [panel, setPanel] = useState("none"); // "none" | "search" | "price" | "location"
@@ -29,13 +29,13 @@ export default function ExploreFilterBar({
   const clearAll = () => { setSearch(""); setSport("All"); setPriceIdx(0); setLocation("All"); setPanel("none"); };
 
   return (
-    <div className={`fixed ${bottomClass} left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] ${maxW} z-40`}>
+    <div className={`fixed ${topClass} left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] ${maxW} z-40`}>
       <div className="relative rounded-2xl overflow-hidden animate-fade-in" style={frostedCard}>
         <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
 
         {/* Expandable panel */}
         {panel !== "none" && (
-          <div className="relative z-10 border-b border-[#1a1a1a]/8 px-3 py-3 animate-fade-in" style={{ background: "rgba(247,245,240,0.6)" }}>
+          <div className="relative z-10 border-t border-[#1a1a1a]/8 px-3 py-3 animate-fade-in" style={{ background: "rgba(247,245,240,0.6)" }}>
             {panel === "search" && (
               <div className="flex items-center gap-2">
                 <Search size={16} className="text-[#1a1a1a]/30 flex-shrink-0" />

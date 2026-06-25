@@ -41,9 +41,9 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
   };
 
   return (
-    <div className="min-h-screen pb-32" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
       {/* ── Dynamic Hero ── */}
-      <div className="px-8 pt-6">
+      <div className="px-8 pt-20">
         <div
           ref={heroRef}
           onMouseMove={handleMouseMove}
@@ -184,7 +184,7 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
         )}
       </div>
 
-      {/* ── Floating bottom-center filter bar ── */}
+      {/* ── Floating top filter bar ── */}
       <ExploreFilterBar
         search={search}
         setSearch={setSearch}
@@ -195,6 +195,7 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
         location={location}
         setLocation={setLocation}
         locations={locations}
+        topClass="top-4"
       />
     </div>
   );
