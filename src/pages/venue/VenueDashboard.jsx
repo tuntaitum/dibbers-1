@@ -39,7 +39,7 @@ export default function VenueDashboard() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <PageBanner title="DASHBOARD" subtitle={`Welcome back, ${user?.full_name || "Venue Owner"}`} variant="green" />
 
       <div className="px-6 md:px-10 py-5 space-y-5">
@@ -109,12 +109,12 @@ export default function VenueDashboard() {
             </div>
             <div className="space-y-2">
               {upcoming.slice(0, 3).map(b => (
-                <div key={b.id} className="rounded-xl p-3 flex items-center justify-between" style={frostedCard}>
-                  <div>
-                    <p className="font-semibold text-[#1a1a1a] text-sm">{b.player_name}</p>
-                    <p className="text-[#1a1a1a]/40 text-xs font-light">{b.court_name} · {b.date} · {b.start_time}–{b.end_time}</p>
+                <div key={b.id} className="rounded-xl p-3 flex items-center justify-between gap-2" style={frostedCard}>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold text-[#1a1a1a] text-sm truncate">{b.player_name}</p>
+                    <p className="text-[#1a1a1a]/40 text-xs font-light truncate">{b.court_name} · {b.date} · {b.start_time}–{b.end_time}</p>
                   </div>
-                  <div className="text-right flex flex-col items-end gap-1">
+                  <div className="text-right flex flex-col items-end gap-1 flex-shrink-0">
                     <span className="font-stat text-lg text-brand-orange">฿{b.price}</span>
                     <SportBadge sport={b.sport} />
                   </div>

@@ -68,12 +68,12 @@ export default function AdminDashboard() {
             {bookings.length === 0 ? (
               <p className="text-[#1a1a1a]/40 text-sm text-center py-6 font-light">No bookings yet.</p>
             ) : bookings.slice(0, 5).map(b => (
-              <div key={b.id} className="rounded-xl p-3 flex items-center justify-between" style={frostedCard}>
-                <div>
-                  <p className="font-semibold text-[#1a1a1a] text-sm">{b.venue_name}</p>
-                  <p className="text-[#1a1a1a]/40 text-xs font-light">{b.player_name} · {b.date} · {b.start_time}</p>
+              <div key={b.id} className="rounded-xl p-3 flex items-center justify-between gap-2" style={frostedCard}>
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-[#1a1a1a] text-sm truncate">{b.venue_name}</p>
+                  <p className="text-[#1a1a1a]/40 text-xs font-light truncate">{b.player_name} · {b.date} · {b.start_time}</p>
                 </div>
-                <span className="font-stat text-lg text-brand-orange">฿{b.price}</span>
+                <span className="font-stat text-lg text-brand-orange flex-shrink-0">฿{b.price}</span>
               </div>
             ))}
           </div>

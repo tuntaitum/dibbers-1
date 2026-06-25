@@ -32,7 +32,7 @@ export default function VenueBookings() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <PageBanner title="BOOKINGS" subtitle="All court reservations" variant="dark" />
 
       {/* Tabs */}
@@ -76,8 +76,8 @@ export default function VenueBookings() {
                   <p className="text-xs text-[#1a1a1a]/40 font-light">Time: <span className="text-[#1a1a1a]/70">{b.start_time} – {b.end_time}</span></p>
                   <div><SportBadge sport={b.sport} /></div>
                 </div>
-                <div className="flex items-center justify-between pt-2 border-t border-[#1a1a1a]/8">
-                  <span className="font-mono text-xs text-[#1a1a1a]/40">{b.reference_code}</span>
+                <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#1a1a1a]/8">
+                  <span className="font-mono text-xs text-[#1a1a1a]/40 truncate">{b.reference_code}</span>
                   <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${b.booking_status === "confirmed" ? "bg-brand-green/10 text-brand-green" : b.booking_status === "cancelled" ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground"}`}>
                     {b.booking_status}
                   </span>

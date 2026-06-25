@@ -101,7 +101,7 @@ export default function MyCourts() {
   );
 
   return (
-    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <PageBanner title="MY COURTS" variant="orange">
         {venues.length > 1 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
@@ -183,11 +183,11 @@ export default function MyCourts() {
                         ) : (
                           <div className="space-y-1.5">
                             {courtSchedules.map(sc => (
-                              <div key={sc.id} className="flex items-center justify-between bg-white/60 rounded-xl px-3 py-2">
-                                <span className="text-sm font-semibold text-[#1a1a1a]">{DAYS[sc.day_of_week]}</span>
-                                <span className="text-xs text-[#1a1a1a]/40 font-light">{sc.start_time} – {sc.end_time}</span>
-                                <span className="font-stat text-sm text-brand-orange">฿{sc.price}</span>
-                                <button onClick={() => deleteSchedule(sc.id)} className="text-[#1a1a1a]/30 hover:text-destructive transition-colors"><Trash2 size={14} /></button>
+                              <div key={sc.id} className="flex items-center gap-2 bg-white/60 rounded-xl px-3 py-2">
+                                <span className="text-sm font-semibold text-[#1a1a1a] flex-shrink-0 min-w-0 truncate">{DAYS[sc.day_of_week]}</span>
+                                <span className="text-xs text-[#1a1a1a]/40 font-light flex-shrink-0 ml-auto">{sc.start_time}–{sc.end_time}</span>
+                                <span className="font-stat text-sm text-brand-orange flex-shrink-0">฿{sc.price}</span>
+                                <button onClick={() => deleteSchedule(sc.id)} className="text-[#1a1a1a]/30 hover:text-destructive transition-colors flex-shrink-0"><Trash2 size={14} /></button>
                               </div>
                             ))}
                           </div>

@@ -132,6 +132,13 @@
                 #00452A;
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   .font-light-body {
     font-weight: 300;
     letter-spacing: 0em;

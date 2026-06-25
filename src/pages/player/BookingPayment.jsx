@@ -122,8 +122,8 @@ export default function BookingPayment() {
   };
 
   const Shell = ({ children }) => isMobile ? (
-    <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
-      <div className="w-full max-w-[430px] min-h-screen shadow-2xl" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen flex items-start justify-center overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+      <div className="w-full max-w-[430px] min-h-screen shadow-2xl overflow-x-hidden" style={{ background: "#FAFAFA" }}>
         {children}
       </div>
     </div>
@@ -153,16 +153,16 @@ export default function BookingPayment() {
         <div className="relative rounded-3xl px-5 md:px-8 py-5 md:py-6 overflow-hidden" style={frostedGradientBrown}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
           <div className="relative z-10 flex items-center gap-3">
-            <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white">
+            <button onClick={() => navigate(-1)} className="text-white/70 hover:text-white flex-shrink-0">
               <ArrowLeft size={22} />
             </button>
-            <div>
+            <div className="min-w-0">
               <h1 className="font-heading text-3xl font-bold text-white leading-none">PAYMENT</h1>
               <p className="text-white/50 text-xs mt-0.5">Secure checkout</p>
             </div>
-            <div className="ml-auto flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
+            <div className="ml-auto flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full flex-shrink-0">
               <Lock size={12} className="text-white/60" />
-              <span className="text-white/60 text-xs font-semibold">SSL secured</span>
+              <span className="text-white/60 text-xs font-semibold hidden sm:inline">SSL secured</span>
             </div>
           </div>
         </div>

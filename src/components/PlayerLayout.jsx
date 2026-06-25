@@ -19,8 +19,8 @@ export default function PlayerLayout() {
   if (isMobile) {
     return (
       <div className="min-h-screen flex items-start justify-center" style={{ background: "#FAFAFA" }}>
-        <div className="relative w-full max-w-[430px] min-h-screen flex flex-col shadow-2xl" style={{ background: "#FAFAFA" }}>
-          <main className="flex-1 overflow-y-auto pb-24">
+        <div className="relative w-full max-w-[430px] min-h-screen flex flex-col shadow-2xl overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+          <main className="flex-1 overflow-y-auto pb-24 overflow-x-hidden">
             <Outlet />
           </main>
 

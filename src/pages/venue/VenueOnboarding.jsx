@@ -69,7 +69,7 @@ export default function VenueOnboarding() {
   );
 
   return (
-    <div className="min-h-screen pb-8" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen pb-8 overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <TopNav items={VENUE_TABS} logoLink="/venue/dashboard" activeBg="bg-brand-green" />
       <div className="px-6 pt-8">
         <div className="relative rounded-3xl px-6 md:px-8 pt-6 pb-6 overflow-hidden" style={gradientBannerDark}>
@@ -164,11 +164,11 @@ export default function VenueOnboarding() {
             <div className="bg-brand-cream rounded-2xl p-4 mt-4">
               <h3 className="font-heading text-lg font-bold text-brand-brown mb-3">REVIEW</h3>
               <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between"><span className="text-muted-foreground">Name</span><span className="font-semibold text-brand-brown">{form.name}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">Sports</span><span className="font-semibold text-brand-brown">{form.sports.join(", ")}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">Courts</span><span className="font-semibold text-brand-brown">{form.court_count}</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">Price</span><span className="font-semibold text-brand-orange">฿{form.price_per_hour}/hr</span></div>
-                <div className="flex justify-between"><span className="text-muted-foreground">Payment</span><span className="font-semibold text-brand-brown">{form.payment_mode === "both" ? "Flexible" : form.payment_mode === "in_app" ? "Online" : "At venue"}</span></div>
+                <div className="flex justify-between gap-2"><span className="text-muted-foreground flex-shrink-0">Name</span><span className="font-semibold text-brand-brown text-right min-w-0 truncate">{form.name}</span></div>
+                <div className="flex justify-between gap-2"><span className="text-muted-foreground flex-shrink-0">Sports</span><span className="font-semibold text-brand-brown text-right min-w-0 truncate">{form.sports.join(", ")}</span></div>
+                <div className="flex justify-between gap-2"><span className="text-muted-foreground flex-shrink-0">Courts</span><span className="font-semibold text-brand-brown">{form.court_count}</span></div>
+                <div className="flex justify-between gap-2"><span className="text-muted-foreground flex-shrink-0">Price</span><span className="font-semibold text-brand-orange">฿{form.price_per_hour}/hr</span></div>
+                <div className="flex justify-between gap-2"><span className="text-muted-foreground flex-shrink-0">Payment</span><span className="font-semibold text-brand-brown text-right min-w-0 truncate">{form.payment_mode === "both" ? "Flexible" : form.payment_mode === "in_app" ? "Online" : "At venue"}</span></div>
               </div>
             </div>
           </div>
