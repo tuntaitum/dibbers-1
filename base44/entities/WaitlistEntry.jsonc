@@ -15,5 +15,7 @@
       "format": "date-time"
     }
   },
-  "required": ["email"]
+  "required": [
+    "email"
+  ]
 }
