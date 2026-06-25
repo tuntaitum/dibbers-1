@@ -48,44 +48,44 @@ export default function ExploreSearch() {
 
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.9)", boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
-      {/* Sport + Location + Price row */}
-      <div className="px-5 pt-5 pb-3 grid grid-cols-3 gap-3">
-        {/* Sport */}
-        <div>
-          <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Sport</p>
-          <button
-            onClick={() => toggle("sport")}
-            className={`w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
-              sport !== "All"
-                ? "bg-brand-orange text-white border-brand-orange"
-                : "bg-white/60 text-[#1a1a1a]/55 border-[#1a1a1a]/8 hover:bg-white"
-            }`}
-          >
-            <span className="flex items-center gap-1.5 truncate">
-              <span>{SPORTS.find(s => s.key === sport)?.emoji}</span>
-              <span className="truncate">{SPORTS.find(s => s.key === sport)?.label}</span>
-            </span>
-            <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "sport" ? "rotate-180" : ""}`} />
-          </button>
-          {openSection === "sport" && (
-            <div className="mt-2 grid grid-cols-1 gap-1.5 animate-fade-in">
-              {SPORTS.map(s => (
-                <button
-                  key={s.key}
-                  onClick={() => { setSport(s.key); setOpenSection(null); }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
-                    sport === s.key
-                      ? "bg-brand-orange text-white border-brand-orange"
-                      : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-orange/40"
-                  }`}
-                >
-                  {s.emoji} {s.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+      {/* Sport */}
+      <div className="px-5 pt-5 pb-3">
+        <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Sport</p>
+        <button
+          onClick={() => toggle("sport")}
+          className={`w-full flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
+            sport !== "All"
+              ? "bg-brand-orange text-white border-brand-orange"
+              : "bg-white/60 text-[#1a1a1a]/55 border-[#1a1a1a]/8 hover:bg-white"
+          }`}
+        >
+          <span className="flex items-center gap-1.5 truncate">
+            <span>{SPORTS.find(s => s.key === sport)?.emoji}</span>
+            <span className="truncate">{SPORTS.find(s => s.key === sport)?.label}</span>
+          </span>
+          <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "sport" ? "rotate-180" : ""}`} />
+        </button>
+        {openSection === "sport" && (
+          <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in">
+            {SPORTS.map(s => (
+              <button
+                key={s.key}
+                onClick={() => { setSport(s.key); setOpenSection(null); }}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                  sport === s.key
+                    ? "bg-brand-orange text-white border-brand-orange"
+                    : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-orange/40"
+                }`}
+              >
+                {s.emoji} {s.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
+      {/* Location + Price row */}
+      <div className="px-5 pb-3 grid grid-cols-2 gap-3">
         {/* Location */}
         <div>
           <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Location</p>
@@ -104,7 +104,7 @@ export default function ExploreSearch() {
             <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "location" ? "rotate-180" : ""}`} />
           </button>
           {openSection === "location" && (
-            <div className="mt-2 grid grid-cols-1 gap-1.5 animate-fade-in max-h-32 overflow-y-auto">
+            <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in max-h-32 overflow-y-auto">
               {["All", ...cities].map(loc => (
                 <button
                   key={loc}
@@ -137,7 +137,7 @@ export default function ExploreSearch() {
             <ChevronDown size={14} className={`flex-shrink-0 transition-transform ${openSection === "price" ? "rotate-180" : ""}`} />
           </button>
           {openSection === "price" && (
-            <div className="mt-2 grid grid-cols-1 gap-1.5 animate-fade-in">
+            <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in">
               {PRICE_RANGES.map((pr, i) => (
                 <button
                   key={pr.label}
