@@ -104,7 +104,7 @@ export default function HomeLaunch() {
           </div>
 
           {/* Right: search filters card */}
-          <div className="relative scroll-mt-32" id="search-courts">
+          <div className="relative scroll-mt-20" id="search-courts">
             <div className="mb-4">
               <h3 className="font-heading text-3xl font-bold text-[#1a1a1a] leading-tight tracking-[-0.03em] mt-4">
                 Search courts<br />across Thailand.
