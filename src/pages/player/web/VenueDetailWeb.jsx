@@ -19,8 +19,8 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
       <TopNav items={PLAYER_TABS} showSignIn />
 
       <div className="max-w-6xl mx-auto px-8 py-8">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 text-[#1a1a1a]/50 hover:text-[#1a1a1a] text-sm font-semibold mb-4 transition-colors">
-          <ArrowLeft size={16} /> Back
+        <button onClick={() => navigate(-1)} className="text-[#1a1a1a]/50 hover:text-[#1a1a1a] text-sm font-semibold mb-4 transition-colors">
+          Back
         </button>
         <div className="grid grid-cols-5 gap-8">
           {/* Left: venue info */}
@@ -139,9 +139,8 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
                       >
                         <p className="font-semibold text-brand-brown text-sm">{slot.start_time} – {slot.end_time}</p>
                         <p className="font-stat text-brand-orange text-lg mt-0.5">฿{slot.price}</p>
-                        <div className="flex items-center justify-between mt-1">
+                        <div className="flex items-center justify-center mt-1">
                           <span className="text-xs text-muted-foreground">Available</span>
-                          <ChevronRight size={14} className="text-brand-orange opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                       </button>
                     ))}

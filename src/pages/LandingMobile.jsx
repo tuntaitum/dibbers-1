@@ -119,10 +119,9 @@ export default function LandingMobile() {
                 />
                 <button
                   type="submit"
-                  className="w-full bg-[#1a1a1a] text-white py-3.5 rounded-xl text-sm font-medium tracking-wide hover:bg-brand-orange transition-colors duration-300 flex items-center justify-center gap-2"
+                  className="w-full bg-[#1a1a1a] text-white py-3.5 rounded-xl text-sm font-medium tracking-wide hover:bg-brand-orange transition-colors duration-300 text-center"
                 >
                   Notify me when we launch
-                  <ArrowUpRight size={15} />
                 </button>
               </form>
             )}
@@ -283,10 +282,9 @@ export default function LandingMobile() {
             </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-5 py-3.5 rounded-xl font-medium text-sm hover:bg-brand-orange transition-all duration-300 group shadow-lg shadow-black/20"
+              className="inline-flex items-center justify-center bg-[#1a1a1a] text-white px-5 py-3.5 rounded-xl font-medium text-sm hover:bg-brand-orange transition-all duration-300 shadow-lg shadow-black/20"
             >
               admin@dibbers.app
-              <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>

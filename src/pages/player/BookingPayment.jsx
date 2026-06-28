@@ -250,9 +250,8 @@ export default function BookingPayment() {
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setPaymentMode("in_app")}
-                className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${paymentMode === "in_app" ? "border-brand-orange bg-brand-orange/5" : "border-border hover:border-brand-orange/30"}`}
+                className={`p-4 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${paymentMode === "in_app" ? "border-brand-orange bg-brand-orange/5" : "border-border hover:border-brand-orange/30"}`}
               >
-                <CreditCard size={22} className={paymentMode === "in_app" ? "text-brand-orange" : "text-muted-foreground"} />
                 <div className="text-center">
                   <p className={`text-xs font-bold ${paymentMode === "in_app" ? "text-brand-orange" : "text-brand-brown"}`}>Pay online</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Card · Stripe</p>
@@ -260,9 +259,8 @@ export default function BookingPayment() {
               </button>
               <button
                 onClick={() => setPaymentMode("pay_at_venue")}
-                className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${paymentMode === "pay_at_venue" ? "border-brand-orange bg-brand-orange/5" : "border-border hover:border-brand-orange/30"}`}
+                className={`p-4 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${paymentMode === "pay_at_venue" ? "border-brand-orange bg-brand-orange/5" : "border-border hover:border-brand-orange/30"}`}
               >
-                <Building2 size={22} className={paymentMode === "pay_at_venue" ? "text-brand-orange" : "text-muted-foreground"} />
                 <div className="text-center">
                   <p className={`text-xs font-bold ${paymentMode === "pay_at_venue" ? "text-brand-orange" : "text-brand-brown"}`}>Pay at venue</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">Cash · On arrival</p>
@@ -350,15 +348,9 @@ export default function BookingPayment() {
         <button
           onClick={handleConfirm}
           disabled={processing || !canSubmit}
-          className="w-full bg-brand-orange text-white py-4 rounded-2xl font-bold text-lg font-heading tracking-wide disabled:opacity-60 hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-brand-orange text-white py-4 rounded-2xl font-bold text-lg font-heading tracking-wide disabled:opacity-60 hover:bg-brand-orange/90 transition-colors text-center"
         >
-          {processing ? (
-            <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Processing...</>
-          ) : isStripe ? (
-            <><Lock size={16} /> PAY ฿{slot?.price}</>
-          ) : (
-            "CONFIRM BOOKING"
-          )}
+          {processing ? "Processing..." : isStripe ? `PAY ฿${slot?.price}` : "CONFIRM BOOKING"}
         </button>
 
         <p className="text-center text-xs text-muted-foreground">

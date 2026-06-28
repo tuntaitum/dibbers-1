@@ -191,17 +191,15 @@ export default function BookingConfirm() {
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setPaymentMode("in_app")}
-                className={`p-3 rounded-xl border-2 transition-all ${paymentMode === "in_app" ? "border-brand-orange bg-brand-orange/5" : "border-border"}`}
+                className={`p-3 rounded-xl border-2 transition-all flex items-center justify-center ${paymentMode === "in_app" ? "border-brand-orange bg-brand-orange/5" : "border-border"}`}
               >
-                <CreditCard size={20} className={paymentMode === "in_app" ? "text-brand-orange mx-auto" : "text-muted-foreground mx-auto"} />
-                <p className="text-xs font-semibold text-center mt-1.5 text-brand-brown">Pay now</p>
+                <p className="text-xs font-semibold text-center text-brand-brown">Pay now</p>
               </button>
               <button
                 onClick={() => setPaymentMode("pay_at_venue")}
-                className={`p-3 rounded-xl border-2 transition-all ${paymentMode === "pay_at_venue" ? "border-brand-orange bg-brand-orange/5" : "border-border"}`}
+                className={`p-3 rounded-xl border-2 transition-all flex items-center justify-center ${paymentMode === "pay_at_venue" ? "border-brand-orange bg-brand-orange/5" : "border-border"}`}
               >
-                <Building2 size={20} className={paymentMode === "pay_at_venue" ? "text-brand-orange mx-auto" : "text-muted-foreground mx-auto"} />
-                <p className="text-xs font-semibold text-center mt-1.5 text-brand-brown">Pay at venue</p>
+                <p className="text-xs font-semibold text-center text-brand-brown">Pay at venue</p>
               </button>
             </div>
           </div>

@@ -98,8 +98,8 @@ export default function HomeLaunch() {
               Discover and book Padel, Squash, and Pickleball courts across Thailand. Log your sessions, build streaks, and make every hour on court count.
             </p>
             <div className="flex items-center gap-3 flex-wrap hidden">
-              <Link to="/register" className="bg-[#1a1a1a] text-white px-6 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-brand-orange transition-all duration-300 group">
-                Start playing <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <Link to="/register" className="bg-[#1a1a1a] text-white px-6 py-3.5 rounded-xl font-semibold text-center hover:bg-brand-orange transition-all duration-300">
+                Start playing
               </Link>
               <Link to="/explore" className="text-[#1a1a1a] border border-[#1a1a1a]/15 px-6 py-3.5 rounded-xl font-semibold hover:bg-white/50 transition-colors backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.3)" }}>
                 Browse courts
@@ -210,8 +210,8 @@ export default function HomeLaunch() {
             READY TO<br /><span className="text-brand-orange">PLAY?</span>
           </h2>
           <p className="text-white/50 mb-8 text-lg font-light">Join thousands of players across Thailand.</p>
-          <Link to="/register" className="inline-flex items-center gap-2 bg-white text-brand-orange px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#FAFAFA] hover:scale-[1.02] transition-all duration-300">
-            Create your account <ArrowUpRight size={18} />
+          <Link to="/register" className="inline-flex items-center justify-center bg-white text-brand-orange px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#FAFAFA] hover:scale-[1.02] transition-all duration-300">
+            Create your account
           </Link>
         </div>
       </section>
@@ -243,10 +243,9 @@ export default function HomeLaunch() {
             </p>
             <a
               href="mailto:admin@dibbers.app"
-              className="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 group shadow-lg shadow-black/20">
+              className="inline-flex items-center justify-center bg-[#1a1a1a] text-white px-6 py-4 rounded-xl font-medium text-sm hover:bg-brand-orange hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-black/20">
               
               admin@dibbers.app
-              <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>

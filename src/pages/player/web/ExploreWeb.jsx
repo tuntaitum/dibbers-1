@@ -126,9 +126,8 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
           <button
             onClick={getLocation}
             disabled={locating}
-            className="flex items-center gap-1.5 text-sm text-brand-orange font-semibold hover:underline transition-all"
+            className="text-sm text-brand-orange font-semibold hover:underline transition-all"
           >
-            <RefreshCw size={13} className={locating ? "animate-spin" : ""} />
             {userCoords ? "Refresh location" : "Get my location"}
           </button>
         </div>

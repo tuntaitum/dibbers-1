@@ -137,16 +137,16 @@ export default function BookingConfirmed() {
             {isGuest ? (
               <Link
                 to="/explore"
-                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors text-center"
               >
-                <Home size={16} /> BACK TO EXPLORE
+                BACK TO EXPLORE
               </Link>
             ) : (
               <button
                 onClick={() => navigate("/bookings")}
-                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-brand-orange text-white py-3.5 rounded-xl font-bold font-heading tracking-wide hover:bg-brand-orange/90 transition-colors text-center"
               >
-                <Home size={16} /> VIEW MY BOOKINGS
+                VIEW MY BOOKINGS
               </button>
             )}
             <button

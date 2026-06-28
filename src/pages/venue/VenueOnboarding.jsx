@@ -75,8 +75,8 @@ export default function VenueOnboarding() {
         <div className="relative rounded-3xl px-6 md:px-8 pt-6 pb-6 overflow-hidden" style={gradientBannerDark}>
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
           <div className="relative z-10">
-            <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate(-1)} className="text-white/60 hover:text-white mb-3 flex items-center gap-1">
-              <ArrowLeft size={16} /> Back
+            <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate(-1)} className="text-white/60 hover:text-white mb-3 text-sm font-semibold">
+              Back
             </button>
             <h1 className="font-heading text-4xl font-bold text-white">LIST YOUR VENUE</h1>
             <div className="flex gap-1 mt-4">
@@ -177,9 +177,9 @@ export default function VenueOnboarding() {
         <button
           onClick={() => step < 3 ? setStep(s => s + 1) : submit()}
           disabled={submitting || (step === 1 && !form.name) || (step === 2 && form.sports.length === 0)}
-          className="mt-6 w-full bg-brand-orange text-white py-4 rounded-2xl font-bold text-lg font-heading tracking-wide disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-brand-orange/90 transition-colors"
+          className="mt-6 w-full bg-brand-orange text-white py-4 rounded-2xl font-bold text-lg font-heading tracking-wide disabled:opacity-50 text-center hover:bg-brand-orange/90 transition-colors"
         >
-          {step < 3 ? (<>Next <ArrowRight size={18} /></>) : submitting ? "Submitting..." : "Submit for approval"}
+          {step < 3 ? "Next" : submitting ? "Submitting..." : "Submit for approval"}
         </button>
       </div>
     </div>

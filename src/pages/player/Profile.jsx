@@ -174,9 +174,8 @@ export default function Profile() {
 
         <button
           onClick={logout}
-          className="w-full flex items-center justify-center gap-2 py-3 border border-destructive/30 text-destructive rounded-2xl font-semibold text-sm hover:bg-destructive/5 transition-colors"
+          className="w-full py-3 border border-destructive/30 text-destructive rounded-2xl font-semibold text-sm hover:bg-destructive/5 transition-colors text-center"
         >
-          <LogOut size={16} />
           Sign out
         </button>
       </div>

@@ -194,9 +194,8 @@ export default function VenueDetail() {
                 >
                   <p className="font-semibold text-brand-brown text-sm">{slot.start_time} – {slot.end_time}</p>
                   <p className="font-stat text-brand-orange text-lg mt-0.5">฿{slot.price}</p>
-                  <div className="flex items-center justify-between mt-1">
+                  <div className="flex items-center justify-center mt-1">
                     <span className="text-xs text-muted-foreground">Available</span>
-                    <ChevronRight size={14} className="text-brand-orange" />
                   </div>
                 </button>
               ))}

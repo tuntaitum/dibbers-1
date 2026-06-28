@@ -140,9 +140,8 @@ export default function Explore() {
               <button
                 onClick={getLocation}
                 disabled={locating}
-                className="flex items-center gap-1 text-xs text-brand-orange font-semibold"
+                className="text-xs text-brand-orange font-semibold"
               >
-                <RefreshCw size={12} className={locating ? "animate-spin" : ""} />
                 {userCoords ? "Near me" : "Locate"}
               </button>
             </div>
