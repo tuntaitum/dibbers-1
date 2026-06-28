@@ -4,10 +4,10 @@ import { Search, MapPin, ChevronDown, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const SPORTS = [
-{ key: "All", emoji: "✨", label: "All" },
-{ key: "Padel", emoji: "🎾", label: "Padel" },
-{ key: "Pickleball", emoji: "🏓", label: "Pickleball" },
-{ key: "Squash", emoji: "🏸", label: "Squash" }];
+{ key: "All", label: "All" },
+{ key: "Padel", label: "Padel" },
+{ key: "Pickleball", label: "Pickleball" },
+{ key: "Squash", label: "Squash" }];
 
 
 const PRICE_RANGES = [
@@ -72,8 +72,7 @@ export default function ExploreSearch() {
             "bg-brand-orange text-white border-brand-orange" :
             "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-orange/40"}`
             }>
-            
-                {s.emoji} {s.label}
+                {s.label}
               </button>
           )}
           </div>

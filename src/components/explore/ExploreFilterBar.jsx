@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 export const SPORTS = [
-  { key: "Padel", emoji: "🎾", label: "Padel" },
-  { key: "Pickleball", emoji: "🏓", label: "Pickleball" },
-  { key: "Squash", emoji: "🏸", label: "Squash" },
+  { key: "Padel", label: "Padel" },
+  { key: "Pickleball", label: "Pickleball" },
+  { key: "Squash", label: "Squash" },
 ];
 
 export const PRICE_RANGES = [
@@ -152,7 +152,7 @@ export default function ExploreFilterBar({
                           : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/50"
                       }`}
                     >
-                      {s.emoji} {s.label}
+                      {s.label}
                       {selected && <Check size={12} />}
                     </button>
                   );
