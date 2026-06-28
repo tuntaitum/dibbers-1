@@ -281,6 +281,14 @@
 
   .dark .brightness-0 { filter: brightness(0) invert(1) !important; }
 
+  /* ── Keep ExploreSearch card light in dark mode ── */
+  .dark .search-card-light .bg-white\/60,
+  .dark .search-card-light .hover\:bg-white:hover { background-color: rgba(255,255,255,0.6) !important; }
+  .dark .search-card-light .hover\:bg-white\/60:hover { background-color: rgba(255,255,255,0.8) !important; }
+  .dark .search-card-light .border-\[\#1a1a1a\]\/8 { border-color: rgba(26,26,26,0.08) !important; }
+  .dark .search-card-light .border-\[\#1a1a1a\]\/10 { border-color: rgba(26,26,26,0.1) !important; }
+  .dark .search-card-light .placeholder\:text-\[\#1a1a1a\]\/30::placeholder { color: rgba(26,26,26,0.3) !important; }
+
   .dark [style*="background:#FAFAFA" i],
   .dark [style*="background: #FAFAFA" i],
   .dark [style*="background:#fafafa" i],
