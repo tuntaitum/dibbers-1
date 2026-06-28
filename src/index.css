@@ -91,10 +91,10 @@
     --page-bg: #000000;
     --frost-bg: rgba(20,20,20,0.65);
     --frost-border: 1px solid rgba(255,255,255,0.08);
-    --frost-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+    --frost-shadow: 0 8px 32px rgba(255,255,255,0.07), inset 0 1px 0 rgba(255,255,255,0.08);
     --frost-hover-bg: rgba(30,30,30,0.75);
     --frost-hover-border: 1px solid rgba(255,255,255,0.12);
-    --frost-hover-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+    --frost-hover-shadow: 0 12px 40px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.12);
 
     color-scheme: dark;
 
@@ -280,4 +280,14 @@
   .dark [style*="rgba(250,250,250,0.97" i] { background-color: rgba(0,0,0,0.97) !important; }
   .dark [style*="background: #F2EFE8" i],
   .dark [style*="background:#F2EFE8" i] { background-color: var(--banner-base) !important; }
+
+  /* ── White floating glow for dark mode icons & buttons ── */
+  .dark button[class*="rounded"]:not(.no-frost),
+  .dark a[class*="rounded"]:not(.no-frost) {
+    box-shadow: 0 4px 20px rgba(255,255,255,0.08), 0 1px 6px rgba(255,255,255,0.04) !important;
+  }
+  .dark button[class*="rounded"]:not(.no-frost):hover,
+  .dark a[class*="rounded"]:not(.no-frost):hover {
+    box-shadow: 0 6px 28px rgba(255,255,255,0.12), 0 2px 8px rgba(255,255,255,0.06) !important;
+  }
 }
