@@ -14,7 +14,10 @@ export default function Explore() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [sport, setSport] = useState(searchParams.get("sport") || "All");
+  const [sport, setSport] = useState(() => {
+    const s = searchParams.get("sport");
+    return s ? s.split(",") : [];
+  });
   const [priceIdx, setPriceIdx] = useState(parseInt(searchParams.get("price")) || 0);
   const [location, setLocation] = useState(searchParams.get("location") || "All");
   const [userCoords, setUserCoords] = useState(null);
@@ -74,7 +77,7 @@ export default function Explore() {
 
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());
-    const matchSport = sport === "All" || (v.sports || []).includes(sport);
+    const matchSport = sport.length === 0 || (v.sports || []).some(s => sport.includes(s));
     const matchLocation = location === "All" || v.city === location;
     const pr = PRICE_RANGES[priceIdx];
     const matchPrice = !v.price_per_hour || (v.price_per_hour >= pr.min && v.price_per_hour <= pr.max);
@@ -122,7 +125,7 @@ export default function Explore() {
               </div>
               <div className="w-px h-7 bg-[#1a1a1a]/10" />
               <div>
-                <p className="font-stat text-2xl text-brand-green">{SPORTS.length - 1}</p>
+                <p className="font-stat text-2xl text-brand-green">{SPORTS.length}</p>
                 <p className="text-[10px] text-[#1a1a1a]/35 font-light">sports</p>
               </div>
               <div className="w-px h-7 bg-[#1a1a1a]/10" />

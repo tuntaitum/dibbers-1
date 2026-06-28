@@ -3,7 +3,6 @@ import { Search, X, Check, MapPin } from "lucide-react";
 import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 export const SPORTS = [
-  { key: "All", emoji: "✨", label: "All" },
   { key: "Padel", emoji: "🎾", label: "Padel" },
   { key: "Pickleball", emoji: "🏓", label: "Pickleball" },
   { key: "Squash", emoji: "🏸", label: "Squash" },
@@ -22,11 +21,19 @@ export default function ExploreFilterBar({
   topClass = "top-20",
   maxW = "max-w-3xl",
 }) {
-  const [panel, setPanel] = useState("none"); // "none" | "search" | "price" | "location"
-  const hasFilters = search.trim() || sport !== "All" || priceIdx !== 0 || location !== "All";
+  const [panel, setPanel] = useState("none"); // "none" | "search" | "sport" | "price" | "location"
+  const hasFilters = search.trim() || sport.length > 0 || priceIdx !== 0 || location !== "All";
 
   const togglePanel = (p) => setPanel(panel === p ? "none" : p);
-  const clearAll = () => { setSearch(""); setSport("All"); setPriceIdx(0); setLocation("All"); setPanel("none"); };
+  const clearAll = () => { setSearch(""); setSport([]); setPriceIdx(0); setLocation("All"); setPanel("none"); };
+
+  const toggleSport = (key) => {
+    if (sport.includes(key)) {
+      setSport(sport.filter(k => k !== key));
+    } else {
+      setSport([...sport, key]);
+    }
+  };
 
   return (
     <div className={`fixed ${topClass} left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] ${maxW} z-40`}>
@@ -51,6 +58,27 @@ export default function ExploreFilterBar({
                     <X size={14} />
                   </button>
                 )}
+              </div>
+            )}
+            {panel === "sport" && (
+              <div className="flex items-center gap-2 flex-wrap">
+                {SPORTS.map(s => {
+                  const selected = sport.includes(s.key);
+                  return (
+                    <button
+                      key={s.key}
+                      onClick={() => toggleSport(s.key)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                        selected
+                          ? "bg-brand-orange text-white border-brand-orange"
+                          : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/50"
+                      }`}
+                    >
+                      {s.emoji} {s.label}
+                      {selected && <Check size={12} />}
+                    </button>
+                  );
+                })}
               </div>
             )}
             {panel === "price" && (
@@ -105,26 +133,20 @@ export default function ExploreFilterBar({
             <span className="max-w-[110px] truncate">{location === "All" ? "Location" : location}</span>
           </button>
 
-          {/* Sport pills */}
-          <div className="flex items-center gap-1 flex-1 overflow-x-auto no-scrollbar">
-            {SPORTS.map(s => {
-              const active = sport === s.key;
-              return (
-                <button
-                  key={s.key}
-                  onClick={() => setSport(s.key)}
-                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                    active
-                      ? "bg-brand-orange text-white"
-                      : "text-[#1a1a1a]/50 hover:bg-white/40 hover:text-[#1a1a1a]/70"
-                  }`}
-                >
-                  <span>{s.emoji}</span>
-                  {s.label}
-                </button>
-              );
-            })}
-          </div>
+          {/* Sport toggle — multi-select dropdown */}
+          <button
+            onClick={() => togglePanel("sport")}
+            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+              panel === "sport" || sport.length > 0
+                ? "bg-brand-orange text-white"
+                : "bg-brand-orange/10 text-brand-orange"
+            }`}
+          >
+            <span>🎾</span>
+            <span className="max-w-[110px] truncate">
+              {sport.length === 0 ? "Sports" : sport.length === 1 ? sport[0] : `${sport.length} sports`}
+            </span>
+          </button>
 
           {/* Price toggle */}
           <button
