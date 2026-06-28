@@ -49,7 +49,7 @@ export default function ExploreSearch() {
   return (
     <div className="search-card-light rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.9)", boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}>
       {/* Sport */}
-      <div className="px-5 pt-5 pb-3 bg-[hsl(var(--destructive-foreground))]">
+      <div className="px-5 pt-5 pb-3 bg-[hsl(var(--primary-foreground))]">
         <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Sport</p>
         <button
           onClick={() => toggle("sport")}
