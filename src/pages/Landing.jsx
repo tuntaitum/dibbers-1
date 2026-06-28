@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import LandingMobile from "@/pages/LandingMobile";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -93,7 +92,6 @@ export default function Landing() {
           <span className="text-xs font-light tracking-[0.15em] uppercase text-[#1a1a1a]/40">
             Thailand · Launching 2026
           </span>
-          <ThemeToggle />
           <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
         </div>
       </nav>

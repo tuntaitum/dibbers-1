@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { LogIn } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
 import { frostedCard, noiseOverlay } from "@/lib/portalDesign";
-import ThemeToggle from "@/components/ThemeToggle";
 
 export default function TopNav({ items = [], logoLink = "/explore", activeBg = "bg-brand-orange", showSignIn = false }) {
   const location = useLocation();
@@ -51,7 +50,6 @@ export default function TopNav({ items = [], logoLink = "/explore", activeBg = "
               )}
             </div>
           )}
-          <ThemeToggle className="ml-auto" />
         </div>
       </div>
     </nav>
