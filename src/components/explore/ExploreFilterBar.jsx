@@ -40,7 +40,73 @@ export default function ExploreFilterBar({
       <div className="relative rounded-2xl overflow-hidden animate-fade-in" style={frostedCard}>
         <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
 
-        {/* Expandable panel */}
+        {/* Main bar */}
+        <div className="relative z-10 flex items-center gap-1 px-2 py-2">
+          {/* Location toggle */}
+          <button
+            onClick={() => togglePanel("location")}
+            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+              panel === "location" || location !== "All"
+                ? "bg-brand-brown text-white"
+                : "bg-brand-brown/10 text-brand-brown"
+            }`}
+          >
+            <MapPin size={16} />
+            <span className="max-w-[110px] truncate">{location === "All" ? "Location" : location}</span>
+          </button>
+
+          {/* Sport toggle — multi-select dropdown */}
+          <button
+            onClick={() => togglePanel("sport")}
+            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+              panel === "sport" || sport.length > 0
+                ? "bg-brand-orange text-white"
+                : "bg-brand-orange/10 text-brand-orange"
+            }`}
+          >
+            <span>🎾</span>
+            <span className="max-w-[110px] truncate">
+              {sport.length === 0 ? "Sports" : sport.length === 1 ? sport[0] : `${sport.length} sports`}
+            </span>
+          </button>
+
+          {/* Price toggle */}
+          <button
+            onClick={() => togglePanel("price")}
+            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl text-sm font-bold transition-all ${
+              panel === "price" || priceIdx !== 0
+                ? "bg-brand-green text-white"
+                : "text-[#1a1a1a]/50 hover:bg-white/40"
+            }`}
+          >
+            ฿
+            {priceIdx !== 0 && <Check size={12} className="ml-0.5" />}
+          </button>
+
+          {/* Search toggle */}
+          <button
+            onClick={() => togglePanel("search")}
+            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl transition-all ${
+              panel === "search" || search
+                ? "bg-brand-brown text-white"
+                : "text-[#1a1a1a]/50 hover:bg-white/40"
+            }`}
+          >
+            <Search size={16} />
+          </button>
+
+          {/* Clear */}
+          {hasFilters && (
+            <button
+              onClick={clearAll}
+              className="flex-shrink-0 flex items-center justify-center w-9 h-10 rounded-xl text-destructive/60 hover:text-destructive hover:bg-destructive/5 transition-all"
+            >
+              <X size={15} />
+            </button>
+          )}
+        </div>
+
+        {/* Expandable panel — drops below the main bar */}
         {panel !== "none" && (
           <div className="relative z-10 border-t border-[#1a1a1a]/8 px-3 py-3 animate-fade-in" style={{ background: "rgba(247,245,240,0.6)" }}>
             {panel === "search" && (
@@ -117,72 +183,6 @@ export default function ExploreFilterBar({
             )}
           </div>
         )}
-
-        {/* Main bar */}
-        <div className="relative z-10 flex items-center gap-1 px-2 py-2">
-          {/* Location toggle */}
-          <button
-            onClick={() => togglePanel("location")}
-            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-              panel === "location" || location !== "All"
-                ? "bg-brand-brown text-white"
-                : "bg-brand-brown/10 text-brand-brown"
-            }`}
-          >
-            <MapPin size={16} />
-            <span className="max-w-[110px] truncate">{location === "All" ? "Location" : location}</span>
-          </button>
-
-          {/* Sport toggle — multi-select dropdown */}
-          <button
-            onClick={() => togglePanel("sport")}
-            className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-              panel === "sport" || sport.length > 0
-                ? "bg-brand-orange text-white"
-                : "bg-brand-orange/10 text-brand-orange"
-            }`}
-          >
-            <span>🎾</span>
-            <span className="max-w-[110px] truncate">
-              {sport.length === 0 ? "Sports" : sport.length === 1 ? sport[0] : `${sport.length} sports`}
-            </span>
-          </button>
-
-          {/* Price toggle */}
-          <button
-            onClick={() => togglePanel("price")}
-            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl text-sm font-bold transition-all ${
-              panel === "price" || priceIdx !== 0
-                ? "bg-brand-green text-white"
-                : "text-[#1a1a1a]/50 hover:bg-white/40"
-            }`}
-          >
-            ฿
-            {priceIdx !== 0 && <Check size={12} className="ml-0.5" />}
-          </button>
-
-          {/* Search toggle */}
-          <button
-            onClick={() => togglePanel("search")}
-            className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl transition-all ${
-              panel === "search" || search
-                ? "bg-brand-brown text-white"
-                : "text-[#1a1a1a]/50 hover:bg-white/40"
-            }`}
-          >
-            <Search size={16} />
-          </button>
-
-          {/* Clear */}
-          {hasFilters && (
-            <button
-              onClick={clearAll}
-              className="flex-shrink-0 flex items-center justify-center w-9 h-10 rounded-xl text-destructive/60 hover:text-destructive hover:bg-destructive/5 transition-all"
-            >
-              <X size={15} />
-            </button>
-          )}
-        </div>
       </div>
     </div>
   );
