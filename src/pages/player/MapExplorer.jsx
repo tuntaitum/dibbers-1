@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { MapContainer, TileLayer, Circle, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { base44 } from "@/api/base44Client";
 import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
-import { ArrowLeft, Navigation, Check } from "lucide-react";
+import { ArrowLeft, Navigation, Check, Search, X, MapPin } from "lucide-react";
 
 const centerIcon = L.divIcon({
   html: `<div style="width:22px;height:22px;background:#EA672D;border:3px solid white;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,0.3);"></div>`,
@@ -56,10 +56,45 @@ export default function MapExplorer() {
   const [radius, setRadius] = useState(() => parseInt(searchParams.get("radius")) || 5);
   const [locating, setLocating] = useState(false);
   const [flyTrigger, setFlyTrigger] = useState(0);
+  const [locationQuery, setLocationQuery] = useState("");
+  const [locationResults, setLocationResults] = useState([]);
+  const [searchingLocations, setSearchingLocations] = useState(false);
+  const searchTimer = useRef(null);
 
   useEffect(() => {
     base44.entities.Venue.filter({ status: "approved" }).then(setVenues).catch(() => {});
   }, []);
+
+  // Debounced location search via OpenStreetMap Nominatim
+  useEffect(() => {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    if (locationQuery.trim().length < 3) {
+      setLocationResults([]);
+      setSearchingLocations(false);
+      return;
+    }
+    setSearchingLocations(true);
+    searchTimer.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationQuery)}&countrycodes=th&limit=5`
+        );
+        const data = await res.json();
+        setLocationResults(data);
+      } catch {
+        setLocationResults([]);
+      }
+      setSearchingLocations(false);
+    }, 400);
+    return () => { if (searchTimer.current) clearTimeout(searchTimer.current); };
+  }, [locationQuery]);
+
+  const selectLocation = (result) => {
+    setCenter({ lat: parseFloat(result.lat), lng: parseFloat(result.lon) });
+    setFlyTrigger(t => t + 1);
+    setLocationQuery(result.display_name.split(",")[0]);
+    setLocationResults([]);
+  };
 
   useEffect(() => {
     if (!center && navigator.geolocation) {
@@ -194,6 +229,41 @@ export default function MapExplorer() {
 
           {/* Controls overlay */}
           <div className="relative z-10 p-4 md:p-5 space-y-4" style={{ background: "rgba(250,250,250,0.97)" }}>
+            {/* Location search */}
+            <div className="relative">
+              <div className="flex items-center gap-2 bg-white/80 rounded-xl px-3 py-2.5 border border-[#1a1a1a]/10">
+                <Search size={16} className="text-[#1a1a1a]/30 flex-shrink-0" />
+                <input
+                  value={locationQuery}
+                  onChange={e => setLocationQuery(e.target.value)}
+                  placeholder="Search for an area or address..."
+                  className="flex-1 bg-transparent text-[#1a1a1a] placeholder-[#1a1a1a]/30 text-sm font-body focus:outline-none min-w-0"
+                />
+                {searchingLocations && (
+                  <div className="w-4 h-4 border-2 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin flex-shrink-0" />
+                )}
+                {locationQuery && !searchingLocations && (
+                  <button onClick={() => { setLocationQuery(""); setLocationResults([]); }} className="text-[#1a1a1a]/30 hover:text-[#1a1a1a] flex-shrink-0">
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+              {locationResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-[#1a1a1a]/10 shadow-lg overflow-hidden z-20">
+                  {locationResults.map((result, i) => (
+                    <button
+                      key={i}
+                      onClick={() => selectLocation(result)}
+                      className="w-full flex items-start gap-2 px-3 py-2.5 text-left hover:bg-brand-orange/5 transition-colors border-b border-[#1a1a1a]/5 last:border-0"
+                    >
+                      <MapPin size={14} className="text-brand-orange flex-shrink-0 mt-0.5" />
+                      <span className="text-xs text-[#1a1a1a]/70 font-light leading-snug">{result.display_name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <div className="flex items-center gap-2">
                 <Navigation size={16} className="text-brand-orange" />
