@@ -61,9 +61,9 @@
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 96%;
-    --card: 0 0% 8%;
+    --card: 0 0% 5%;
     --card-foreground: 0 0% 96%;
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 96%;
@@ -81,14 +81,14 @@
     --input: 0 0% 15%;
     --ring: 22 82% 55%;
 
-    --color-cream: #0a0a0a;
+    --color-cream: #000000;
     --color-sky: #1a2a3a;
     --color-brown: #f5f5f5;
     --color-orange: #FF7A3D;
     --color-green: #00B860;
 
-    --banner-base: #141414;
-    --page-bg: #0a0a0a;
+    --banner-base: #0a0a0a;
+    --page-bg: #000000;
     --frost-bg: rgba(20,20,20,0.65);
     --frost-border: 1px solid rgba(255,255,255,0.08);
     --frost-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
@@ -275,9 +275,9 @@
   .dark [style*="background:#FAFAFA" i],
   .dark [style*="background: #FAFAFA" i],
   .dark [style*="background:#fafafa" i],
-  .dark [style*="background: #fafafa" i] { background-color: #0a0a0a !important; }
+  .dark [style*="background: #fafafa" i] { background-color: #000000 !important; }
   .dark [style*="rgba(247,245,240" i] { background-color: rgba(20,20,20,0.6) !important; }
-  .dark [style*="rgba(250,250,250,0.97" i] { background-color: rgba(10,10,10,0.97) !important; }
+  .dark [style*="rgba(250,250,250,0.97" i] { background-color: rgba(0,0,0,0.97) !important; }
   .dark [style*="background: #F2EFE8" i],
   .dark [style*="background:#F2EFE8" i] { background-color: var(--banner-base) !important; }
 }
