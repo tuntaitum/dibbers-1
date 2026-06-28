@@ -11,7 +11,7 @@ const navItems = [
 
 export default function AdminLayout() {
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen overflow-x-hidden bg-brand-cream">
       <TopNav items={navItems} logoLink="/admin/dashboard" activeBg="bg-brand-orange" />
       <main className="pt-4 pb-8">
         <Outlet />

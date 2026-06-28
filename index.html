@@ -7,6 +7,13 @@
     <link rel="manifest" href="/manifest.json" />
     <title>Dibbers — Thailand's Court Sports Platform</title>
     <meta name="description" content="Discover, book and track Padel, Squash and Pickleball courts across Thailand." />
+    <script>
+      (function() {
+        var saved = localStorage.getItem('dibbers-theme');
+        var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

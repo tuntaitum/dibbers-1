@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import LandingMobile from "@/pages/LandingMobile";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const sports = [
   { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
@@ -79,7 +80,7 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-body text-[#1a1a1a] overflow-x-hidden">
+    <div className="min-h-screen bg-brand-cream font-body text-[#1a1a1a] overflow-x-hidden">
 
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
@@ -92,6 +93,7 @@ export default function Landing() {
           <span className="text-xs font-light tracking-[0.15em] uppercase text-[#1a1a1a]/40">
             Thailand · Launching 2026
           </span>
+          <ThemeToggle />
           <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
         </div>
       </nav>
@@ -103,13 +105,13 @@ export default function Landing() {
         ref={heroRef}
         onMouseMove={handleMouseMove}
         className="relative min-h-[92vh] flex flex-col justify-between px-8 pt-16 pb-16 max-w-[1400px] mx-auto rounded-3xl mt-2 mb-8 overflow-hidden"
-        style={{ background: "#FAFAFA", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
+        style={{ background: "var(--page-bg)", boxShadow: "0 32px 80px -20px rgba(0,0,0,0.18), 0 8px 24px -8px rgba(0,0,0,0.10)" }}
       >
         {/* Gradient base */}
         <div
           className="absolute inset-0 rounded-3xl"
           style={{
-            background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), #F2EFE8",
+            background: "radial-gradient(ellipse at -5% 108%, #EA672D 0%, #EA672Dcc 18%, transparent 52%), radial-gradient(ellipse at 108% -5%, #00452A 0%, #00452Acc 18%, transparent 50%), var(--banner-base)",
           }}
         />
         {/* Noise overlay */}

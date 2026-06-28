@@ -1,9 +1,10 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Compass, CalendarDays, BarChart2, User } from "lucide-react";
+import { Compass, CalendarDays, BarChart2, User, Sun, Moon } from "lucide-react";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import { frostedCard, noiseOverlay } from "@/lib/portalDesign";
 import TopNav from "@/components/TopNav";
+import { useTheme } from "@/lib/ThemeContext";
 
 const tabs = [
   { path: "/explore", label: "Explore", icon: Compass },
@@ -15,10 +16,11 @@ const tabs = [
 export default function PlayerLayout() {
   const location = useLocation();
   const isMobile = useIsMobileApp();
+  const { theme, toggle } = useTheme();
 
   if (isMobile) {
     return (
-      <div className="relative min-h-screen flex flex-col overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+      <div className="relative min-h-screen flex flex-col overflow-x-hidden bg-brand-cream">
         <main className="flex-1 pb-28 overflow-x-hidden">
           <Outlet />
         </main>
@@ -44,6 +46,14 @@ export default function PlayerLayout() {
                   </Link>
                 );
               })}
+              <button onClick={toggle} className="no-frost flex flex-col items-center gap-0.5 px-4 py-2 group">
+                <div className="w-7 h-7 flex items-center justify-center rounded-lg">
+                  {theme === "dark" ? <Sun size={21} className="text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors" /> : <Moon size={21} className="text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors" />}
+                </div>
+                <span className="text-[9px] font-body font-semibold tracking-wide text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors">
+                  {theme === "dark" ? "Light" : "Dark"}
+                </span>
+              </button>
             </div>
           </div>
         </nav>
@@ -52,7 +62,7 @@ export default function PlayerLayout() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "#FAFAFA" }}>
+    <div className="min-h-screen bg-brand-cream">
       <TopNav items={tabs} showSignIn />
       <main className="pt-4">
         <Outlet />
