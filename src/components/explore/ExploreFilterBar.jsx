@@ -60,25 +60,25 @@ export default function ExploreFilterBar({
           {/* Location — navigates to map */}
           <Link
             to={mapUrl}
-            className={`flex-shrink-0 flex items-center justify-center px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+            className={`flex-1 min-w-0 flex items-center justify-center px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
               geoFilter
                 ? "bg-brand-brown text-white"
                 : "bg-brand-brown/10 text-brand-brown"
             }`}
           >
-            <span className="max-w-[110px] truncate">{geoFilter ? geoFilter.label : "Near me"}</span>
+            <span className="truncate">{geoFilter ? geoFilter.label : "Near me"}</span>
           </Link>
 
           {/* Sport toggle — multi-select dropdown */}
           <button
             onClick={() => togglePanel("sport")}
-            className={`flex-shrink-0 flex items-center justify-center px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+            className={`flex-1 min-w-0 flex items-center justify-center px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
               panel === "sport" || sport.length > 0
                 ? "bg-brand-orange text-white"
                 : "bg-brand-orange/10 text-brand-orange"
             }`}
           >
-            <span className="max-w-[110px] truncate">
+            <span className="truncate">
               {sport.length === 0 ? "Sports" : sport.length === 1 ? sport[0] : `${sport.length} sports`}
             </span>
           </button>
