@@ -41,9 +41,14 @@ export default function LandingMobile() {
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-5 py-4">
         <img
-          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/0a7202968_Asset1.svg"
           alt="Dibbers"
-          className="h-9 w-auto brightness-0"
+          className="h-9 w-auto dark:hidden"
+        />
+        <img
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/b007a5a53_Asset3.svg"
+          alt="Dibbers"
+          className="h-9 w-auto hidden dark:block"
         />
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-light tracking-[0.12em] uppercase text-[#1a1a1a]/40">Launching 2026</span>

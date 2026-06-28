@@ -84,9 +84,14 @@ export default function Landing() {
       {/* ── Nav ── */}
       <nav className="flex items-center justify-between px-8 py-5 max-w-[1400px] mx-auto">
         <img
-          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/0a7202968_Asset1.svg"
           alt="Dibbers"
-          className="h-12 w-auto brightness-0"
+          className="h-12 w-auto dark:hidden"
+        />
+        <img
+          src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/b007a5a53_Asset3.svg"
+          alt="Dibbers"
+          className="h-12 w-auto hidden dark:block"
         />
         <div className="flex items-center gap-6">
           <span className="text-xs font-light tracking-[0.15em] uppercase text-[#1a1a1a]/40">

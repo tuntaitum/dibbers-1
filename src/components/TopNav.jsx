@@ -15,9 +15,14 @@ export default function TopNav({ items = [], logoLink = "/explore", activeBg = "
         <div className="relative z-10 flex items-center gap-2">
           <Link to={logoLink} className="flex-shrink-0">
             <img
-              src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/2e92b8183_260620_LogoDesign-Negative.png"
+              src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/0a7202968_Asset1.svg"
               alt="Dibbers"
-              className="h-8 md:h-9 w-auto brightness-0"
+              className="h-8 md:h-9 w-auto dark:hidden"
+            />
+            <img
+              src="https://media.base44.com/images/public/6a2e6ee4a90a564f536f865d/b007a5a53_Asset3.svg"
+              alt="Dibbers"
+              className="h-8 md:h-9 w-auto hidden dark:block"
             />
           </Link>
           {items.length > 0 && (
