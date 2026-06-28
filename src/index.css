@@ -288,6 +288,17 @@
   .dark .search-card-light .border-\[\#1a1a1a\]\/8 { border-color: rgba(26,26,26,0.08) !important; }
   .dark .search-card-light .border-\[\#1a1a1a\]\/10 { border-color: rgba(26,26,26,0.1) !important; }
   .dark .search-card-light .placeholder\:text-\[\#1a1a1a\]\/30::placeholder { color: rgba(26,26,26,0.3) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\] { color: #1a1a1a !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/25 { color: rgba(26,26,26,0.4) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/30 { color: rgba(26,26,26,0.45) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/40 { color: rgba(26,26,26,0.5) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/45 { color: rgba(26,26,26,0.55) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/50 { color: rgba(26,26,26,0.6) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/55 { color: rgba(26,26,26,0.65) !important; }
+  .dark .search-card-light .text-\[\#1a1a1a\]\/60 { color: rgba(26,26,26,0.7) !important; }
+  .dark .search-card-light .hover\:border-brand-orange\/40:hover { border-color: rgba(234,103,45,0.4) !important; }
+  .dark .search-card-light .hover\:border-brand-brown\/40:hover { border-color: rgba(93,55,42,0.4) !important; }
+  .dark .search-card-light .hover\:border-brand-green\/40:hover { border-color: rgba(0,69,42,0.4) !important; }
 
   .dark [style*="background:#FAFAFA" i],
   .dark [style*="background: #FAFAFA" i],
