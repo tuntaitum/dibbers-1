@@ -5,7 +5,7 @@ import SportBadge from "@/components/SportBadge";
 import { noiseOverlay, frostedCard, gradientBannerExploreBold } from "@/lib/portalDesign";
 import ExploreFilterBar, { SPORTS, PRICE_RANGES } from "@/components/explore/ExploreFilterBar";
 
-export default function ExploreWeb({ venues, loading, userCoords, locating, getLocation, distanceLabel, locations = [], location, setLocation }) {
+export default function ExploreWeb({ venues, loading, userCoords, locating, getLocation, distanceLabel, geoFilter, setGeoFilter }) {
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [sport, setSport] = useState(() => {
@@ -22,13 +22,21 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
     setMouse({ x: (e.clientX - rect.left) / rect.width, y: (e.clientY - rect.top) / rect.height });
   };
 
+  const haversineKm = (lat1, lng1, lat2, lng2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  };
+
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());
     const matchSport = sport.length === 0 || (v.sports || []).some(s => sport.includes(s));
-    const matchLocation = location === "All" || v.city === location;
+    const matchGeo = !geoFilter || (v.latitude && v.longitude && haversineKm(geoFilter.lat, geoFilter.lng, v.latitude, v.longitude) <= geoFilter.radius);
     const pr = PRICE_RANGES[priceIdx];
     const matchPrice = !v.price_per_hour || (v.price_per_hour >= pr.min && v.price_per_hour <= pr.max);
-    return matchSearch && matchSport && matchLocation && matchPrice;
+    return matchSearch && matchSport && matchGeo && matchPrice;
   });
 
   const blobOrange = {
@@ -196,9 +204,8 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
         setSport={setSport}
         priceIdx={priceIdx}
         setPriceIdx={setPriceIdx}
-        location={location}
-        setLocation={setLocation}
-        locations={locations}
+        geoFilter={geoFilter}
+        setGeoFilter={setGeoFilter}
         topClass="top-4"
       />
     </div>

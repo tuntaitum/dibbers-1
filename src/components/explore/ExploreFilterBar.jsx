@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Search, X, Check, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import { noiseOverlay, frostedCard } from "@/lib/portalDesign";
 
 export const SPORTS = [
@@ -17,15 +18,29 @@ export const PRICE_RANGES = [
 
 export default function ExploreFilterBar({
   search, setSearch, sport, setSport, priceIdx, setPriceIdx,
-  location, setLocation, locations = [],
+  geoFilter, setGeoFilter,
   topClass = "top-20",
   maxW = "max-w-3xl",
 }) {
   const [panel, setPanel] = useState("none"); // "none" | "search" | "sport" | "price" | "location"
-  const hasFilters = search.trim() || sport.length > 0 || priceIdx !== 0 || location !== "All";
+  const hasFilters = search.trim() || sport.length > 0 || priceIdx !== 0 || geoFilter !== null;
 
   const togglePanel = (p) => setPanel(panel === p ? "none" : p);
-  const clearAll = () => { setSearch(""); setSport([]); setPriceIdx(0); setLocation("All"); setPanel("none"); };
+  const clearAll = () => { setSearch(""); setSport([]); setPriceIdx(0); setGeoFilter(null); setPanel("none"); };
+
+  const mapUrl = (() => {
+    const params = new URLSearchParams();
+    if (sport.length) params.set("sport", sport.join(","));
+    if (priceIdx !== 0) params.set("price", String(priceIdx));
+    if (search.trim()) params.set("search", search.trim());
+    if (geoFilter) {
+      params.set("lat", String(geoFilter.lat));
+      params.set("lng", String(geoFilter.lng));
+      params.set("radius", String(geoFilter.radius));
+      params.set("label", geoFilter.label);
+    }
+    return `/explore/map?${params.toString()}`;
+  })();
 
   const toggleSport = (key) => {
     if (sport.includes(key)) {
@@ -42,18 +57,18 @@ export default function ExploreFilterBar({
 
         {/* Main bar */}
         <div className="relative z-10 flex items-center gap-1 px-2 py-2">
-          {/* Location toggle */}
-          <button
-            onClick={() => togglePanel("location")}
+          {/* Location — navigates to map */}
+          <Link
+            to={mapUrl}
             className={`flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-              panel === "location" || location !== "All"
+              geoFilter
                 ? "bg-brand-brown text-white"
                 : "bg-brand-brown/10 text-brand-brown"
             }`}
           >
             <MapPin size={16} />
-            <span className="max-w-[110px] truncate">{location === "All" ? "Location" : location}</span>
-          </button>
+            <span className="max-w-[110px] truncate">{geoFilter ? geoFilter.label : "Near me"}</span>
+          </Link>
 
           {/* Sport toggle — multi-select dropdown */}
           <button
@@ -164,23 +179,7 @@ export default function ExploreFilterBar({
                 ))}
               </div>
             )}
-            {panel === "location" && (
-              <div className="flex items-center gap-2 flex-wrap max-h-40 overflow-y-auto">
-                {["All", ...locations].map(loc => (
-                  <button
-                    key={loc}
-                    onClick={() => setLocation(loc)}
-                    className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${
-                      location === loc
-                        ? "bg-brand-brown text-white border-brand-brown"
-                        : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-brown/50"
-                    }`}
-                  >
-                    {loc === "All" ? "All locations" : loc}
-                  </button>
-                ))}
-              </div>
-            )}
+
           </div>
         )}
       </div>

@@ -20,6 +20,7 @@ import Privacy from '@/pages/Privacy';
 
 // Player
 import Explore from '@/pages/player/Explore';
+import MapExplorer from '@/pages/player/MapExplorer';
 import VenueDetail from '@/pages/player/VenueDetail';
 import BookingConfirm from '@/pages/player/BookingConfirm';
 import BookingPayment from '@/pages/player/BookingPayment';
@@ -77,6 +78,7 @@ const AuthenticatedApp = () => {
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Route>
+      <Route path="/explore/map" element={<MapExplorer />} />
       <Route path="/venue/:id" element={<VenueDetail />} />
       <Route path="/book/:slotId" element={<BookingConfirm />} />
       <Route path="/pay/:slotId" element={<BookingPayment />} />

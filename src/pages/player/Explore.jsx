@@ -19,7 +19,16 @@ export default function Explore() {
     return s ? s.split(",") : [];
   });
   const [priceIdx, setPriceIdx] = useState(parseInt(searchParams.get("price")) || 0);
-  const [location, setLocation] = useState(searchParams.get("location") || "All");
+  const [geoFilter, setGeoFilter] = useState(() => {
+    const lat = parseFloat(searchParams.get("lat"));
+    const lng = parseFloat(searchParams.get("lng"));
+    const radius = parseInt(searchParams.get("radius")) || 5;
+    const label = searchParams.get("label");
+    if (!isNaN(lat) && !isNaN(lng)) {
+      return { lat, lng, radius, label: label || `${radius}km area` };
+    }
+    return null;
+  });
   const [userCoords, setUserCoords] = useState(null);
   const [locating, setLocating] = useState(false);
 
@@ -57,7 +66,7 @@ export default function Explore() {
     return km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`;
   };
 
-  const locations = [...new Set(venues.map(v => v.city).filter(Boolean))].sort();
+
 
   if (!isMobile) {
     return (
@@ -68,9 +77,8 @@ export default function Explore() {
         locating={locating}
         getLocation={getLocation}
         distanceLabel={distanceLabel}
-        locations={locations}
-        location={location}
-        setLocation={setLocation}
+        geoFilter={geoFilter}
+        setGeoFilter={setGeoFilter}
       />
     );
   }
@@ -78,10 +86,10 @@ export default function Explore() {
   const filtered = venues.filter(v => {
     const matchSearch = !search || v.name.toLowerCase().includes(search.toLowerCase()) || (v.city || "").toLowerCase().includes(search.toLowerCase());
     const matchSport = sport.length === 0 || (v.sports || []).some(s => sport.includes(s));
-    const matchLocation = location === "All" || v.city === location;
+    const matchGeo = !geoFilter || (v.latitude && v.longitude && haversineKm(geoFilter.lat, geoFilter.lng, v.latitude, v.longitude) <= geoFilter.radius);
     const pr = PRICE_RANGES[priceIdx];
     const matchPrice = !v.price_per_hour || (v.price_per_hour >= pr.min && v.price_per_hour <= pr.max);
-    return matchSearch && matchSport && matchLocation && matchPrice;
+    return matchSearch && matchSport && matchGeo && matchPrice;
   });
 
   return (
@@ -228,9 +236,8 @@ export default function Explore() {
         setSport={setSport}
         priceIdx={priceIdx}
         setPriceIdx={setPriceIdx}
-        location={location}
-        setLocation={setLocation}
-        locations={locations}
+        geoFilter={geoFilter}
+        setGeoFilter={setGeoFilter}
         topClass="top-4"
         maxW="max-w-[420px]"
       />
