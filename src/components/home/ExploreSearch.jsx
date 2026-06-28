@@ -85,7 +85,7 @@ export default function ExploreSearch() {
       </div>
 
       {/* Location + Price row */}
-      <div className="px-5 pb-3 grid grid-cols-2 gap-3">
+      <div className="px-5 pb-3 grid grid-cols-2 gap-3 bg-[hsl(var(--input))]">
         {/* Location */}
         <div>
           <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Location</p>
@@ -157,7 +157,7 @@ export default function ExploreSearch() {
       </div>
 
       {/* Search input */}
-      <div className="px-5 pb-3">
+      <div className="px-5 pb-3 bg-[hsl(var(--input))]">
         <div className="flex items-center gap-2 bg-white/60 rounded-xl px-4 py-2.5 border border-[#1a1a1a]/8">
           <Search size={16} className="text-[#1a1a1a]/30 flex-shrink-0" />
           <input
@@ -171,7 +171,7 @@ export default function ExploreSearch() {
       </div>
 
       {/* Search button */}
-      <div className="px-5 pb-5">
+      <div className="px-5 pb-5 bg-[hsl(var(--input))]">
         <button
           onClick={handleSearch}
           className="w-full flex items-center justify-center gap-2 bg-[#1a1a1a] text-white py-3.5 rounded-xl font-bold text-sm hover:bg-brand-orange transition-all duration-300 group shadow-lg shadow-black/15">
