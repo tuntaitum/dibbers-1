@@ -81,6 +81,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -95,6 +99,16 @@
     @apply font-heading;
     font-weight: 700;
     letter-spacing: -0.03em;
+  }
+
+  /* Global frosted hover effect — applies across all pages */
+  a:not(.no-frost):hover,
+  button:not(.no-frost):hover,
+  [class*="card"]:not(.no-frost):hover,
+  [class*="rounded-2xl"]:not(.no-frost):hover,
+  [class*="rounded-3xl"]:not(.no-frost):hover {
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
   }
 }
 
