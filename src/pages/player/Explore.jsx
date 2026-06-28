@@ -159,7 +159,6 @@ export default function Explore() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20 animate-fade-in">
-            <div className="text-5xl mb-4">🏟️</div>
             <p className="font-heading text-2xl font-bold text-[#1a1a1a] mb-2">NO COURTS FOUND</p>
             <p className="text-[#1a1a1a]/40 text-sm font-light">Try adjusting your filters.</p>
           </div>

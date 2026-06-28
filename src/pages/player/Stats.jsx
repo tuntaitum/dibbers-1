@@ -98,9 +98,9 @@ export default function Stats() {
   }, []);
 
   const sportBreakdown = [
-    { sport: "Padel", emoji: "🎾", hours: profile?.padel_hours || 0, color: "bg-brand-orange" },
-    { sport: "Squash", emoji: "🏸", hours: profile?.squash_hours || 0, color: "bg-brand-green" },
-    { sport: "Pickleball", emoji: "🏓", hours: profile?.pickleball_hours || 0, color: "bg-brand-sky border border-border" },
+    { sport: "Padel", hours: profile?.padel_hours || 0, color: "bg-brand-orange" },
+    { sport: "Squash", hours: profile?.squash_hours || 0, color: "bg-brand-green" },
+    { sport: "Pickleball", hours: profile?.pickleball_hours || 0, color: "bg-brand-sky border border-border" },
   ];
   const maxHours = Math.max(...sportBreakdown.map(s => s.hours), 1);
 
@@ -194,7 +194,6 @@ export default function Stats() {
               <div key={sport}>
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
-                    <span>{emoji}</span>
                     <span className="text-sm font-semibold text-brand-brown">{sport}</span>
                   </div>
                   <span className="font-stat text-lg text-brand-brown">{hours}h</span>

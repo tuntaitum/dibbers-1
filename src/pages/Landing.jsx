@@ -6,9 +6,9 @@ import useIsMobileApp from "@/hooks/useIsMobileApp";
 import LandingMobile from "@/pages/LandingMobile";
 
 const sports = [
-  { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
-  { name: "Pickleball", emoji: "🏓", desc: "Thailand's fastest growing sport" },
-  { name: "Squash", emoji: "🏸", desc: "Premium indoor courts near you" },
+  { name: "Padel", desc: "Find courts across Bangkok & beyond" },
+  { name: "Pickleball", desc: "Thailand's fastest growing sport" },
+  { name: "Squash", desc: "Premium indoor courts near you" },
 ];
 
 const features = [
@@ -207,7 +207,6 @@ export default function Landing() {
                 boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
               }}
             >
-              <span className="text-base">{s.emoji}</span>
               <span className="text-xs font-medium tracking-[0.1em] uppercase text-[#1a1a1a]/70">{s.name}</span>
             </div>
           ))}
@@ -288,7 +287,6 @@ export default function Landing() {
               }}
               className={`rounded-2xl p-8 hover:bg-white/12 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
             >
-              <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
               <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
               <p className="text-sm font-light text-white/45 leading-relaxed">{s.desc}</p>
             </div>

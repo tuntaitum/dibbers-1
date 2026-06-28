@@ -140,7 +140,6 @@ export default function ExploreWeb({ venues, loading, userCoords, locating, getL
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-24 animate-fade-in">
-            <div className="text-6xl mb-4">🏟️</div>
             <p className="font-heading text-3xl font-bold text-[#1a1a1a] mb-2">NO COURTS FOUND</p>
             <p className="text-[#1a1a1a]/40 font-light">Try adjusting your filters or search.</p>
           </div>

@@ -28,9 +28,7 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
             {venue.photos?.[0] ? (
               <img src={venue.photos[0]} alt={venue.name} className="w-full h-80 object-cover rounded-2xl mb-6" />
             ) : (
-              <div className="w-full h-80 bg-brand-brown/10 rounded-2xl mb-6 flex items-center justify-center">
-                <span className="text-8xl">🏟️</span>
-              </div>
+              <div className="w-full h-80 bg-brand-brown/10 rounded-2xl mb-6" />
             )}
 
             <div className="flex items-start justify-between gap-4 mb-4">
@@ -53,8 +51,8 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
               {(venue.sports || []).map(s => <SportBadge key={s} sport={s} size="lg" />)}
               {venue.payment_mode && (
                 <span className="bg-brand-sky text-brand-brown px-3 py-1 rounded-full text-sm font-semibold">
-                  {venue.payment_mode === "in_app" ? "💳 Online payment" :
-                   venue.payment_mode === "pay_at_venue" ? "🏦 Pay at venue" : "💳 Flexible payment"}
+                  {venue.payment_mode === "in_app" ? "Online payment" :
+                   venue.payment_mode === "pay_at_venue" ? "Pay at venue" : "Flexible payment"}
                 </span>
               )}
             </div>

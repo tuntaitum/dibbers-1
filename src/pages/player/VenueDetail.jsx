@@ -80,9 +80,7 @@ export default function VenueDetail() {
         {venue.photos?.[0] ? (
           <img src={venue.photos[0]} alt={venue.name} className="w-full h-60 object-cover" />
         ) : (
-          <div className="w-full h-60 bg-brand-brown flex items-center justify-center">
-            <span className="text-6xl">🏟️</span>
-          </div>
+          <div className="w-full h-60 bg-brand-brown" />
         )}
         <button onClick={() => navigate(-1)} className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2.5 rounded-full shadow-lg active:scale-95 transition-transform z-10">
           <ArrowLeft size={20} className="text-brand-brown" />

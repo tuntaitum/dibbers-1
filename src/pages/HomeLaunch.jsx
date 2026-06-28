@@ -4,9 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 import ExploreSearch from "@/components/home/ExploreSearch";
 
 const sports = [
-{ name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
-{ name: "Pickleball", emoji: "🏓", desc: "Thailand's fastest growing sport" },
-{ name: "Squash", emoji: "🏸", desc: "Premium indoor courts near you" }];
+{ name: "Padel", desc: "Find courts across Bangkok & beyond" },
+{ name: "Pickleball", desc: "Thailand's fastest growing sport" },
+{ name: "Squash", desc: "Premium indoor courts near you" }];
 
 
 const features = [
@@ -183,8 +183,7 @@ export default function HomeLaunch() {
             style={{ transitionDelay: `${i * 80}ms`, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
             className={`rounded-2xl p-8 hover:bg-white/12 hover:-translate-y-1 hover:shadow-2xl transition-all duration-400 group cursor-default ${sportsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             
-              <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
-              <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
+                <h3 className="font-heading font-bold text-2xl tracking-[-0.02em] text-white mb-2">{s.name.toUpperCase()}</h3>
               <p className="text-sm font-light text-white/45 leading-relaxed">{s.desc}</p>
             </div>
           )}

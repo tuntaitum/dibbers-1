@@ -4,9 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const sports = [
-  { name: "Padel", emoji: "🎾", desc: "Find courts across Bangkok & beyond" },
-  { name: "Pickleball", emoji: "🏓", desc: "Thailand's fastest growing sport" },
-  { name: "Squash", emoji: "🏸", desc: "Premium indoor courts near you" },
+  { name: "Padel", desc: "Find courts across Bangkok & beyond" },
+  { name: "Pickleball", desc: "Thailand's fastest growing sport" },
+  { name: "Squash", desc: "Premium indoor courts near you" },
 ];
 
 const features = [
@@ -139,7 +139,6 @@ export default function LandingMobile() {
                   WebkitBackdropFilter: "blur(12px)",
                   border: "1px solid rgba(255,255,255,0.7)",
                 }}>
-                <span className="text-sm">{s.emoji}</span>
                 <span className="text-[10px] font-medium tracking-[0.08em] uppercase text-[#1a1a1a]/70">{s.name}</span>
               </div>
             ))}
@@ -201,7 +200,6 @@ export default function LandingMobile() {
               }}
               className="rounded-2xl p-5">
               <div className="flex items-center gap-3 mb-1">
-                <div className="text-2xl">{s.emoji}</div>
                 <h3 className="font-heading font-bold text-lg tracking-[-0.02em] text-white">{s.name.toUpperCase()}</h3>
               </div>
               <p className="text-sm font-light text-white/45 leading-relaxed">{s.desc}</p>
