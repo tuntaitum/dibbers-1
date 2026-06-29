@@ -177,9 +177,9 @@ export default function MapExplorer() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: "#FAFAFA" }}>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: "#FAFAFA" }}>
       {/* Header */}
-      <div className="sticky top-4 z-50 mx-auto max-w-6xl px-3 md:px-4">
+      <div className="flex-shrink-0 z-50 mx-auto max-w-6xl w-full px-3 md:px-4 pt-4">
         <div className="relative rounded-2xl px-3 py-2.5 overflow-hidden" style={frostedCard}>
           <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlay} />
           <div className="relative z-10 flex items-center gap-3">
@@ -194,12 +194,12 @@ export default function MapExplorer() {
       </div>
 
       {/* Map + Controls */}
-      <div className="px-3 md:px-4 pt-4 pb-8 max-w-6xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden" style={frostedCard}>
+      <div className="flex-1 min-h-0 px-3 md:px-4 pt-3 pb-4 max-w-6xl mx-auto w-full">
+        <div className="flex flex-col h-full rounded-3xl overflow-hidden" style={frostedCard}>
           <MapContainer
             center={[center.lat, center.lng]}
             zoom={13}
-            className="w-full h-[55vh] md:h-[65vh]"
+            className="w-full flex-1 min-h-0"
             style={{ background: "#e0e0e0" }}
           >
             <TileLayer
@@ -228,10 +228,10 @@ export default function MapExplorer() {
           </MapContainer>
 
           {/* Controls overlay */}
-          <div className="relative z-10 p-4 md:p-5 space-y-4" style={{ background: "rgba(250,250,250,0.97)" }}>
+          <div className="relative z-10 flex-shrink-0 p-3 md:p-4 space-y-3" style={{ background: "rgba(250,250,250,0.97)" }}>
             {/* Location search */}
             <div className="relative">
-              <div className="flex items-center gap-2 bg-white/80 rounded-xl px-3 py-2.5 border border-[#1a1a1a]/10">
+              <div className="flex items-center gap-2 bg-white/80 rounded-xl px-3 py-2 border border-[#1a1a1a]/10">
                 <Search size={16} className="text-[#1a1a1a]/30 flex-shrink-0" />
                 <input
                   value={locationQuery}
@@ -264,32 +264,31 @@ export default function MapExplorer() {
               )}
             </div>
 
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-2">
-                <Navigation size={16} className="text-brand-orange" />
-                <p className="text-sm font-bold text-[#1a1a1a]">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 min-w-0">
+                <Navigation size={16} className="text-brand-orange flex-shrink-0" />
+                <p className="text-sm font-bold text-[#1a1a1a] truncate">
                   {locating ? "Finding your location..." : `${venuesInRadius.length} venue${venuesInRadius.length !== 1 ? "s" : ""} within ${radius}km`}
                 </p>
               </div>
               <button
                 onClick={useMyLocation}
                 disabled={locating}
-                className="flex items-center gap-1.5 text-xs font-semibold text-brand-orange hover:underline transition-all"
+                className="flex items-center gap-1.5 text-xs font-semibold text-brand-orange hover:underline transition-all flex-shrink-0"
               >
                 <Navigation size={13} className={locating ? "animate-pulse" : ""} />
-                Use my location
+                <span className="hidden md:inline">Use my location</span>
               </button>
             </div>
 
-            {/* Radius selector */}
-            <div>
-              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Search radius</p>
-              <div className="flex items-center gap-2 flex-wrap">
+            {/* Radius selector + Apply button inline */}
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 {RADII.map(r => (
                   <button
                     key={r}
                     onClick={() => setRadius(r)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                    className={`px-3 py-1 rounded-full text-xs font-bold transition-all border ${
                       radius === r
                         ? "bg-brand-orange text-white border-brand-orange"
                         : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/50"
@@ -299,19 +298,14 @@ export default function MapExplorer() {
                   </button>
                 ))}
               </div>
+              <button
+                onClick={handleApply}
+                className="flex items-center justify-center gap-2 bg-[#1a1a1a] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-orange transition-all shadow-lg shadow-black/10"
+              >
+                <Check size={16} />
+                Apply area filter
+              </button>
             </div>
-
-            <p className="text-xs text-[#1a1a1a]/40 font-light">
-              Tap anywhere on the map to move the center point
-            </p>
-
-            <button
-              onClick={handleApply}
-              className="w-full flex items-center justify-center gap-2 bg-[#1a1a1a] text-white py-3.5 rounded-xl font-bold text-sm hover:bg-brand-orange transition-all shadow-lg shadow-black/10"
-            >
-              <Check size={16} />
-              Apply area filter
-            </button>
           </div>
         </div>
       </div>
