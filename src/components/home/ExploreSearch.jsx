@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Search, MapPin, ChevronDown, ArrowRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
@@ -44,6 +44,15 @@ export default function ExploreSearch() {
     navigate(`/explore?${params.toString()}`);
   };
 
+  const mapUrl = (() => {
+    const params = new URLSearchParams();
+    if (sport !== "All") params.set("sport", sport);
+    if (priceIdx !== 0) params.set("price", String(priceIdx));
+    if (search.trim()) params.set("search", search.trim());
+    if (location !== "All") params.set("label", location);
+    return `/explore/map?${params.toString()}`;
+  })();
+
   const toggle = (section) => setOpenSection(openSection === section ? null : section);
 
   return (
@@ -84,32 +93,16 @@ export default function ExploreSearch() {
         {/* Location */}
         <div>
           <p className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#1a1a1a]/30 mb-2">Location</p>
-          <button
-            onClick={() => toggle("location")}
-            className={`w-full flex items-center justify-center px-3 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
+          <Link
+            to={mapUrl}
+            className={`w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
             location !== "All" ?
             "bg-brand-brown text-white border-brand-brown" :
             "bg-white/60 text-[#1a1a1a]/55 border-[#1a1a1a]/8 hover:bg-white"}`
             }>
-            <span className="truncate">{location === "All" ? "All" : location}</span>
-          </button>
-          {openSection === "location" &&
-          <div className="mt-2 grid grid-cols-2 gap-1.5 animate-fade-in max-h-32 overflow-y-auto">
-              {["All", ...cities].map((loc) =>
-            <button
-              key={loc}
-              onClick={() => {setLocation(loc);setOpenSection(null);}}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border truncate ${
-              location === loc ?
-              "bg-brand-brown text-white border-brand-brown" :
-              "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/10 hover:border-brand-brown/40"}`
-              }>
-              
-                  {loc === "All" ? "All locations" : loc}
-                </button>
-            )}
-            </div>
-          }
+            <MapPin size={14} className="flex-shrink-0" />
+            <span className="truncate">{location === "All" ? "Near me" : location}</span>
+          </Link>
         </div>
 
         {/* Price */}
