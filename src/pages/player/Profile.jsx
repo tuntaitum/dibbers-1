@@ -64,8 +64,8 @@ export default function Profile() {
   return (
     <div className="min-h-screen pb-8 overflow-x-hidden" style={{ background: "#FAFAFA" }}>
       <div className={`${isMobile ? "px-4" : "px-8"} pt-5`}>
-        <div className="relative rounded-3xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientGreen}>
-          <div className="absolute inset-0 rounded-3xl pointer-events-none" style={noiseOverlayDark} />
+        <div className="relative rounded-2xl px-5 md:px-8 py-6 md:py-8 overflow-hidden" style={frostedGradientGreen}>
+          <div className="absolute inset-0 rounded-2xl pointer-events-none" style={noiseOverlayDark} />
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-4">
               <h1 className="font-heading text-4xl font-bold text-white">PROFILE</h1>
