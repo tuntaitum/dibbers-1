@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/lib/ThemeContext';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import LoadingPage from '@/components/LoadingPage';
 
 // Layouts
 import PlayerLayout from '@/components/PlayerLayout';
@@ -47,14 +48,7 @@ const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
   if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-brand-cream">
-        <div className="flex flex-col items-center gap-3">
-          <span className="font-heading text-3xl font-bold text-brand-brown">Dibbers</span>
-          <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin"></div>
-        </div>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   if (authError) {
