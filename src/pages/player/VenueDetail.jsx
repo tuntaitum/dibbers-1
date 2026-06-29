@@ -105,7 +105,7 @@ export default function VenueDetail() {
         <div className="flex flex-wrap gap-2 mb-4">
           {(venue.sports || []).map(s => <SportBadge key={s} sport={s} size="lg" />)}
           {venue.payment_mode && (
-            <span className="bg-brand-sky text-brand-brown px-3 py-1 rounded-full text-xs font-semibold">
+            <span className="inline-flex items-center justify-center text-center bg-brand-sky text-brand-brown px-3 py-1 rounded-full text-xs font-semibold leading-none">
               {venue.payment_mode === "in_app" ? "Online payment" :
                venue.payment_mode === "pay_at_venue" ? "Pay at venue" : "Flexible payment"}
             </span>
