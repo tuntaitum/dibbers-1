@@ -282,8 +282,8 @@ export default function MapExplorer() {
             </div>
 
             {/* Radius selector + Apply button inline */}
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-1.5 flex-wrap">
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex items-center gap-1.5 flex-wrap justify-center">
                 {RADII.map(r => (
                   <button
                     key={r}
@@ -300,7 +300,7 @@ export default function MapExplorer() {
               </div>
               <button
                 onClick={handleApply}
-                className="flex items-center justify-center gap-2 bg-[#1a1a1a] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-orange transition-all shadow-lg shadow-black/10"
+                className="mx-auto flex items-center justify-center gap-2 bg-[#1a1a1a] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-orange transition-all shadow-lg shadow-black/10"
               >
                 <Check size={16} />
                 Apply area filter
