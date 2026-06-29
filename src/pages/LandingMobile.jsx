@@ -84,7 +84,7 @@ export default function LandingMobile() {
             DISCOVER<br />
             <span className="text-brand-orange drop-shadow-sm">MORE.</span><br />
             TRACK<br />
-            IT.
+            <span className="text-brand-orange drop-shadow-sm">MORE.</span>
           </h1>
 
           {/* Frosted glass card */}
