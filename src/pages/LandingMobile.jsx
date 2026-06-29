@@ -80,11 +80,11 @@ export default function LandingMobile() {
           <p className="text-[10px] font-light tracking-[0.2em] uppercase text-[#1a1a1a]/50 mb-4">
             Padel · Squash · Pickleball
           </p>
-          <h1 className="font-heading font-bold text-[3.2rem] leading-[0.9] tracking-[-0.04em] text-[#1a1a1a]">DISCOVER
-MORE.
-TRACK
-MORE.
-
+          <h1 className="font-heading font-bold text-[3.2rem] leading-[0.9] tracking-[-0.04em] text-[#1a1a1a]">
+            DISCOVER<br />
+            <span className="text-brand-orange drop-shadow-sm">MORE.</span><br />
+            TRACK<br />
+            IT.
           </h1>
 
           {/* Frosted glass card */}
