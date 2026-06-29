@@ -81,7 +81,7 @@ export default function LandingMobile() {
             Padel · Squash · Pickleball
           </p>
           <h1 className="font-heading font-bold text-[3.2rem] leading-[0.9] tracking-[-0.04em] text-[#1a1a1a]">
-            PLAY<br />
+            DISCOVER<br />
             <span className="text-brand-orange drop-shadow-sm">MORE.</span><br />
             TRACK<br />
             IT.
