@@ -6,6 +6,7 @@ import SportBadge from "@/components/SportBadge";
 import { format, addDays } from "date-fns";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import VenueDetailWeb from "@/pages/player/web/VenueDetailWeb";
+import LoadingPage from "@/components/LoadingPage";
 
 export default function VenueDetail() {
   const isMobile = useIsMobileApp();
@@ -44,11 +45,7 @@ export default function VenueDetail() {
     }).then(s => setSlots(s.filter(sl => sl.status === "available")));
   }, [selectedCourt, selectedDate]);
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center overflow-x-hidden" style={{ background: "#FAFAFA" }}>
-      <div className="w-8 h-8 border-4 border-brand-orange/30 border-t-brand-orange rounded-full animate-spin" />
-    </div>
-  );
+  if (loading) return <LoadingPage />;
 
   if (!venue) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-3 overflow-x-hidden" style={{ background: "#FAFAFA" }}>
