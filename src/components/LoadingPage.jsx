@@ -55,12 +55,14 @@ export default function LoadingPage() {
         }
 
         @keyframes dibbers-loading-bar {
-          0% { transform: translateX(-100%); width: 30%; }
-          50% { transform: translateX(60%); width: 50%; }
-          100% { transform: translateX(300%); width: 30%; }
+          0% { transform: scaleX(0); transform-origin: left; }
+          50% { transform: scaleX(1); transform-origin: left; }
+          51% { transform: scaleX(1); transform-origin: right; }
+          100% { transform: scaleX(0); transform-origin: right; }
         }
         .dibbers-loading-bar {
           animation: dibbers-loading-bar 1.4s ease-in-out infinite;
+          width: 100%;
         }
       `}</style>
     </div>
