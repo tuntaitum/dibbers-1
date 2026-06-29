@@ -106,8 +106,8 @@ export default function VenueDetail() {
           {(venue.sports || []).map(s => <SportBadge key={s} sport={s} size="lg" />)}
           {venue.payment_mode && (
             <span className="bg-brand-sky text-brand-brown px-3 py-1 rounded-full text-xs font-semibold">
-              {venue.payment_mode === "in_app" ? "💳 Online payment" :
-               venue.payment_mode === "pay_at_venue" ? "🏦 Pay at venue" : "💳 Flexible payment"}
+              {venue.payment_mode === "in_app" ? "Online payment" :
+               venue.payment_mode === "pay_at_venue" ? "Pay at venue" : "Flexible payment"}
             </span>
           )}
         </div>
