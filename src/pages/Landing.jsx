@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import LandingMobile from "@/pages/LandingMobile";
+import WelcomeMobile from "@/pages/WelcomeMobile";
 
 const sports = [
   { name: "Padel", desc: "Find courts across Bangkok & beyond" },
@@ -67,7 +68,7 @@ export default function Landing() {
   const [ctaRef, ctaVisible] = useFadeIn();
   const [venueRef, venueVisible] = useFadeIn();
 
-  if (isMobile) return <LandingMobile />;
+  if (isMobile) return <WelcomeMobile />;
 
   const blobOrange = {
     transform: `translate(${(mouse.x - 0.5) * -40}px, ${(mouse.y - 0.5) * -25}px)`,
