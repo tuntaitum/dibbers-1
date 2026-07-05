@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, MapPin, Clock, ChevronRight } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
+import PhotoGallery from "@/components/venue/PhotoGallery";
+import RatingStars from "@/components/venue/RatingStars";
 import TopNav from "@/components/TopNav";
 
 const PLAYER_TABS = [
@@ -25,16 +27,15 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
         <div className="grid grid-cols-5 gap-8">
           {/* Left: venue info */}
           <div className="col-span-3">
-            {venue.photos?.[0] ? (
-              <img src={venue.photos[0]} alt={venue.name} className="w-full h-80 object-cover rounded-2xl mb-6" />
-            ) : (
-              <div className="w-full h-80 bg-brand-brown/10 rounded-2xl mb-6" />
-            )}
+            <PhotoGallery photos={venue.photos || []} alt={venue.name} className="w-full h-80 rounded-2xl mb-6 overflow-hidden" />
 
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <h2 className="font-heading text-4xl font-bold text-brand-brown">{venue.name}</h2>
-                <div className="flex items-center gap-1.5 text-muted-foreground text-sm mt-1">
+                <div className="flex items-center gap-3 mt-2">
+                  <RatingStars rating={venue.rating || 0} reviewCount={venue.review_count || 0} size={16} />
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground text-sm mt-1.5">
                   <MapPin size={14} />
                   <span>{venue.address || venue.city || "Bangkok"}</span>
                 </div>

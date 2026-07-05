@@ -81,6 +81,16 @@
     },
     "court_count": {
       "type": "number"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Average rating from 0 to 5",
+      "default": 0
+    },
+    "review_count": {
+      "type": "number",
+      "description": "Total number of reviews",
+      "default": 0
     }
   },
   "required": [
