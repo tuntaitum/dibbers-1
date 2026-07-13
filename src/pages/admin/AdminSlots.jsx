@@ -5,6 +5,7 @@ import { Loader2, Plus, Trash2, Ban, CheckCircle2, Clock } from "lucide-react";
 import { frostedCard } from "@/lib/portalDesign";
 import PageBanner from "@/components/PageBanner";
 import SportBadge from "@/components/SportBadge";
+import CourtFloorPlan from "@/components/venue/CourtFloorPlan";
 
 const HOURS = Array.from({ length: 17 }, (_, i) => {
   const h = i + 6;
@@ -106,47 +107,33 @@ export default function AdminSlots() {
           </div>
         ) : (
           <div className="rounded-2xl p-5 space-y-4" style={frostedCard}>
-            {/* Venue + Court row */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p className="text-[10px] font-bold text-[#1a1a1a]/40 tracking-wider mb-2">VENUE</p>
-                <div className="flex gap-2 overflow-x-auto no-scrollbar">
-                  {venues.map((v) => (
-                    <button
-                      key={v.id}
-                      onClick={() => loadVenueCourts(v)}
-                      className={`flex-shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                        selectedVenue?.id === v.id
-                          ? "bg-brand-orange text-white border-brand-orange"
-                          : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/40"
-                      }`}
-                    >
-                      {v.name}
-                    </button>
-                  ))}
-                </div>
+            {/* Venue row */}
+            <div>
+              <p className="text-[10px] font-bold text-[#1a1a1a]/40 tracking-wider mb-2">VENUE</p>
+              <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                {venues.map((v) => (
+                  <button
+                    key={v.id}
+                    onClick={() => loadVenueCourts(v)}
+                    className={`flex-shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                      selectedVenue?.id === v.id
+                        ? "bg-brand-orange text-white border-brand-orange"
+                        : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/40"
+                    }`}
+                  >
+                    {v.name}
+                  </button>
+                ))}
               </div>
-              {courts.length > 0 && (
-                <div>
-                  <p className="text-[10px] font-bold text-[#1a1a1a]/40 tracking-wider mb-2">COURT</p>
-                  <div className="flex gap-2 overflow-x-auto no-scrollbar">
-                    {courts.map((c) => (
-                      <button
-                        key={c.id}
-                        onClick={() => setSelectedCourt(c)}
-                        className={`flex-shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                          selectedCourt?.id === c.id
-                            ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
-                            : "bg-white/60 text-[#1a1a1a]/50 border-[#1a1a1a]/12 hover:border-brand-orange/40"
-                        }`}
-                      >
-                        {c.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
+
+            {/* Court floor plan */}
+            {courts.length > 0 && (
+              <div>
+                <p className="text-[10px] font-bold text-[#1a1a1a]/40 tracking-wider mb-2">COURT</p>
+                <CourtFloorPlan courts={courts} selectedCourt={selectedCourt} onSelect={setSelectedCourt} />
+              </div>
+            )}
 
             {/* Date picker */}
             {courts.length > 0 && (
