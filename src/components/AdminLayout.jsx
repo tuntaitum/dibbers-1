@@ -5,6 +5,7 @@ import TopNav from "@/components/TopNav";
 const navItems = [
   { path: "/admin/dashboard", label: "Dashboard" },
   { path: "/admin/venues", label: "Venues" },
+  { path: "/admin/slots", label: "Slots" },
   { path: "/admin/users", label: "Users" },
   { path: "/admin/waitlist", label: "Waitlist" },
 ];

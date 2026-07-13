@@ -42,6 +42,7 @@ import VenueSettings from '@/pages/venue/VenueSettings';
 // Admin
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AdminVenues from '@/pages/admin/AdminVenues';
+import AdminSlots from '@/pages/admin/AdminSlots';
 import AdminUsers from '@/pages/admin/AdminUsers';
 import AdminWaitlist from '@/pages/admin/AdminWaitlist';
 
@@ -97,6 +98,7 @@ const AuthenticatedApp = () => {
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/venues" element={<AdminVenues />} />
+          <Route path="/admin/slots" element={<AdminSlots />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/waitlist" element={<AdminWaitlist />} />
         </Route>
