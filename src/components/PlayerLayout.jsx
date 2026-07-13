@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Compass, CalendarDays, BarChart2, User } from "lucide-react";
+import { Compass, CalendarDays, BarChart2, Trophy, User } from "lucide-react";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import { frostedCard, noiseOverlay } from "@/lib/portalDesign";
 import TopNav from "@/components/TopNav";
@@ -9,6 +9,7 @@ const tabs = [
   { path: "/explore", label: "Explore", icon: Compass },
   { path: "/bookings", label: "Bookings", icon: CalendarDays },
   { path: "/stats", label: "Stats", icon: BarChart2 },
+  { path: "/milestones", label: "Milestones", icon: Trophy },
   { path: "/profile", label: "Profile", icon: User },
 ];
 
