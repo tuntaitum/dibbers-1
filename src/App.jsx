@@ -31,7 +31,6 @@ import MyBookings from '@/pages/player/MyBookings';
 import Stats from '@/pages/player/Stats';
 import Profile from '@/pages/player/Profile';
 import Milestones from '@/pages/player/Milestones';
-import CourtFloorplan from '@/pages/player/CourtFloorplan';
 
 // Venue
 import VenueDashboard from '@/pages/venue/VenueDashboard';
@@ -69,7 +68,6 @@ const AuthenticatedApp = () => {
       {/* Player app — Explore is fully public; Stats/Profile/Bookings require login */}
       <Route element={<PlayerLayout />}>
         <Route path="/explore" element={<Explore />} />
-        <Route path="/court-floorplan" element={<CourtFloorplan />} />
         <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
           <Route path="/bookings" element={<MyBookings />} />
           <Route path="/stats" element={<Stats />} />
