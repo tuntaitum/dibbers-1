@@ -4,6 +4,7 @@ import { ArrowLeft, MapPin, Clock, ChevronRight } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import PhotoGallery from "@/components/venue/PhotoGallery";
 import RatingStars from "@/components/venue/RatingStars";
+import CourtFloorPlan from "@/components/venue/CourtFloorPlan";
 import TopNav from "@/components/TopNav";
 
 const PLAYER_TABS = [
@@ -79,24 +80,10 @@ export default function VenueDetailWeb({ venue, courts, slots, selectedCourt, se
             <div className="bg-white rounded-2xl border border-border p-6 sticky top-6">
               <h3 className="font-heading text-2xl font-bold text-brand-brown mb-5">BOOK A SLOT</h3>
 
-              {courts.length > 1 && (
+              {courts.length > 0 && (
                 <div className="mb-5">
                   <p className="text-xs font-bold text-muted-foreground mb-2 tracking-wide">SELECT COURT</p>
-                  <div className="flex flex-wrap gap-2">
-                    {courts.map(c => (
-                      <button
-                        key={c.id}
-                        onClick={() => setSelectedCourt(c)}
-                        className={`px-4 py-2 rounded-xl border text-sm font-semibold transition-all ${
-                          selectedCourt?.id === c.id
-                            ? "bg-brand-orange text-white border-brand-orange"
-                            : "bg-white text-brand-brown border-border hover:border-brand-orange/50"
-                        }`}
-                      >
-                        {c.name}
-                      </button>
-                    ))}
-                  </div>
+                  <CourtFloorPlan courts={courts} selectedCourt={selectedCourt} onSelect={setSelectedCourt} />
                 </div>
               )}
 

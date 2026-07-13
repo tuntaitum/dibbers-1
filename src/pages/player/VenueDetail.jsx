@@ -5,6 +5,7 @@ import { ArrowLeft, MapPin, Clock, ChevronRight } from "lucide-react";
 import SportBadge from "@/components/SportBadge";
 import PhotoGallery from "@/components/venue/PhotoGallery";
 import RatingStars from "@/components/venue/RatingStars";
+import CourtFloorPlan from "@/components/venue/CourtFloorPlan";
 import { format, addDays } from "date-fns";
 import useIsMobileApp from "@/hooks/useIsMobileApp";
 import VenueDetailWeb from "@/pages/player/web/VenueDetailWeb";
@@ -129,24 +130,10 @@ export default function VenueDetail() {
         )}
 
         {/* Court Select */}
-        {courts.length > 1 && (
+        {courts.length > 0 && (
           <div className="mb-5">
             <h3 className="font-heading text-lg font-bold text-brand-brown mb-2">SELECT COURT</h3>
-            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-              {courts.map(c => (
-                <button
-                  key={c.id}
-                  onClick={() => setSelectedCourt(c)}
-                  className={`flex-shrink-0 px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
-                    selectedCourt?.id === c.id
-                      ? "bg-brand-orange text-white border-brand-orange"
-                      : "bg-white text-brand-brown border-border"
-                  }`}
-                >
-                  {c.name}
-                </button>
-              ))}
-            </div>
+            <CourtFloorPlan courts={courts} selectedCourt={selectedCourt} onSelect={setSelectedCourt} />
           </div>
         )}
 
