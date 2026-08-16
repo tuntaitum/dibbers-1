@@ -7,7 +7,7 @@ import { frostedCard } from "@/lib/portalDesign";
 import PageBanner from "@/components/PageBanner";
 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const HOURS = Array.from({ length: 17 }, (_, i) => {
+const HOURS = Array.from({ length: 19 }, (_, i) => {
   const h = i + 6;
   return `${h.toString().padStart(2, "0")}:00`;
 });
