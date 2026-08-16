@@ -1,0 +1,71 @@
+{
+  "name": "PackagePurchase",
+  "type": "object",
+  "properties": {
+    "package_id": {
+      "type": "string"
+    },
+    "package_name": {
+      "type": "string"
+    },
+    "venue_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "purchase_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "total_hours": {
+      "type": "number"
+    },
+    "used_hours": {
+      "type": "number",
+      "default": 0
+    },
+    "remaining_hours": {
+      "type": "number"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the package expires. Null means never expires."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "exhausted"
+      ],
+      "default": "active"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "paid",
+        "refunded"
+      ],
+      "default": "paid"
+    },
+    "price_paid": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "package_id",
+    "venue_id",
+    "user_id",
+    "total_hours",
+    "remaining_hours"
+  ]
+}

@@ -36,6 +36,7 @@ import Milestones from '@/pages/player/Milestones';
 import VenueDashboard from '@/pages/venue/VenueDashboard';
 import VenueOnboarding from '@/pages/venue/VenueOnboarding';
 import MyCourts from '@/pages/venue/MyCourts';
+import Packages from '@/pages/venue/Packages';
 import VenueBookings from '@/pages/venue/VenueBookings';
 import VenueSettings from '@/pages/venue/VenueSettings';
 
@@ -88,6 +89,7 @@ const AuthenticatedApp = () => {
         <Route element={<VenueLayout />}>
           <Route path="/venue/dashboard" element={<VenueDashboard />} />
           <Route path="/venue/courts" element={<MyCourts />} />
+          <Route path="/venue/packages" element={<Packages />} />
           <Route path="/venue/bookings" element={<VenueBookings />} />
           <Route path="/venue/settings" element={<VenueSettings />} />
         </Route>

@@ -1,0 +1,48 @@
+{
+  "name": "PackageUsage",
+  "type": "object",
+  "properties": {
+    "purchase_id": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_name": {
+      "type": "string"
+    },
+    "venue_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "booking_id": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "hours_used": {
+      "type": "number"
+    },
+    "court_name": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "purchase_id",
+    "package_id",
+    "venue_id",
+    "user_id",
+    "date",
+    "hours_used"
+  ]
+}

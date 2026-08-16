@@ -1,0 +1,54 @@
+{
+  "name": "VenuePackage",
+  "type": "object",
+  "properties": {
+    "venue_id": {
+      "type": "string"
+    },
+    "venue_name": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "total_hours": {
+      "type": "number",
+      "description": "Total hours included in the package"
+    },
+    "price": {
+      "type": "number",
+      "description": "Total price in THB"
+    },
+    "expiry_days": {
+      "type": "number",
+      "description": "Number of days until the package expires after purchase. Null or 0 means never expires."
+    },
+    "sport": {
+      "type": "string",
+      "enum": [
+        "Padel",
+        "Squash",
+        "Pickleball",
+        "Any"
+      ],
+      "default": "Any"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active"
+    }
+  },
+  "required": [
+    "venue_id",
+    "name",
+    "total_hours",
+    "price"
+  ]
+}
